@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Meyer-Powers Syndrome</title>
+  <link rel="stylesheet" type="text/css" href="./styles.css">
+</head>
+<body>
+  <h1>Meyer-Powers Syndrome</h1>
+
+  <div id="notice-box">
+    <strong>Notice:</strong>
+    <ul>
+      <li>All genetic data processing is performed entirely on your device, no data is sent or stored elsewhere.</li>
+      <li>Currently only 23andMe and Ancestry.com data is supported. To download your data:</li>
+        <ul>
+            <li>For 23andMe data, visit <a href="https://you.23andme.com/tools/data/download/" target="_blank">23andMe</a>.</li>
+            <li>For Ancestry.com data, visit <a href="https://www.ancestry.com/account/data/user/download" target="_blank">Ancestry</a>.</li>
+        </ul>
+      <li>For more information, visit the <a href="https://www.reddit.com/r/DrWillPowers/">Dr Powers Subreddit</a>.</li>
+    </ul>
+  </div>
+
+  <div class="file-upload-container">
+    <input type="file" id="txt-file" accept=".txt">
+    <button id="analyze-btn">Analyze</button>
+  </div>
+
+  <div id="progress-container" style="display: none;">
+    <div id="progress-bar"></div>
+  </div>
+
+  <div id="results"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+  <script src="./app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      main(null);
+    })
+  </script>  
+</body>
+</html>
