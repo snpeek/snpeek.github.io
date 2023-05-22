@@ -65,8 +65,7 @@ function validateDOMElements (elements, snpsInputSelector) {
 }
 
 function processFile (elements, mpsData) {
-  elements.progressContainer.style.display = 'block'
-  elements.progressBar.style.width = '0%'
+  progressBarShow(elements)
 
   const file = elements.fileInput.files[0]
   if (!file) {
@@ -116,7 +115,7 @@ function parseFile (file, elements, mpsData) {
     error: function (error) {
       console.error('Error while reading file:', error)
       alert('An error occurred while reading the file.')
-      elements.progressContainer.style.display = 'none'
+      progressBarHide(elements)
     }
   }
   )
@@ -135,14 +134,12 @@ function parseFileStream (file, elements, mpsData, parseRowFunction, delimiter) 
     chunkSize,
     dynamicTyping: true,
     delimiter,
-    chunk: function (results, parser) {
+    chunk: (results, parser) => {
       const data = results.data
       processedSize += chunkSize
 
-      // update progress
       const progress = processedSize / fileSize * 100
-      elements.progressBar.style.width = progress + '%'
-      // elements.progressBar.innerHTML = progress.toFixed(0) + '%'
+      progressBarUpdate(elements, progress + '%')
 
       try {
         const foundSnps = parseRowFunction(data, mpsData)
@@ -153,17 +150,15 @@ function parseFileStream (file, elements, mpsData, parseRowFunction, delimiter) 
         parser.abort()
       }
     },
-    complete: function () {
-      // update progress (processing)
-      elements.progressBar.style.width = '100%'
-      // elements.progressBar.innerHTML = '100%'
+    complete: () => {
+      progressBarUpdate('100%')
       renderTable(elements, totalSnps)
-      elements.progressContainer.style.display = 'none'
+      progressBarHide(elements)
     },
-    error: function (error) {
+    error: (error) => {
       console.error('Error while reading file:', error)
       alert('An error occurred while reading the file.')
-      elements.progressContainer.style.display = 'none'
+      progressBarHide(elements)
     }
   })
 }
@@ -316,4 +311,18 @@ function escapeHtml (unsafe) {
 
 function linkToSnpedia (snp) {
   return '<a href="https://www.snpedia.com/index.php/' + snp + '">' + snp + '</a>'
+}
+
+function progressBarUpdate (elements, value) {
+  elements.progressBar.style.width = value
+  // elements.progressBar.innerHTML = value
+}
+
+function progressBarHide (elements) {
+  elements.progressContainer.style.display = 'none'
+}
+
+function progressBarShow (elements) {
+  elements.progressContainer.style.display = 'block'
+  elements.progressBar.style.width = '0%'
 }
