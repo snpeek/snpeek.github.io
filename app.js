@@ -153,6 +153,7 @@ function parseFileStream (file, elements, mpsData, parseRowFunction, delimiter) 
     complete: () => {
       progressBarUpdate(elements, '100%')
       renderTable(elements, totalSnps)
+      renderReportDownload(elements, totalSnps)
       progressBarHide(elements)
     },
     error: (error) => {
@@ -292,6 +293,15 @@ function renderTable (elements, foundSnps) {
   }
 }
 
+function renderReportDownload (elements, foundSnps) {
+  const button = document.createElement('button')
+  button.textContent = 'Save Report'
+  button.onclick = () => { downloadCSV(foundSnps) }
+
+  // Insert the button after the table
+  elements.resultsDiv.parentNode.insertBefore(button, elements.resultsDiv.nextSibling)
+}
+
 // Group by function
 function groupBy (arr, key) {
   return arr.reduce(function (rv, x) {
@@ -299,6 +309,35 @@ function groupBy (arr, key) {
     return rv
   }, {})
 };
+
+function convertToCSV (arrayOfObjects) {
+  const keys = Object.keys(arrayOfObjects[0])
+  const values = arrayOfObjects.map(obj => keys.map(key => obj[key]).join(','))
+  return [keys.join(','), ...values].join('\n')
+}
+
+function downloadCSV (obj) {
+  // Convert the object to CSV
+  const csv = convertToCSV(obj)
+
+  // Create a blob from the CSV string
+  const blob = new Blob([csv], { type: 'text/csv' })
+
+  // Create a hidden link and attach the blob
+  const a = document.createElement('a')
+  a.style.display = 'none'
+  a.href = URL.createObjectURL(blob)
+  a.download = 'meyer-powers-report.csv'
+
+  // Append the link to the body
+  document.body.appendChild(a)
+
+  // Programmatically click the link
+  a.click()
+
+  // Clean up the link
+  document.body.removeChild(a)
+}
 
 function escapeHtml (unsafe) {
   return unsafe
