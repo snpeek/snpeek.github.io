@@ -151,7 +151,7 @@ function parseFileStream (file, elements, mpsData, parseRowFunction, delimiter) 
       }
     },
     complete: () => {
-      progressBarUpdate('100%')
+      progressBarUpdate(elements, '100%')
       renderTable(elements, totalSnps)
       progressBarHide(elements)
     },
