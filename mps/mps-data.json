@@ -1,342 +1,342 @@
 {
     "rs2476601": {
         "phenotype": "Addison's Disease",
-        "pathogenic": "",
+        "pathogenic": [],
         "gene": "AP4B1-AS1, PTPN22"
     },
     "rs11571303": {
         "phenotype": "Addison's Disease",
-        "pathogenic": "",
+        "pathogenic": [],
         "gene": null
     },
     "rs1464510": {
         "phenotype": "Addison's Disease",
-        "pathogenic": "",
+        "pathogenic": [],
         "gene": "LPP"
     },
     "rs3998178": {
         "phenotype": "Addison's Disease",
-        "pathogenic": "",
+        "pathogenic": [],
         "gene": "HLA-DQA1, HLA-DQB1"
     },
     "rs10806425": {
         "phenotype": "Addison's Disease",
-        "pathogenic": "",
+        "pathogenic": [],
         "gene": "BACH2"
     },
     "rs7137828": {
         "phenotype": "Addison's Disease",
-        "pathogenic": "",
+        "pathogenic": [],
         "gene": "ATXN2"
     },
     "rs8112143": {
         "phenotype": "Addison's Disease",
-        "pathogenic": "",
+        "pathogenic": [],
         "gene": null
     },
     "rs11203203": {
         "phenotype": "Addison's Disease",
-        "pathogenic": "",
+        "pathogenic": [],
         "gene": "UBASH3A"
     },
     "rs74203920": {
         "phenotype": "Addison's Disease",
-        "pathogenic": "",
+        "pathogenic": [],
         "gene": null
     },
     "rs2075876": {
         "phenotype": "Addison's Disease",
-        "pathogenic": "",
+        "pathogenic": [],
         "gene": "AIRE"
     },
     "rs1801133": {
         "phenotype": "DNA Methylation",
-        "pathogenic": "TT",
+        "pathogenic": ["TT"],
         "gene": "MTHFR 677"
     },
     "rs1801131": {
         "phenotype": "DNA Methylation",
-        "pathogenic": "??",
+        "pathogenic": [],
         "gene": "A1298C"
     },
     "rs2236225": {
         "phenotype": "DNA Methylation",
-        "pathogenic": "??",
+        "pathogenic": [],
         "gene": "MTHFD1"
     },
     "rs1950902": {
         "phenotype": "DNA Methylation",
-        "pathogenic": "??",
+        "pathogenic": [],
         "gene": "MTHFD1"
     },
     "rs6922269": {
         "phenotype": "DNA Methylation",
-        "pathogenic": "??",
+        "pathogenic": [],
         "gene": "MTHFD1"
     },
     "rs2470152": {
         "phenotype": "Aromatase Enzyme",
-        "pathogenic": "CC",
+        "pathogenic": ["CC"],
         "gene": "CYP19A1"
     },
     "rs4646": {
         "phenotype": "Aromatase Enzyme",
-        "pathogenic": "CC",
+        "pathogenic": ["CC"],
         "gene": "CYP19A1"
     },
     "rs2470144": {
         "phenotype": "Aromatase Enzyme",
-        "pathogenic": "GG",
+        "pathogenic": ["GG"],
         "gene": "Aromatase #3 (minor)"
     },
     "rs10046": {
         "phenotype": "Aromatase Enzyme",
-        "pathogenic": "??",
+        "pathogenic": [],
         "gene": null
     },
     "rs2414096": {
         "phenotype": "Aromatase Enzyme",
-        "pathogenic": "??",
+        "pathogenic": [],
         "gene": null
     },
     "rs17036314": {
         "phenotype": "Insulin Resistance",
-        "pathogenic": "CC",
+        "pathogenic": ["CC"],
         "gene": "PPARG"
     },
     "rs5219": {
         "phenotype": "Insulin Resistance",
-        "pathogenic": "TT",
+        "pathogenic": ["TT"],
         "gene": "KCNJ11"
     },
     "rs2943634": {
         "phenotype": "Insulin Resistance",
-        "pathogenic": "CC",
+        "pathogenic": ["CC"],
         "gene": "IRS1"
     },
     "rs1800796": {
         "phenotype": "Inflammation Marker",
-        "pathogenic": "CC",
+        "pathogenic": ["CC"],
         "gene": "IL6"
     },
     "rs3761847": {
         "phenotype": "Inflammation Marker",
-        "pathogenic": "GG",
+        "pathogenic": ["GG"],
         "gene": "TRAF1"
     },
     "rs429358": {
         "phenotype": "LDL Cholesterol",
-        "pathogenic": "??",
+        "pathogenic": [],
         "gene": "ApoE"
     },
     "rs7412": {
         "phenotype": "LDL Cholesterol",
-        "pathogenic": "??",
+        "pathogenic": [],
         "gene": "ApoE"
     },
     "rs75932628": {
         "phenotype": "LDL Cholesterol",
-        "pathogenic": "TT",
+        "pathogenic": ["TT"],
         "gene": "TREM2"
     },
     "rs4420638": {
         "phenotype": "LDL Cholesterol",
-        "pathogenic": "GG",
+        "pathogenic": ["GG"],
         "gene": "APOC1"
     },
     "rs1800795": {
         "phenotype": "LDL Cholesterol",
-        "pathogenic": "GG",
+        "pathogenic": ["GG"],
         "gene": "IL6"
     },
     "rs1064039": {
         "phenotype": "NAD(P)H Metabolism",
-        "pathogenic": "AA",
+        "pathogenic": ["AA"],
         "gene": "TCA Cycle"
     },
     "rs11868035": {
         "phenotype": "NAD(P)H Metabolism",
-        "pathogenic": "AA",
+        "pathogenic": ["AA"],
         "gene": "SREBF1"
     },
     "rs9652490": {
         "phenotype": "NAD(P)H Metabolism",
-        "pathogenic": "AA",
+        "pathogenic": ["AA"],
         "gene": "LINGO1"
     },
     "rs6812193": {
         "phenotype": "NAD(P)H Metabolism",
-        "pathogenic": "CC",
+        "pathogenic": ["CC"],
         "gene": "FAM47E"
     },
     "rs393152": {
         "phenotype": "NAD(P)H Metabolism",
-        "pathogenic": "AA",
+        "pathogenic": ["AA"],
         "gene": "C17orf69"
     },
     "rs2736990": {
         "phenotype": "NAD(P)H Metabolism",
-        "pathogenic": "CC",
+        "pathogenic": ["CC"],
         "gene": "SNCA"
     },
     "rs356219": {
         "phenotype": "NAD(P)H Metabolism",
-        "pathogenic": "GG",
+        "pathogenic": ["GG"],
         "gene": "SNCA"
     },
     "rs165599": {
         "phenotype": "Estrogen Deactivation",
-        "pathogenic": "GG",
+        "pathogenic": ["GG"],
         "gene": "COMT"
     },
     "rs165722": {
         "phenotype": "Estrogen Deactivation",
-        "pathogenic": "CC",
+        "pathogenic": ["CC"],
         "gene": "COMT"
     },
     "rs776746": {
         "phenotype": "Estrogen Deactivation",
-        "pathogenic": "GG",
+        "pathogenic": ["GG"],
         "gene": "SULT1A1"
     },
     "rs762551": {
         "phenotype": "Estrogen Deactivation",
-        "pathogenic": "??",
+        "pathogenic": [],
         "gene": "CYP1A2"
     },
     "rs743572": {
         "phenotype": "Estrogen Deactivation",
-        "pathogenic": "??",
+        "pathogenic": [],
         "gene": "CYP17A1"
     },
     "rs398124239": {
         "phenotype": "Hypermobility RS2",
-        "pathogenic": "??",
+        "pathogenic": [],
         "gene": "RP2"
     },
     "i5005436": {
         "phenotype": "Congenital Adrenal Hyperplasia",
-        "pathogenic": "CT",
+        "pathogenic": ["CT"],
         "gene": "CYP21A2"
     },
     "rs151344503": {
         "phenotype": "Congenital Adrenal Hyperplasia",
-        "pathogenic": null,
+        "pathogenic": [],
         "gene": "CYP21A2, TNXB"
     },
     "rs201552310": {
         "phenotype": "Congenital Adrenal Hyperplasia",
-        "pathogenic": null,
+        "pathogenic": [],
         "gene": "CYP21A2"
     },
     "rs267606756": {
         "phenotype": "Congenital Adrenal Hyperplasia",
-        "pathogenic": null,
+        "pathogenic": [],
         "gene": null
     },
     "rs267606757": {
         "phenotype": "Congenital Adrenal Hyperplasia",
-        "pathogenic": null,
+        "pathogenic": [],
         "gene": null
     },
     "rs387906510": {
         "phenotype": "Congenital Adrenal Hyperplasia",
-        "pathogenic": null,
+        "pathogenic": [],
         "gene": null
     },
     "rs397509367": {
         "phenotype": "Congenital Adrenal Hyperplasia",
-        "pathogenic": null,
+        "pathogenic": [],
         "gene": null
     },
     "rs6445": {
         "phenotype": "Congenital Adrenal Hyperplasia",
-        "pathogenic": null,
+        "pathogenic": [],
         "gene": null
     },
     "rs6467": {
         "phenotype": "Congenital Adrenal Hyperplasia",
-        "pathogenic": null,
+        "pathogenic": [],
         "gene": null
     },
     "rs6471": {
         "phenotype": "Congenital Adrenal Hyperplasia",
-        "pathogenic": null,
+        "pathogenic": [],
         "gene": null
     },
     "rs6472": {
         "phenotype": "Congenital Adrenal Hyperplasia",
-        "pathogenic": null,
+        "pathogenic": [],
         "gene": null
     },
     "rs6475": {
         "phenotype": "Congenital Adrenal Hyperplasia",
-        "pathogenic": null,
+        "pathogenic": [],
         "gene": null
     },
     "rs6476": {
         "phenotype": "Congenital Adrenal Hyperplasia",
-        "pathogenic": null,
+        "pathogenic": [],
         "gene": null
     },
     "rs7755898": {
         "phenotype": "Congenital Adrenal Hyperplasia",
-        "pathogenic": null,
+        "pathogenic": [],
         "gene": null
     },
     "rs7769409": {
         "phenotype": "Congenital Adrenal Hyperplasia",
-        "pathogenic": null,
+        "pathogenic": [],
         "gene": null
     },
     "rs9378251": {
         "phenotype": "Congenital Adrenal Hyperplasia",
-        "pathogenic": null,
+        "pathogenic": [],
         "gene": null
     },
     "rs151344504": {
         "phenotype": "Congenital Adrenal Hyperplasia",
-        "pathogenic": null,
+        "pathogenic": [],
         "gene": null
     },
     "rs151344505": {
         "phenotype": "Congenital Adrenal Hyperplasia",
-        "pathogenic": null,
+        "pathogenic": [],
         "gene": null
     },
     "rs151344506": {
         "phenotype": "Congenital Adrenal Hyperplasia",
-        "pathogenic": null,
+        "pathogenic": [],
         "gene": null
     },
     "rs397515532": {
         "phenotype": "Congenital Adrenal Hyperplasia",
-        "pathogenic": null,
+        "pathogenic": [],
         "gene": null
     },
     "rs72552754": {
         "phenotype": "Congenital Adrenal Hyperplasia",
-        "pathogenic": null,
+        "pathogenic": [],
         "gene": null
     },
     "rs72552756": {
         "phenotype": "Congenital Adrenal Hyperplasia",
-        "pathogenic": null,
+        "pathogenic": [],
         "gene": null
     },
     "rs72552757": {
         "phenotype": "Congenital Adrenal Hyperplasia",
-        "pathogenic": null,
+        "pathogenic": [],
         "gene": null
     },
     "rs72552758": {
         "phenotype": "Congenital Adrenal Hyperplasia",
-        "pathogenic": null,
+        "pathogenic": [],
         "gene": null
     },
     "rs9378252": {
         "phenotype": "Congenital Adrenal Hyperplasia",
-        "pathogenic": null,
+        "pathogenic": [],
         "gene": null
     }
 }
