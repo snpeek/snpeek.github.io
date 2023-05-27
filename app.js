@@ -15,12 +15,11 @@ async function main (snpsInputSelector) {
   })
 }
 
-// Fetch mps-data.json and return the keys as snpsToSearch
 async function fetchMpsData () {
   try {
     const response = await fetch('mps-data.json')
     const mpsData = await response.json()
-    return Object.keys(mpsData)
+    return mpsData
   } catch (error) {
     console.error('Error fetching MPS data:', error)
     return null
@@ -59,27 +58,19 @@ function validateDOMElements (elements, snpsInputSelector) {
   return true
 }
 
-function processFile (elements, searchSnps) {
-  console.log('searchSNps=' + searchSnps)
-  searchSnps = searchSnps.map(snp => snp.trim()).filter(snp => snp !== '')
-
-  if (!searchSnps || searchSnps.length === 0) {
-    alert('Please enter at least one SNP!')
-    return
-  }
-
+function processFile (elements, mpsData) {
   elements.progressContainer.style.display = 'block'
   elements.progressBar.style.width = '0%'
 
   const file = elements.fileInput.files[0]
   if (file) {
-    readFile(file, elements, searchSnps)
+    readFile(file, elements, mpsData)
   } else {
     alert('Please select a file!')
   }
 }
 
-function readFile (file, elements, searchSnps) {
+function readFile (file, elements, mpsData) {
   const reader = new FileReader()
 
   reader.onprogress = function (e) {
@@ -90,7 +81,7 @@ function readFile (file, elements, searchSnps) {
   }
 
   reader.onload = function (e) {
-    parseFile(e.target.result, elements, searchSnps)
+    parseFile(e.target.result, elements, mpsData)
   }
 
   reader.onerror = function () {
@@ -120,19 +111,22 @@ function parseFile (result, elements, searchSnps) {
   })
 }
 
-function analyze23AndMeData (data, snpsToSearch) {
+function analyze23AndMeData (data, mpsData) {
   const foundSnps = []
   data.forEach(row => {
     if (!row || row.length < 4 || (typeof row[0] === 'string' && row[0].startsWith('#'))) {
-      return
+      return // skip these rows
     }
     const snp = row[0]
-    if (snpsToSearch.includes(snp)) {
+    if (mpsData[snp]) {
       foundSnps.push({
         rsid: snp,
         chromosome: row[1],
         position: row[2],
-        genotype: row[3]
+        genotype: row[3],
+        type: mpsData[snp].type,
+        bad: mpsData[snp].bad,
+        description: mpsData[snp].description
       })
     }
   })
@@ -140,13 +134,16 @@ function analyze23AndMeData (data, snpsToSearch) {
 }
 
 function renderTable (elements, foundSnps) {
+  // Sort the found SNPs by type
+  foundSnps.sort((a, b) => a.type.localeCompare(b.type))
+
   // Creating table element
   const table = document.createElement('table')
   table.style.width = '100%'
   table.setAttribute('border', '1')
 
   const headerRow = document.createElement('tr')
-  const columns = ['rsid', 'chromosome', 'position', 'genotype']
+  const columns = ['rsid', 'chromosome', 'position', 'genotype', 'type', 'bad', 'description']
   columns.forEach(column => {
     const th = document.createElement('th')
     th.textContent = column
