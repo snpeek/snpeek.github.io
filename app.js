@@ -125,12 +125,16 @@ function analyze23AndMeData (data, mpsData) {
         position: row[2],
         genotype: row[3],
         type: mpsData[snp].type,
-        bad: mpsData[snp].bad,
-        description: mpsData[snp].description !== null ? mpsData[snp].description : ''
+        bad: nullOrEmptyString(mpsData[snp].bad),
+        description: nullOrEmptyString(mpsData[snp].description)
       })
     }
   })
   return foundSnps
+}
+
+function nullOrEmptyString (str) {
+  return str !== null ? str : ''
 }
 
 function renderTable (elements, foundSnps) {
