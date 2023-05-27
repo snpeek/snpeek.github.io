@@ -6,6 +6,7 @@ interface Elements {
   resultsDiv: HTMLDivElement
   progressBar: HTMLDivElement
   progressContainer: HTMLDivElement
+  saveReportBtn: HTMLButtonElement
   snpsInput?: HTMLInputElement | null
 }
 
@@ -69,7 +70,8 @@ function getDOMElements (): Elements {
     analyzeBtn: document.getElementById('analyze-btn') as HTMLButtonElement,
     resultsDiv: document.getElementById('results') as HTMLDivElement,
     progressBar: document.getElementById('progress-bar') as HTMLDivElement,
-    progressContainer: document.getElementById('progress-container') as HTMLDivElement
+    progressContainer: document.getElementById('progress-container') as HTMLDivElement,
+    saveReportBtn: document.getElementById('save-report') as HTMLButtonElement
   }
 
   const snpsInputElement = document.getElementById('snps-input')
@@ -369,7 +371,8 @@ function renderReportDownload (elements: Elements, foundSnps: Variant[]): void {
   button.onclick = () => { downloadCSV(foundSnps) }
 
   // Insert the button after the table
-  elements.resultsDiv.parentNode?.insertBefore(button, elements.resultsDiv.nextSibling)
+  elements.saveReportBtn.innerHTML = ''
+  elements.saveReportBtn.appendChild(button)
 }
 
 function groupBy (arr: Variant[], key: keyof Variant): Record<string, Variant[]> {
