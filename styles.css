@@ -1,20 +1,69 @@
 body {
   font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
 }
 
-#txt-file {
-  display: block;
-  margin-bottom: 20px;
+h1 {
+  text-align: center;
+  color: #333;
 }
 
-#snps-input {
+#txt-file, #snps-input {
   display: block;
   width: 100%;
-  height: 100px;
+  padding: 10px;
+  margin: 10px 0;
+  box-sizing: border-box;
+}
+
+#analyze-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  cursor: pointer;
   margin-bottom: 20px;
+}
+
+#analyze-btn:hover {
+  background-color: #0056b3;
+}
+
+#progress-container {
+  height: 20px;
+  background-color: #ddd;
+  margin-bottom: 20px;
+}
+
+#progress-bar {
+  height: 100%;
+  width: 0;
+  background-color: #4CAF50;
 }
 
 #results {
-  margin-top: 20px;
-  font-weight: bold;
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ddd;
+  color: #333;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
 }
