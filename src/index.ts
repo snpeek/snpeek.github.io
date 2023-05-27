@@ -290,11 +290,22 @@ function checkVariantGenotypes (mpsData: MpsData, variants: Variant[]): Variant[
   return [...sameGenotypeMatches, ...flippedGenotypeMatches]
 }
 
+function IsNucleotide (genotype: string): boolean {
+  const alleles = genotype.split('')
+  for (const allele of alleles) {
+    if (!['A', 'C', 'T', 'G'].includes(allele)) {
+      return false
+    }
+  }
+  return true
+}
+
 function flipOrientation (genotype: string): string {
   if (genotype.length !== 2) {
     throw new Error('Invalid genotype')
   }
-  if (genotype === 'II') {
+  if (!IsNucleotide(genotype)) {
+    console.log(`found odd genotype=${genotype}`)
     return genotype // we don't need to flip II genotypes
   }
 
