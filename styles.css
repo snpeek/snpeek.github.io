@@ -92,7 +92,18 @@ table {
 th, td {
   text-align: left;
   padding: 8px;
+}
+
+th {
+  border-bottom: 1px solid #000;
+}
+
+td {
   border-bottom: 1px solid #ddd;
+}
+
+tr:last-child td, tr:last-child th {
+  border-bottom: 1px solid #000;
 }
 
 tr:nth-child(even) {
