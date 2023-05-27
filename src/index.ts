@@ -13,7 +13,7 @@ interface Elements {
 interface MpsData {
   [snp: string]: {
     phenotype: string,
-    broken_geno: string,
+    pathogenic: string,
     gene: string
   }
 }
@@ -24,7 +24,7 @@ interface Variant {
   position: string;
   genotype: string;
   phenotype: string;
-  broken_geno: string | null;
+  pathogenic: string | null;
   gene: string | null;
 }
 
@@ -217,7 +217,7 @@ function parseVCFData(data: string[][], mpsData: MpsData): Variant[] {
         position: row[1],
         genotype: row[4], // assuming genotype is in the 5th column
         phenotype: mpsData[snp].phenotype,
-        broken_geno: nullOrEmptyString(mpsData[snp].broken_geno),
+        pathogenic: nullOrEmptyString(mpsData[snp].pathogenic),
         gene: nullOrEmptyString(mpsData[snp].gene)
       })
     }
@@ -239,7 +239,7 @@ function parseAncestryData (data: string[][], mpsData: MpsData): Variant[] {
         position: row[2],
         genotype: row[3],
         phenotype: mpsData[snp].phenotype,
-        broken_geno: nullOrEmptyString(mpsData[snp].broken_geno),
+        pathogenic: nullOrEmptyString(mpsData[snp].pathogenic),
         gene: nullOrEmptyString(mpsData[snp].gene)
       })
     }
@@ -263,7 +263,7 @@ function parse23AndMeData(data: string[][], mpsData: MpsData): Variant[] {
         position: row[2],
         genotype: row[3],
         phenotype: mpsData[snp].phenotype,
-        broken_geno: nullOrEmptyString(mpsData[snp].broken_geno),
+        pathogenic: nullOrEmptyString(mpsData[snp].pathogenic),
         gene: nullOrEmptyString(mpsData[snp].gene)
       })
     }
@@ -302,11 +302,11 @@ function renderTable(elements: Elements, foundSnps: Variant[]): void {
     table.setAttribute('border', '1');
 
     const headerRow = document.createElement('tr');
-    const columns: Array<keyof Variant> = ['rsid', 'genotype', 'broken_geno', 'chromosome', 'position', 'gene'];
+    const columns: Array<keyof Variant> = ['rsid', 'genotype', 'pathogenic', 'chromosome', 'position', 'gene'];
     const columnDisplay: Record<string, string> = {
       rsid: 'RSID',
       genotype: 'Genotype',
-      broken_geno: 'Broken',
+      pathogenic: 'Pathogenic',
       chromosome: 'Chromosome',
       position: 'Position',
       gene: 'Gene'

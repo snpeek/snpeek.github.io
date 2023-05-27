@@ -18,7 +18,7 @@ describe('JSON structure test', function () {
         return done(err)
       }
 
-      const expectedNestedKeys = ['phenotype', 'broken_geno', 'gene']
+      const expectedNestedKeys = ['phenotype', 'pathogenic', 'gene']
 
       Object.keys(json).forEach(function (key) {
         // Check the keys of each nested object
