@@ -278,17 +278,14 @@ function nullOrEmptyString (str: string | null): string {
 }
 
 function genotypeMatches (mpsData: MpsData, matchingRsids: Variant[]): Variant[] {
-  return matchingRsids.filter(variant => variant.genotype in mpsData[variant.rsid].pathogenic)
+  return matchingRsids.filter(variant => mpsData[variant.rsid].pathogenic.includes(variant.genotype))
 }
 
-function renderTable (elements: Elements, foundSnps: Variant[]): void {
-  // Sort the found SNPs by phenotype
-  foundSnps.sort((a, b) => a.phenotype.localeCompare(b.phenotype))
+function prioritySort (variants: Variant[]): Record<string, Variant[]> {
+  const priorityOrder = ['DNA Methylation', 'Estrogen Deactivation']
 
   // Group the found SNPs by phenotype
-  const groups: Record<string, Variant[]> = groupBy(foundSnps, 'phenotype')
-
-  const priorityOrder = ['DNA Methylation', 'Estrogen Deactivation']
+  const groups: Record<string, Variant[]> = groupBy(variants, 'phenotype')
 
   const sortWithPriority = (a: string, b: string): number => {
     const indexA = priorityOrder.indexOf(a)
@@ -305,6 +302,18 @@ function renderTable (elements: Elements, foundSnps: Variant[]): void {
   for (const key of sortedKeys) {
     sortedGroups[key] = groups[key]
   }
+  return sortedGroups
+}
+
+function renderTable (elements: Elements, foundSnps: Variant[]): void {
+  if (foundSnps.length === 0) {
+    elements.resultsDiv.textContent = 'No matching SNPs found'
+    return // Stop the function if no SNPs were found
+  }
+  // Sort the found SNPs by phenotype
+  foundSnps.sort((a, b) => a.phenotype.localeCompare(b.phenotype))
+
+  const sortedGroups = prioritySort(foundSnps)
 
   // Clear previous results
   elements.resultsDiv.innerHTML = ''
@@ -339,7 +348,7 @@ function renderTable (elements: Elements, foundSnps: Variant[]): void {
 
     table.appendChild(headerRow)
 
-    groups[phenotype].forEach(snp => {
+    sortedGroups[phenotype].forEach(snp => {
       const tr = document.createElement('tr')
       columns.forEach(column => {
         const td = document.createElement('td')
