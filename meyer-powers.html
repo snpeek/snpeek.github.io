@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Meyer-Powers Syndrome</title>
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
@@ -15,13 +16,14 @@
     </ul>
   </div>
 
-  <input type="file" id="txt-file" accept=".txt">
-  <button id="analyze-btn">Analyze</button>
+  <div class="file-upload-container">
+    <input type="file" id="txt-file" accept=".txt">
+    <button id="analyze-btn">Analyze</button>
+  </div>
 
   <div id="progress-container" style="display: none;">
     <div id="progress-bar"></div>
   </div>
-  
 
   <div id="results"></div>
 

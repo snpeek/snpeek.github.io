@@ -99,3 +99,19 @@ tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
+@media (max-width: 600px) {
+  #txt-file, #analyze-btn {
+    padding: 15px;
+  }
+}
+
+.file-upload-container {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 600px) {
+  .file-upload-container {
+    flex-direction: row;
+  }
+}

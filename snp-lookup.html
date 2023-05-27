@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SNP Lookup</title>
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
@@ -15,9 +16,10 @@
     </ul>
   </div>
 
-  <input type="file" id="txt-file" accept=".txt">
-  <textarea id="snps-input" placeholder="Enter SNPs, separated by commas..."></textarea>
-  <button id="analyze-btn">Analyze</button>
+  <div class="file-upload-container">
+    <input type="file" id="txt-file" accept=".txt">
+    <button id="analyze-btn">Analyze</button>
+  </div>  
 
   <div id="progress-container" style="display: none; width: 100%; background-color: #f3f3f3;">
     <div id="progress-bar" style="height: 20px; width: 0%; background-color: #4CAF50;"></div>
