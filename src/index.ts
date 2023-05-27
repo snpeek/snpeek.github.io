@@ -191,9 +191,9 @@ function parseFileStream (
     },
     complete: () => {
       progressBarUpdate(elements, '100%')
-      const matchingSnps = genotypeMatches(mpsData, matchingRsids)
-      renderTable(elements, matchingSnps)
-      renderReportDownload(elements, matchingSnps)
+      const matchingVariants = checkVariantGenotypes(mpsData, matchingRsids)
+      renderTable(elements, matchingVariants)
+      renderReportDownload(elements, matchingVariants)
       progressBarHide(elements)
     },
     error: (error) => {
@@ -279,8 +279,42 @@ function nullOrEmptyString (str: string | null): string {
   return str !== null ? str : ''
 }
 
-function genotypeMatches (mpsData: MpsData, matchingRsids: Variant[]): Variant[] {
-  return matchingRsids.filter(variant => mpsData[variant.rsid].pathogenic.includes(variant.genotype))
+// This function tries both orientations to see if they match, it returns the genotype flipped or not if it exists
+// TODO this isn't the best solution, it does come with the risk of https://www.snpedia.com/index.php/Ambiguous_flip
+function checkVariantGenotypes (mpsData: MpsData, variants: Variant[]): Variant[] {
+  const sameGenotypeMatches = variants.filter(variant => mpsData[variant.rsid].pathogenic.includes(variant.genotype))
+  const flippedGenotypeMatches = variants
+    .map(variant => ({ ...variant, genotype: flipOrientation(variant.genotype) }))
+    .filter(variant => mpsData[variant.rsid].pathogenic.includes(variant.genotype))
+
+  return [...sameGenotypeMatches, ...flippedGenotypeMatches]
+}
+
+function flipOrientation (genotype: string): string {
+  if (genotype.length !== 2) {
+    throw new Error('Invalid genotype')
+  }
+  if (genotype === 'II') {
+    return genotype // we don't need to flip II genotypes
+  }
+
+  const complementMap: Record<string, string> = {
+    A: 'T',
+    T: 'A',
+    C: 'G',
+    G: 'C'
+  }
+
+  return genotype
+    .split('')
+    .reverse()
+    .map(allele => {
+      if (!(allele in complementMap)) {
+        throw new Error(`Invalid allele=${allele} genotype=${genotype}`)
+      }
+      return complementMap[allele]
+    })
+    .join('')
 }
 
 function prioritySort (variants: Variant[]): Record<string, Variant[]> {
