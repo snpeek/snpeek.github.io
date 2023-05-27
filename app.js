@@ -1,15 +1,14 @@
-
 // entrypoint
 // eslint-disable-next-line no-unused-vars
-function handleInputs (snpsInputSelector, snpsToSearch = null) {
+function main (snpsInputSelector, snpsToSearch = null) {
   const elements = getDOMElements(snpsInputSelector)
 
-  if (validateDOMElements(elements, snpsInputSelector)) {
-    elements.analyzeBtn.addEventListener('click', () => {
+  elements.analyzeBtn.addEventListener('click', () => {
+    if (validateDOMElements(elements, snpsInputSelector)) {
       const snpsInput = snpsToSearch !== null ? snpsToSearch : elements.snpsInput.value.split(',')
-      processFile(elements.fileInput, snpsInput, elements.progressBar, elements.progressContainer, elements.resultsDiv)
-    })
-  }
+      processFile(elements, snpsInput)
+    }
+  })
 }
 
 function getDOMElements (snpsInputSelector) {
@@ -44,7 +43,7 @@ function validateDOMElements (elements, snpsInputSelector) {
   return true
 }
 
-function processFile (fileInput, searchSnps, progressBar, progressContainer, resultsDiv) {
+function processFile (elements, searchSnps) {
   console.log('searchSNps=' + searchSnps)
   searchSnps = searchSnps.map(snp => snp.trim()).filter(snp => snp !== '')
 
@@ -53,58 +52,59 @@ function processFile (fileInput, searchSnps, progressBar, progressContainer, res
     return
   }
 
-  progressContainer.style.display = 'block'
-  progressBar.style.width = '0%'
+  elements.progressContainer.style.display = 'block'
+  elements.progressBar.style.width = '0%'
 
-  const file = fileInput.files[0]
+  const file = elements.fileInput.files[0]
   if (file) {
-    readFile(file, progressBar, progressContainer, resultsDiv, searchSnps)
+    readFile(file, elements, searchSnps)
   } else {
     alert('Please select a file!')
   }
 }
 
-function readFile (file, progressBar, progressContainer, resultsDiv, searchSnps) {
+function readFile (file, elements, searchSnps) {
   const reader = new FileReader()
 
   reader.onprogress = function (e) {
     if (e.lengthComputable) {
       const progress = Math.floor((e.loaded / e.total) * 100)
-      progressBar.style.width = progress + '%'
+      elements.progressBar.style.width = progress + '%'
     }
   }
 
   reader.onload = function (e) {
-    parseFile(e.target.result, progressBar, progressContainer, resultsDiv, searchSnps)
+    parseFile(e.target.result, elements, searchSnps)
   }
 
   reader.onerror = function () {
     console.error('Error while reading file:', reader.error)
     alert('An error occurred while reading the file.')
-    progressContainer.style.display = 'none'
+    elements.progressContainer.style.display = 'none'
   }
 
   reader.readAsText(file)
 }
 
-function parseFile (result, progressBar, progressContainer, resultsDiv, searchSnps) {
+function parseFile (result, elements, searchSnps) {
   // eslint-disable-next-line no-undef
   Papa.parse(result, {
     delimiter: '\t',
     dynamicTyping: true,
     complete: function (results) {
-      analyze23AndMeData(results.data, searchSnps, resultsDiv)
-      progressContainer.style.display = 'none'
+      const foundSnps = analyze23AndMeData(results.data, searchSnps)
+      renderTable(elements, foundSnps)
+      elements.progressContainer.style.display = 'none'
     },
     error: function (error) {
       console.error('Error while parsing file:', error)
       alert('An error occurred while parsing the file.')
-      progressContainer.style.display = 'none'
+      elements.progressContainer.style.display = 'none'
     }
   })
 }
 
-function analyze23AndMeData (data, snpsToSearch, resultsDiv) {
+function analyze23AndMeData (data, snpsToSearch) {
   const foundSnps = []
   data.forEach(row => {
     if (!row || row.length < 4 || (typeof row[0] === 'string' && row[0].startsWith('#'))) {
@@ -120,7 +120,10 @@ function analyze23AndMeData (data, snpsToSearch, resultsDiv) {
       })
     }
   })
+  return foundSnps
+}
 
+function renderTable (elements, foundSnps) {
   // Creating table element
   const table = document.createElement('table')
   table.style.width = '100%'
@@ -146,8 +149,8 @@ function analyze23AndMeData (data, snpsToSearch, resultsDiv) {
     table.appendChild(tr)
   })
 
-  resultsDiv.innerHTML = ''
-  resultsDiv.appendChild(table)
+  elements.resultsDiv.innerHTML = ''
+  elements.resultsDiv.appendChild(table)
 }
 
 function escapeHtml (unsafe) {
