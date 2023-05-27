@@ -11,7 +11,7 @@ interface Elements {
 
 type MpsData = Record<string, {
   phenotype: string
-  pathogenic: string
+  pathogenic: string[]
   gene: string
 }>
 
@@ -21,7 +21,7 @@ interface Variant {
   position: string
   genotype: string
   phenotype: string
-  pathogenic: string | null
+  pathogenic: string[]
   gene: string | null
 }
 
@@ -161,7 +161,7 @@ function parseFileStream (
   delimiter: string
 ): void {
   const chunkSize = 1024 * 50 // 50KB
-  let totalSnps: Variant[] = [] // aggregate all SNPs
+  let matchingRsids: Variant[] = [] // aggregate all SNPs
 
   // for updating the progress bar
   const fileSize = file.size
@@ -180,7 +180,7 @@ function parseFileStream (
 
       try {
         const foundSnps = parseRowFunction(data, mpsData)
-        totalSnps = totalSnps.concat(foundSnps)
+        matchingRsids = matchingRsids.concat(foundSnps)
       } catch (error) {
         console.error('Error while parsing chunk:', error)
         alert('An error occurred while parsing the file.')
@@ -189,8 +189,9 @@ function parseFileStream (
     },
     complete: () => {
       progressBarUpdate(elements, '100%')
-      renderTable(elements, totalSnps)
-      renderReportDownload(elements, totalSnps)
+      const matchingSnps = genotypeMatches(mpsData, matchingRsids)
+      renderTable(elements, matchingSnps)
+      renderReportDownload(elements, matchingSnps)
       progressBarHide(elements)
     },
     error: (error) => {
@@ -215,7 +216,7 @@ function parseVCFData (data: string[][], mpsData: MpsData): Variant[] {
         position: row[1],
         genotype: row[4], // assuming genotype is in the 5th column
         phenotype: mpsData[snp].phenotype,
-        pathogenic: nullOrEmptyString(mpsData[snp].pathogenic),
+        pathogenic: mpsData[snp].pathogenic,
         gene: nullOrEmptyString(mpsData[snp].gene)
       })
     }
@@ -237,7 +238,7 @@ function parseAncestryData (data: string[][], mpsData: MpsData): Variant[] {
         position: row[2],
         genotype: row[3],
         phenotype: mpsData[snp].phenotype,
-        pathogenic: nullOrEmptyString(mpsData[snp].pathogenic),
+        pathogenic: mpsData[snp].pathogenic,
         gene: nullOrEmptyString(mpsData[snp].gene)
       })
     }
@@ -260,7 +261,7 @@ function parse23AndMeData (data: string[][], mpsData: MpsData): Variant[] {
         position: row[2],
         genotype: row[3],
         phenotype: mpsData[snp].phenotype,
-        pathogenic: nullOrEmptyString(mpsData[snp].pathogenic),
+        pathogenic: mpsData[snp].pathogenic,
         gene: nullOrEmptyString(mpsData[snp].gene)
       })
     }
@@ -274,6 +275,10 @@ function getFileExtension (filename: string): string {
 
 function nullOrEmptyString (str: string | null): string {
   return str !== null ? str : ''
+}
+
+function genotypeMatches (mpsData: MpsData, matchingRsids: Variant[]): Variant[] {
+  return matchingRsids.filter(variant => variant.genotype in mpsData[variant.rsid].pathogenic)
 }
 
 function renderTable (elements: Elements, foundSnps: Variant[]): void {
