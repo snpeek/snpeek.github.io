@@ -74,7 +74,7 @@ function processFile (elements, mpsData) {
     return
   }
   console.log('file size=' + file.size)
-  const maxSize = 100000000 // 100 Mb
+  const maxSize = 1024 * 1024 * 100 // 100 Mb
   if (file.size > maxSize) {
     console.log('Streaming large file=' + file.name)
     if (getFileExtension(file.name) !== 'vcf') {
@@ -168,12 +168,12 @@ function parseFileStream (file, elements, mpsData, parseRowFunction, delimiter) 
     delimiter,
     chunk: function (results, parser) {
       const data = results.data
-      processedSize += results.meta.cursor
+      processedSize += chunkSize
 
       // update progress
-      const progress = Math.min(50, (processedSize / fileSize) * 50)
+      const progress = processedSize / fileSize * 100
       elements.progressBar.style.width = progress + '%'
-      elements.progressBar.innerHTML = progress.toFixed(0) + '%'
+      // elements.progressBar.innerHTML = progress.toFixed(0) + '%'
 
       try {
         const foundSnps = parseRowFunction(data, mpsData)
