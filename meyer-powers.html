@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Meyer-Powers Syndrome</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <h1>Meyer-Powers Syndrome</h1>
+
+  <input type="file" id="txt-file" accept=".txt">
+  <button id="analyze-btn">Analyze</button>
+
+  <div id="progress-container" style="display: none;">
+    <div id="progress-bar"></div>
+  </div>
+  
+
+  <div id="results"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+  <script src="app.js"></script>
+  <script>
+    const snpsToSearch = ["rs1801131", "rs1801133", "rs1802059", "rs6812193", "rs356219", "rs2736990", "rs1800796","rs1800795", "rs776746", "rs3761847", "rs5219", "rs1950902", "rs4646", "rs10046", "rs2414096","rs2470152", "rs2470144", "rs762551", "rs9652490", "rs1064039", "rs165722", "rs165599", "rs4680", "rs4633"];
+    setupSNPAnalyzer(null, snpsToSearch);
+  </script>  
+</body>
+</html>
