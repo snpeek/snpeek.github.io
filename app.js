@@ -72,30 +72,47 @@ analyzeBtn.addEventListener('click', () => {
 });
 
 function analyze23AndMeData(data, snpsToSearch) {
-  const foundSnps = {};
-  const resultsFragment = document.createDocumentFragment();
-
+  const foundSnps = [];
   data.forEach(row => {
-    if (!row || row.length < 2 || (typeof row[0] === 'string' && row[0].startsWith('#'))) {
+    if (!row || row.length < 4 || (typeof row[0] === 'string' && row[0].startsWith('#'))) {
       return;
     }
     const snp = row[0];
     if (snpsToSearch.includes(snp)) {
-      foundSnps[snp] = true;
+      foundSnps.push({
+        rsid: snp,
+        chromosome: row[1],
+        position: row[2],
+        genotype: row[3]
+      });
     }
   });
 
-  const heading = document.createElement('p');
-  heading.textContent = 'Found SNPs:';
-  resultsFragment.appendChild(heading);
+  // Creating table element
+  const table = document.createElement('table');
+  table.style.width = '100%';
+  table.setAttribute('border', '1');
 
-  for (const snp in foundSnps) {
-    const snpTextNode = document.createTextNode(escapeHtml(snp));
-    const br = document.createElement('br');
-    resultsFragment.appendChild(snpTextNode);
-    resultsFragment.appendChild(br);
-  }
+  const headerRow = document.createElement('tr');
+  const columns = ['rsid', 'chromosome', 'position', 'genotype'];
+  columns.forEach(column => {
+    const th = document.createElement('th');
+    th.textContent = column;
+    headerRow.appendChild(th);
+  });
+
+  table.appendChild(headerRow);
+
+  foundSnps.forEach(snp => {
+    const tr = document.createElement('tr');
+    columns.forEach(column => {
+      const td = document.createElement('td');
+      td.textContent = escapeHtml(String(snp[column]));
+      tr.appendChild(td);
+    });
+    table.appendChild(tr);
+  });
 
   resultsDiv.innerHTML = '';
-  resultsDiv.appendChild(resultsFragment);
+  resultsDiv.appendChild(table);
 }
