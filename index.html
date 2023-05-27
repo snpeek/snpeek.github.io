@@ -7,6 +7,10 @@
 <body>
   <h1>SNiPeek</h1>
 
+  <div id="notice-box">
+    <p><strong>Notice:</strong>All genetic data processing is performed entirely on your device (client-side), so no data is sent or stored elsewhere.</p>
+  </div>
+
   <input type="file" id="txt-file" accept=".txt">
   <textarea id="snps-input" placeholder="Enter SNPs, separated by commas..."></textarea>
   <button id="analyze-btn">Analyze</button>
@@ -14,10 +18,8 @@
   <div id="progress-container" style="display: none; width: 100%; background-color: #f3f3f3;">
     <div id="progress-bar" style="height: 20px; width: 0%; background-color: #4CAF50;"></div>
   </div>
-  
 
   <div id="results"></div>
-
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
   <script src="app.js"></script>
