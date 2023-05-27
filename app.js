@@ -161,9 +161,17 @@ function renderTable (elements, foundSnps) {
 
     const headerRow = document.createElement('tr')
     const columns = ['rsid', 'genotype', 'bad', 'chromosome', 'position', 'description']
+    const columnDisplay = {
+      rsid: 'RSID',
+      genotype: 'Genotype',
+      bad: 'Bad Genotype',
+      chromosome: 'Chromosome',
+      position: 'Position',
+      description: 'Description'
+    }
     columns.forEach(column => {
       const th = document.createElement('th')
-      th.textContent = column
+      th.textContent = columnDisplay[column]
       headerRow.appendChild(th)
     })
 
