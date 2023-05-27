@@ -143,7 +143,8 @@ function renderTable (elements, foundSnps) {
     const tr = document.createElement('tr')
     columns.forEach(column => {
       const td = document.createElement('td')
-      td.textContent = escapeHtml(String(snp[column]))
+      const content = escapeHtml(String(snp[column]))
+      td.innerHTML = column === 'rsid' ? linkToSnpedia(content) : content
       tr.appendChild(td)
     })
     table.appendChild(tr)
@@ -160,4 +161,8 @@ function escapeHtml (unsafe) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;')
+}
+
+function linkToSnpedia (snp) {
+  return '<a href="https://www.snpedia.com/index.php/' + snp + '">' + snp + '</a>'
 }
