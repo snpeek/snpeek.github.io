@@ -124,9 +124,9 @@ function analyze23AndMeData (data, mpsData) {
         chromosome: row[1],
         position: row[2],
         genotype: row[3],
-        type: mpsData[snp].type,
-        bad: nullOrEmptyString(mpsData[snp].bad),
-        description: nullOrEmptyString(mpsData[snp].description)
+        phenotype: mpsData[snp].phenotype,
+        broken_geno: nullOrEmptyString(mpsData[snp].broken_geno),
+        gene: nullOrEmptyString(mpsData[snp].gene)
       })
     }
   })
@@ -138,20 +138,20 @@ function nullOrEmptyString (str) {
 }
 
 function renderTable (elements, foundSnps) {
-  // Sort the found SNPs by type
-  foundSnps.sort((a, b) => a.type.localeCompare(b.type))
+  // Sort the found SNPs by phenotype
+  foundSnps.sort((a, b) => a.phenotype.localeCompare(b.phenotype))
 
-  // Group the found SNPs by type
-  const groups = groupBy(foundSnps, 'type')
+  // Group the found SNPs by phenotype
+  const groups = groupBy(foundSnps, 'phenotype')
 
   // Clear previous results
   elements.resultsDiv.innerHTML = ''
 
   // Loop through each group and create a table
-  for (const type in groups) {
+  for (const phenotype in groups) {
     // Creating table title
     const title = document.createElement('h3')
-    title.textContent = type
+    title.textContent = phenotype
     elements.resultsDiv.appendChild(title)
 
     // Creating table element
@@ -160,14 +160,14 @@ function renderTable (elements, foundSnps) {
     table.setAttribute('border', '1')
 
     const headerRow = document.createElement('tr')
-    const columns = ['rsid', 'genotype', 'bad', 'chromosome', 'position', 'description']
+    const columns = ['rsid', 'genotype', 'broken_geno', 'chromosome', 'position', 'gene']
     const columnDisplay = {
       rsid: 'RSID',
       genotype: 'Genotype',
-      bad: 'Bad Genotype',
+      broken_geno: 'Broken',
       chromosome: 'Chromosome',
       position: 'Position',
-      description: 'Description'
+      gene: 'Gene'
     }
     columns.forEach(column => {
       const th = document.createElement('th')
@@ -177,7 +177,7 @@ function renderTable (elements, foundSnps) {
 
     table.appendChild(headerRow)
 
-    groups[type].forEach(snp => {
+    groups[phenotype].forEach(snp => {
       const tr = document.createElement('tr')
       columns.forEach(column => {
         const td = document.createElement('td')

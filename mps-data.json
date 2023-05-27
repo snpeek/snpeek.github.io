@@ -1,342 +1,342 @@
 {
     "rs2476601": {
-        "type": "Addison's Disease",
-        "bad": "",
-        "description": null
+        "phenotype": "Addison's Disease",
+        "broken_geno": "",
+        "gene": null
     },
     "rs11571303": {
-        "type": "Addison's Disease",
-        "bad": "",
-        "description": null
+        "phenotype": "Addison's Disease",
+        "broken_geno": "",
+        "gene": null
     },
     "rs1464510": {
-        "type": "Addison's Disease",
-        "bad": "",
-        "description": null
+        "phenotype": "Addison's Disease",
+        "broken_geno": "",
+        "gene": null
     },
     "rs3998178": {
-        "type": "Addison's Disease",
-        "bad": "",
-        "description": null
+        "phenotype": "Addison's Disease",
+        "broken_geno": "",
+        "gene": null
     },
     "rs10806425": {
-        "type": "Addison's Disease",
-        "bad": "",
-        "description": null
+        "phenotype": "Addison's Disease",
+        "broken_geno": "",
+        "gene": null
     },
     "rs7137828": {
-        "type": "Addison's Disease",
-        "bad": "",
-        "description": null
+        "phenotype": "Addison's Disease",
+        "broken_geno": "",
+        "gene": null
     },
     "rs8112143": {
-        "type": "Addison's Disease",
-        "bad": "",
-        "description": null
+        "phenotype": "Addison's Disease",
+        "broken_geno": "",
+        "gene": null
     },
     "rs11203203": {
-        "type": "Addison's Disease",
-        "bad": "",
-        "description": null
+        "phenotype": "Addison's Disease",
+        "broken_geno": "",
+        "gene": null
     },
     "rs74203920": {
-        "type": "Addison's Disease",
-        "bad": "",
-        "description": null
+        "phenotype": "Addison's Disease",
+        "broken_geno": "",
+        "gene": null
     },
     "rs2075876": {
-        "type": "Addison's Disease",
-        "bad": "",
-        "description": null
+        "phenotype": "Addison's Disease",
+        "broken_geno": "",
+        "gene": null
     },
     "rs1801133": {
-        "type": "DNA Methylation",
-        "bad": "TT",
-        "description": "MTHFR 677"
+        "phenotype": "DNA Methylation",
+        "broken_geno": "TT",
+        "gene": "MTHFR 677"
     },
     "rs1801131": {
-        "type": "DNA Methylation",
-        "bad": "??",
-        "description": "A1298C"
+        "phenotype": "DNA Methylation",
+        "broken_geno": "??",
+        "gene": "A1298C"
     },
     "rs2236225": {
-        "type": "DNA Methylation",
-        "bad": "??",
-        "description": "MTHFD1"
+        "phenotype": "DNA Methylation",
+        "broken_geno": "??",
+        "gene": "MTHFD1"
     },
     "rs1950902": {
-        "type": "DNA Methylation",
-        "bad": "??",
-        "description": "MTHFD1"
+        "phenotype": "DNA Methylation",
+        "broken_geno": "??",
+        "gene": "MTHFD1"
     },
     "rs6922269": {
-        "type": "DNA Methylation",
-        "bad": "??",
-        "description": "MTHFD1"
+        "phenotype": "DNA Methylation",
+        "broken_geno": "??",
+        "gene": "MTHFD1"
     },
     "rs2470152": {
-        "type": "Aromatase Enzyme",
-        "bad": "CC",
-        "description": "Aromatase #1"
+        "phenotype": "Aromatase Enzyme",
+        "broken_geno": "CC",
+        "gene": "Aromatase #1"
     },
     "rs4646": {
-        "type": "Aromatase Enzyme",
-        "bad": "CC",
-        "description": "Aromatase #2"
+        "phenotype": "Aromatase Enzyme",
+        "broken_geno": "CC",
+        "gene": "Aromatase #2"
     },
     "rs2470144": {
-        "type": "Aromatase Enzyme",
-        "bad": "GG",
-        "description": "Aromatase #3 (minor)"
+        "phenotype": "Aromatase Enzyme",
+        "broken_geno": "GG",
+        "gene": "Aromatase #3 (minor)"
     },
     "rs10046": {
-        "type": "Aromatase Enzyme",
-        "bad": "??",
-        "description": null
+        "phenotype": "Aromatase Enzyme",
+        "broken_geno": "??",
+        "gene": null
     },
     "rs2414096": {
-        "type": "Aromatase Enzyme",
-        "bad": "??",
-        "description": null
+        "phenotype": "Aromatase Enzyme",
+        "broken_geno": "??",
+        "gene": null
     },
     "rs17036314": {
-        "type": "Insulin Resistance",
-        "bad": "CC",
-        "description": "PPARG"
+        "phenotype": "Insulin Resistance",
+        "broken_geno": "CC",
+        "gene": "PPARG"
     },
     "rs5219": {
-        "type": "Insulin Resistance",
-        "bad": "TT",
-        "description": "KCNJ11"
+        "phenotype": "Insulin Resistance",
+        "broken_geno": "TT",
+        "gene": "KCNJ11"
     },
     "rs2943634": {
-        "type": "Insulin Resistance",
-        "bad": "CC",
-        "description": "IRS1"
+        "phenotype": "Insulin Resistance",
+        "broken_geno": "CC",
+        "gene": "IRS1"
     },
     "rs1800796": {
-        "type": "Inflammation Marker",
-        "bad": "CC",
-        "description": "IL6"
+        "phenotype": "Inflammation Marker",
+        "broken_geno": "CC",
+        "gene": "IL6"
     },
     "rs3761847": {
-        "type": "Inflammation Marker",
-        "bad": "GG",
-        "description": "TRAF1"
+        "phenotype": "Inflammation Marker",
+        "broken_geno": "GG",
+        "gene": "TRAF1"
     },
     "rs429358": {
-        "type": "LDL Cholesterol",
-        "bad": "??",
-        "description": "ApoE"
+        "phenotype": "LDL Cholesterol",
+        "broken_geno": "??",
+        "gene": "ApoE"
     },
     "rs7412": {
-        "type": "LDL Cholesterol",
-        "bad": "??",
-        "description": "ApoE"
+        "phenotype": "LDL Cholesterol",
+        "broken_geno": "??",
+        "gene": "ApoE"
     },
     "rs75932628": {
-        "type": "LDL Cholesterol",
-        "bad": "TT",
-        "description": "TREM2"
+        "phenotype": "LDL Cholesterol",
+        "broken_geno": "TT",
+        "gene": "TREM2"
     },
     "rs4420638": {
-        "type": "LDL Cholesterol",
-        "bad": "GG",
-        "description": "APOC1"
+        "phenotype": "LDL Cholesterol",
+        "broken_geno": "GG",
+        "gene": "APOC1"
     },
     "rs1800795": {
-        "type": "LDL Cholesterol",
-        "bad": "GG",
-        "description": "IL6"
+        "phenotype": "LDL Cholesterol",
+        "broken_geno": "GG",
+        "gene": "IL6"
     },
     "rs1064039": {
-        "type": "NAD(P)H Metabolism",
-        "bad": "AA",
-        "description": "TCA Cycle"
+        "phenotype": "NAD(P)H Metabolism",
+        "broken_geno": "AA",
+        "gene": "TCA Cycle"
     },
     "rs11868035": {
-        "type": "NAD(P)H Metabolism",
-        "bad": "AA",
-        "description": "SREBF1"
+        "phenotype": "NAD(P)H Metabolism",
+        "broken_geno": "AA",
+        "gene": "SREBF1"
     },
     "rs9652490": {
-        "type": "NAD(P)H Metabolism",
-        "bad": "AA",
-        "description": "LINGO1"
+        "phenotype": "NAD(P)H Metabolism",
+        "broken_geno": "AA",
+        "gene": "LINGO1"
     },
     "rs6812193": {
-        "type": "NAD(P)H Metabolism",
-        "bad": "CC",
-        "description": "FAM47E"
+        "phenotype": "NAD(P)H Metabolism",
+        "broken_geno": "CC",
+        "gene": "FAM47E"
     },
     "rs393152": {
-        "type": "NAD(P)H Metabolism",
-        "bad": "AA",
-        "description": "C17orf69"
+        "phenotype": "NAD(P)H Metabolism",
+        "broken_geno": "AA",
+        "gene": "C17orf69"
     },
     "rs2736990": {
-        "type": "NAD(P)H Metabolism",
-        "bad": "CC",
-        "description": "SNCA"
+        "phenotype": "NAD(P)H Metabolism",
+        "broken_geno": "CC",
+        "gene": "SNCA"
     },
     "rs356219": {
-        "type": "NAD(P)H Metabolism",
-        "bad": "GG",
-        "description": "SNCA"
+        "phenotype": "NAD(P)H Metabolism",
+        "broken_geno": "GG",
+        "gene": "SNCA"
     },
     "rs165599": {
-        "type": "Estrogen Deactivation",
-        "bad": "GG",
-        "description": "COMT"
+        "phenotype": "Estrogen Deactivation",
+        "broken_geno": "GG",
+        "gene": "COMT"
     },
     "rs165722": {
-        "type": "Estrogen Deactivation",
-        "bad": "CC",
-        "description": "COMT"
+        "phenotype": "Estrogen Deactivation",
+        "broken_geno": "CC",
+        "gene": "COMT"
     },
     "rs776746": {
-        "type": "Estrogen Deactivation",
-        "bad": "GG",
-        "description": "SULT1A1"
+        "phenotype": "Estrogen Deactivation",
+        "broken_geno": "GG",
+        "gene": "SULT1A1"
     },
     "rs762551": {
-        "type": "Estrogen Deactivation",
-        "bad": "??",
-        "description": null
+        "phenotype": "Estrogen Deactivation",
+        "broken_geno": "??",
+        "gene": null
     },
     "rs743572": {
-        "type": "Estrogen Deactivation",
-        "bad": "??",
-        "description": null
+        "phenotype": "Estrogen Deactivation",
+        "broken_geno": "??",
+        "gene": null
     },
     "rs398124239": {
-        "type": "Hypermobility RS2",
-        "bad": "??",
-        "description": null
+        "phenotype": "Hypermobility RS2",
+        "broken_geno": "??",
+        "gene": null
     },
     "i5005436": {
-        "type": "Congenital Adrenal Hyperplasia",
-        "bad": "CT",
-        "description": "CYP21A2"
+        "phenotype": "Congenital Adrenal Hyperplasia",
+        "broken_geno": "CT",
+        "gene": "CYP21A2"
     },
     "rs151344503": {
-        "type": "Congenital Adrenal Hyperplasia",
-        "bad": null,
-        "description": null
+        "phenotype": "Congenital Adrenal Hyperplasia",
+        "broken_geno": null,
+        "gene": null
     },
     "rs201552310": {
-        "type": "Congenital Adrenal Hyperplasia",
-        "bad": null,
-        "description": null
+        "phenotype": "Congenital Adrenal Hyperplasia",
+        "broken_geno": null,
+        "gene": null
     },
     "rs267606756": {
-        "type": "Congenital Adrenal Hyperplasia",
-        "bad": null,
-        "description": null
+        "phenotype": "Congenital Adrenal Hyperplasia",
+        "broken_geno": null,
+        "gene": null
     },
     "rs267606757": {
-        "type": "Congenital Adrenal Hyperplasia",
-        "bad": null,
-        "description": null
+        "phenotype": "Congenital Adrenal Hyperplasia",
+        "broken_geno": null,
+        "gene": null
     },
     "rs387906510": {
-        "type": "Congenital Adrenal Hyperplasia",
-        "bad": null,
-        "description": null
+        "phenotype": "Congenital Adrenal Hyperplasia",
+        "broken_geno": null,
+        "gene": null
     },
     "rs397509367": {
-        "type": "Congenital Adrenal Hyperplasia",
-        "bad": null,
-        "description": null
+        "phenotype": "Congenital Adrenal Hyperplasia",
+        "broken_geno": null,
+        "gene": null
     },
     "rs6445": {
-        "type": "Congenital Adrenal Hyperplasia",
-        "bad": null,
-        "description": null
+        "phenotype": "Congenital Adrenal Hyperplasia",
+        "broken_geno": null,
+        "gene": null
     },
     "rs6467": {
-        "type": "Congenital Adrenal Hyperplasia",
-        "bad": null,
-        "description": null
+        "phenotype": "Congenital Adrenal Hyperplasia",
+        "broken_geno": null,
+        "gene": null
     },
     "rs6471": {
-        "type": "Congenital Adrenal Hyperplasia",
-        "bad": null,
-        "description": null
+        "phenotype": "Congenital Adrenal Hyperplasia",
+        "broken_geno": null,
+        "gene": null
     },
     "rs6472": {
-        "type": "Congenital Adrenal Hyperplasia",
-        "bad": null,
-        "description": null
+        "phenotype": "Congenital Adrenal Hyperplasia",
+        "broken_geno": null,
+        "gene": null
     },
     "rs6475": {
-        "type": "Congenital Adrenal Hyperplasia",
-        "bad": null,
-        "description": null
+        "phenotype": "Congenital Adrenal Hyperplasia",
+        "broken_geno": null,
+        "gene": null
     },
     "rs6476": {
-        "type": "Congenital Adrenal Hyperplasia",
-        "bad": null,
-        "description": null
+        "phenotype": "Congenital Adrenal Hyperplasia",
+        "broken_geno": null,
+        "gene": null
     },
     "rs7755898": {
-        "type": "Congenital Adrenal Hyperplasia",
-        "bad": null,
-        "description": null
+        "phenotype": "Congenital Adrenal Hyperplasia",
+        "broken_geno": null,
+        "gene": null
     },
     "rs7769409": {
-        "type": "Congenital Adrenal Hyperplasia",
-        "bad": null,
-        "description": null
+        "phenotype": "Congenital Adrenal Hyperplasia",
+        "broken_geno": null,
+        "gene": null
     },
     "rs9378251": {
-        "type": "Congenital Adrenal Hyperplasia",
-        "bad": null,
-        "description": null
+        "phenotype": "Congenital Adrenal Hyperplasia",
+        "broken_geno": null,
+        "gene": null
     },
     "rs151344504": {
-        "type": "Congenital Adrenal Hyperplasia",
-        "bad": null,
-        "description": null
+        "phenotype": "Congenital Adrenal Hyperplasia",
+        "broken_geno": null,
+        "gene": null
     },
     "rs151344505": {
-        "type": "Congenital Adrenal Hyperplasia",
-        "bad": null,
-        "description": null
+        "phenotype": "Congenital Adrenal Hyperplasia",
+        "broken_geno": null,
+        "gene": null
     },
     "rs151344506": {
-        "type": "Congenital Adrenal Hyperplasia",
-        "bad": null,
-        "description": null
+        "phenotype": "Congenital Adrenal Hyperplasia",
+        "broken_geno": null,
+        "gene": null
     },
     "rs397515532": {
-        "type": "Congenital Adrenal Hyperplasia",
-        "bad": null,
-        "description": null
+        "phenotype": "Congenital Adrenal Hyperplasia",
+        "broken_geno": null,
+        "gene": null
     },
     "rs72552754": {
-        "type": "Congenital Adrenal Hyperplasia",
-        "bad": null,
-        "description": null
+        "phenotype": "Congenital Adrenal Hyperplasia",
+        "broken_geno": null,
+        "gene": null
     },
     "rs72552756": {
-        "type": "Congenital Adrenal Hyperplasia",
-        "bad": null,
-        "description": null
+        "phenotype": "Congenital Adrenal Hyperplasia",
+        "broken_geno": null,
+        "gene": null
     },
     "rs72552757": {
-        "type": "Congenital Adrenal Hyperplasia",
-        "bad": null,
-        "description": null
+        "phenotype": "Congenital Adrenal Hyperplasia",
+        "broken_geno": null,
+        "gene": null
     },
     "rs72552758": {
-        "type": "Congenital Adrenal Hyperplasia",
-        "bad": null,
-        "description": null
+        "phenotype": "Congenital Adrenal Hyperplasia",
+        "broken_geno": null,
+        "gene": null
     },
     "rs9378252": {
-        "type": "Congenital Adrenal Hyperplasia",
-        "bad": null,
-        "description": null
+        "phenotype": "Congenital Adrenal Hyperplasia",
+        "broken_geno": null,
+        "gene": null
     }
 }
