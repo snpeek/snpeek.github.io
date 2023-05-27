@@ -1,0 +1,342 @@
+{
+    "rs2476601": {
+        "type": "addison",
+        "bad": "",
+        "description": null
+    },
+    "rs11571303": {
+        "type": "addison",
+        "bad": "",
+        "description": null
+    },
+    "rs1464510": {
+        "type": "addison",
+        "bad": "",
+        "description": null
+    },
+    "rs3998178": {
+        "type": "addison",
+        "bad": "",
+        "description": null
+    },
+    "rs10806425": {
+        "type": "addison",
+        "bad": "",
+        "description": null
+    },
+    "rs7137828": {
+        "type": "addison",
+        "bad": "",
+        "description": null
+    },
+    "rs8112143": {
+        "type": "addison",
+        "bad": "",
+        "description": null
+    },
+    "rs11203203": {
+        "type": "addison",
+        "bad": "",
+        "description": null
+    },
+    "rs74203920": {
+        "type": "addison",
+        "bad": "",
+        "description": null
+    },
+    "rs2075876": {
+        "type": "addison",
+        "bad": "",
+        "description": null
+    },
+    "rs1801133": {
+        "type": "methylation",
+        "bad": "TT",
+        "description": "MTHFR 677"
+    },
+    "rs1801131": {
+        "type": "methylation",
+        "bad": "??",
+        "description": "A1298C"
+    },
+    "rs2236225": {
+        "type": "methylation",
+        "bad": "??",
+        "description": "MTHFD1"
+    },
+    "rs1950902": {
+        "type": "methylation",
+        "bad": "??",
+        "description": "MTHFD1"
+    },
+    "rs6922269": {
+        "type": "methylation",
+        "bad": "??",
+        "description": "MTHFD1 "
+    },
+    "rs2470152": {
+        "type": "Aromatase",
+        "bad": "CC",
+        "description": "Aromatase #1"
+    },
+    "rs4646": {
+        "type": "Aromatase",
+        "bad": "CC",
+        "description": "Aromatase #2"
+    },
+    "rs2470144": {
+        "type": "Aromatase",
+        "bad": "GG",
+        "description": "Aromatase #3 (minor)"
+    },
+    "rs10046": {
+        "type": "Aromatase",
+        "bad": "??",
+        "description": null
+    },
+    "rs2414096": {
+        "type": "Aromatase",
+        "bad": "??",
+        "description": null
+    },
+    "rs17036314": {
+        "type": "Insulin resistance",
+        "bad": "CC",
+        "description": "PPARG"
+    },
+    "rs5219": {
+        "type": "Insulin resistance",
+        "bad": "TT",
+        "description": "KCNJ11"
+    },
+    "rs2943634": {
+        "type": "Insulin resistance",
+        "bad": "CC",
+        "description": "IRS1"
+    },
+    "rs1800796": {
+        "type": "Inflammation",
+        "bad": "CC",
+        "description": "IL6"
+    },
+    "rs3761847": {
+        "type": "Inflammation",
+        "bad": "GG",
+        "description": "TRAF1"
+    },
+    "rs429358": {
+        "type": "ldl-cholesterol",
+        "bad": "??",
+        "description": "ApoE"
+    },
+    "rs7412": {
+        "type": "ldl-cholesterol",
+        "bad": "??",
+        "description": "ApoE"
+    },
+    "rs75932628": {
+        "type": "ldl-cholesterol",
+        "bad": "TT",
+        "description": "TREM2"
+    },
+    "rs4420638": {
+        "type": "ldl-cholesterol",
+        "bad": "GG",
+        "description": "APOC1"
+    },
+    "rs1800795": {
+        "type": "ldl-cholesterol",
+        "bad": "GG",
+        "description": "IL6"
+    },
+    "rs1064039": {
+        "type": "NAD(P)H",
+        "bad": "AA",
+        "description": "TCA Cycle"
+    },
+    "rs11868035": {
+        "type": "NAD(P)H",
+        "bad": "AA",
+        "description": "SREBF1"
+    },
+    "rs9652490": {
+        "type": "NAD(P)H",
+        "bad": "AA",
+        "description": "LINGO1"
+    },
+    "rs6812193": {
+        "type": "NAD(P)H",
+        "bad": "CC",
+        "description": "FAM47E"
+    },
+    "rs393152": {
+        "type": "NAD(P)H",
+        "bad": "AA",
+        "description": "C17orf69"
+    },
+    "rs2736990": {
+        "type": "NAD(P)H",
+        "bad": "CC",
+        "description": "SNCA"
+    },
+    "rs356219": {
+        "type": "NAD(P)H",
+        "bad": "GG",
+        "description": "SNCA"
+    },
+    "rs165599": {
+        "type": "estrogen deactivation",
+        "bad": "GG",
+        "description": "COMT"
+    },
+    "rs165722": {
+        "type": "estrogen deactivation",
+        "bad": "CC",
+        "description": "COMT"
+    },
+    "rs776746": {
+        "type": "estrogen deactivation",
+        "bad": "GG",
+        "description": "SULT1A1"
+    },
+    "rs762551": {
+        "type": "estrogen deactivation",
+        "bad": "??",
+        "description": "?"
+    },
+    "rs743572": {
+        "type": "estrogen deactivation",
+        "bad": "??",
+        "description": "?"
+    },
+    "rs398124239": {
+        "type": "Hypermobility==RS2",
+        "bad": "??",
+        "description": "?"
+    },
+    "i5005436": {
+        "type": "CAH",
+        "bad": "CT",
+        "description": "CYP21A2"
+    },
+    "rs151344503": {
+        "type": "CAH",
+        "bad": null,
+        "description": null
+    },
+    "rs201552310": {
+        "type": "CAH",
+        "bad": null,
+        "description": null
+    },
+    "rs267606756": {
+        "type": "CAH",
+        "bad": null,
+        "description": null
+    },
+    "rs267606757": {
+        "type": "CAH",
+        "bad": null,
+        "description": null
+    },
+    "rs387906510": {
+        "type": "CAH",
+        "bad": null,
+        "description": null
+    },
+    "rs397509367": {
+        "type": "CAH",
+        "bad": null,
+        "description": null
+    },
+    "rs6445": {
+        "type": "CAH",
+        "bad": null,
+        "description": null
+    },
+    "rs6467": {
+        "type": "CAH",
+        "bad": null,
+        "description": null
+    },
+    "rs6471": {
+        "type": "CAH",
+        "bad": null,
+        "description": null
+    },
+    "rs6472": {
+        "type": "CAH",
+        "bad": null,
+        "description": null
+    },
+    "rs6475": {
+        "type": "CAH",
+        "bad": null,
+        "description": null
+    },
+    "rs6476": {
+        "type": "CAH",
+        "bad": null,
+        "description": null
+    },
+    "rs7755898": {
+        "type": "CAH",
+        "bad": null,
+        "description": null
+    },
+    "rs7769409": {
+        "type": "CAH",
+        "bad": null,
+        "description": null
+    },
+    "rs9378251": {
+        "type": "CAH",
+        "bad": null,
+        "description": null
+    },
+    "rs151344504": {
+        "type": "CAH",
+        "bad": null,
+        "description": null
+    },
+    "rs151344505": {
+        "type": "CAH",
+        "bad": null,
+        "description": null
+    },
+    "rs151344506": {
+        "type": "CAH",
+        "bad": null,
+        "description": null
+    },
+    "rs397515532": {
+        "type": "CAH",
+        "bad": null,
+        "description": null
+    },
+    "rs72552754": {
+        "type": "CAH",
+        "bad": null,
+        "description": null
+    },
+    "rs72552756": {
+        "type": "CAH",
+        "bad": null,
+        "description": null
+    },
+    "rs72552757": {
+        "type": "CAH",
+        "bad": null,
+        "description": null
+    },
+    "rs72552758": {
+        "type": "CAH",
+        "bad": null,
+        "description": null
+    },
+    "rs9378252": {
+        "type": "CAH",
+        "bad": null,
+        "description": null
+    }
+}
