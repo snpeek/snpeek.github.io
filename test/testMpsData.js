@@ -6,7 +6,7 @@ const expect = chai.expect
 describe('JSON structure test', function () {
   // eslint-disable-next-line no-undef
   it('should have the expected keys and nested objects', function (done) {
-    fs.readFile('./docs/mps/mps-data.json', 'utf8', function (err, data) {
+    fs.readFile('./public/mps/mps-data.json', 'utf8', function (err, data) {
       if (err) {
         return done(err)
       }
