@@ -1,14 +1,30 @@
-// entrypoint
 // eslint-disable-next-line no-unused-vars
-function main (snpsInputSelector, snpsToSearch = null) {
+async function main (snpsInputSelector) {
   const elements = getDOMElements(snpsInputSelector)
 
-  elements.analyzeBtn.addEventListener('click', () => {
+  elements.analyzeBtn.addEventListener('click', async () => {
     if (validateDOMElements(elements, snpsInputSelector)) {
-      const snpsInput = snpsToSearch !== null ? snpsToSearch : elements.snpsInput.value.split(',')
-      processFile(elements, snpsInput)
+      const snpsToSearch = await fetchMpsData()
+      if (!snpsToSearch) {
+        console.error('Failed to load MPS data.')
+        return
+      }
+
+      processFile(elements, snpsToSearch)
     }
   })
+}
+
+// Fetch mps-data.json and return the keys as snpsToSearch
+async function fetchMpsData () {
+  try {
+    const response = await fetch('mps-data.json')
+    const mpsData = await response.json()
+    return Object.keys(mpsData)
+  } catch (error) {
+    console.error('Error fetching MPS data:', error)
+    return null
+  }
 }
 
 function getDOMElements (snpsInputSelector) {
