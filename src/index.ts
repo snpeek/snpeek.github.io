@@ -340,13 +340,15 @@ function renderReportDownload (elements: Elements, foundSnps: Variant[]): void {
   elements.resultsDiv.parentNode?.insertBefore(button, elements.resultsDiv.nextSibling)
 }
 
-// Group by function
-function groupBy(arr: Variant[], key: keyof Variant): Record<string, Variant[]> {
+function groupBy (arr: Variant[], key: keyof Variant): Record<string, Variant[]> {
   return arr.reduce((rv: Record<string, Variant[]>, x: Variant) => {
-    const keyValue = String(x[key]); // convert the key value to string
-    (rv[keyValue] = rv[keyValue] || []).push(x);
-    return rv;
-  }, {});
+    const keyValue = String(x[key])
+    if (!(keyValue in rv)) {
+      rv[keyValue] = []
+    }
+    rv[keyValue].push(x)
+    return rv
+  }, {})
 }
 
 function convertToCSV (arrayOfObjects: any[]): string {
