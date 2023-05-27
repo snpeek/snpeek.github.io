@@ -119,7 +119,7 @@ function parseFile (file, elements, mpsData) {
       return
     }
 
-    parseEachLine(result, elements, mpsData, parseRowFunction, delimiter)
+    parseFileStream(result, elements, mpsData, parseRowFunction, delimiter)
   }
 
   reader.onerror = function () {
@@ -129,28 +129,6 @@ function parseFile (file, elements, mpsData) {
   }
 
   reader.readAsText(file)
-}
-
-function parseEachLine (data, elements, searchSnps, parseRowFunction, delimiter) {
-  // eslint-disable-next-line no-undef
-  Papa.parse(data, {
-    delimiter,
-    dynamicTyping: true,
-    complete: function (results) {
-      const foundSnps = parseRowFunction(results.data, searchSnps)
-      if (foundSnps) {
-        renderTable(elements, foundSnps)
-        elements.progressContainer.style.display = 'none'
-      } else {
-        console.error('Unable to determine file type for parsing.')
-      }
-    },
-    error: function (error) {
-      console.error('Error while parsing file:', error)
-      alert('An error occurred while parsing the file.')
-      elements.progressContainer.style.display = 'none'
-    }
-  })
 }
 
 function parseFileStream (file, elements, mpsData, parseRowFunction, delimiter) {
@@ -187,7 +165,7 @@ function parseFileStream (file, elements, mpsData, parseRowFunction, delimiter) 
     complete: function () {
       // update progress (processing)
       elements.progressBar.style.width = '100%'
-      elements.progressBar.innerHTML = '100%'
+      // elements.progressBar.innerHTML = '100%'
       renderTable(elements, totalSnps)
       elements.progressContainer.style.display = 'none'
     },
