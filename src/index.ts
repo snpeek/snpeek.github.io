@@ -283,11 +283,29 @@ function renderTable (elements: Elements, foundSnps: Variant[]): void {
   // Group the found SNPs by phenotype
   const groups: Record<string, Variant[]> = groupBy(foundSnps, 'phenotype')
 
+  const priorityOrder = ['DNA Methylation', 'Estrogen Deactivation']
+
+  const sortWithPriority = (a: string, b: string): number => {
+    const indexA = priorityOrder.indexOf(a)
+    const indexB = priorityOrder.indexOf(b)
+    if (indexA === -1 && indexB === -1) return a.localeCompare(b)
+    if (indexA === -1) return 1
+    if (indexB === -1) return -1
+    return indexA - indexB
+  }
+
+  const sortedKeys = Object.keys(groups).sort(sortWithPriority)
+
+  const sortedGroups: Record<string, Variant[]> = {}
+  for (const key of sortedKeys) {
+    sortedGroups[key] = groups[key]
+  }
+
   // Clear previous results
   elements.resultsDiv.innerHTML = ''
 
   // Loop through each group and create a table
-  for (const phenotype in groups) {
+  for (const phenotype in sortedGroups) {
     // Creating table title
     const title = document.createElement('h3')
     title.textContent = phenotype
