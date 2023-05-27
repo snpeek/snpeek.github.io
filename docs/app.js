@@ -17,7 +17,7 @@ async function main (snpsInputSelector) {
 
 async function fetchMpsData () {
   try {
-    const response = await fetch('mps-data.json')
+    const response = await fetch('./mps/mps-data.json') // TODO this should be passed in
     const mpsData = await response.json()
 
     if (mpsData && Object.keys(mpsData).length > 0) {
