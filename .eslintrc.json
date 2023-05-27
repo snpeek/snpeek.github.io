@@ -3,12 +3,28 @@
         "browser": true,
         "es2021": true
     },
-    "extends": "standard-with-typescript",
-    "overrides": [
+    "extends": [
+        "standard-with-typescript"
     ],
+    "parser": "@typescript-eslint/parser",
     "parserOptions": {
-        "ecmaVersion": "latest"
+        "project": "./tsconfig.json",
+        "ecmaVersion": 2021,
+        "sourceType": "module"
     },
+    "plugins": [
+        "@typescript-eslint"
+    ],
     "rules": {
-    }
+        // Add your rules here
+    },
+    "overrides": [
+        {
+            "files": ["*.ts", "*.tsx"],
+            "rules": {
+                // Your TypeScript specific rules can be added here
+            }
+        }
+    ]
 }
+
