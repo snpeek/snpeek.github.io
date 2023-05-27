@@ -126,7 +126,7 @@ function analyze23AndMeData (data, mpsData) {
         genotype: row[3],
         type: mpsData[snp].type,
         bad: mpsData[snp].bad,
-        description: mpsData[snp].description
+        description: mpsData[snp].description !== null ? mpsData[snp].description : ''
       })
     }
   })
@@ -137,35 +137,56 @@ function renderTable (elements, foundSnps) {
   // Sort the found SNPs by type
   foundSnps.sort((a, b) => a.type.localeCompare(b.type))
 
-  // Creating table element
-  const table = document.createElement('table')
-  table.style.width = '100%'
-  table.setAttribute('border', '1')
+  // Group the found SNPs by type
+  const groups = groupBy(foundSnps, 'type')
 
-  const headerRow = document.createElement('tr')
-  const columns = ['rsid', 'chromosome', 'position', 'genotype', 'type', 'bad', 'description']
-  columns.forEach(column => {
-    const th = document.createElement('th')
-    th.textContent = column
-    headerRow.appendChild(th)
-  })
-
-  table.appendChild(headerRow)
-
-  foundSnps.forEach(snp => {
-    const tr = document.createElement('tr')
-    columns.forEach(column => {
-      const td = document.createElement('td')
-      const content = escapeHtml(String(snp[column]))
-      td.innerHTML = column === 'rsid' ? linkToSnpedia(content) : content
-      tr.appendChild(td)
-    })
-    table.appendChild(tr)
-  })
-
+  // Clear previous results
   elements.resultsDiv.innerHTML = ''
-  elements.resultsDiv.appendChild(table)
+
+  // Loop through each group and create a table
+  for (const type in groups) {
+    // Creating table title
+    const title = document.createElement('h3')
+    title.textContent = type
+    elements.resultsDiv.appendChild(title)
+
+    // Creating table element
+    const table = document.createElement('table')
+    table.style.width = '100%'
+    table.setAttribute('border', '1')
+
+    const headerRow = document.createElement('tr')
+    const columns = ['rsid', 'genotype', 'bad', 'chromosome', 'position', 'description']
+    columns.forEach(column => {
+      const th = document.createElement('th')
+      th.textContent = column
+      headerRow.appendChild(th)
+    })
+
+    table.appendChild(headerRow)
+
+    groups[type].forEach(snp => {
+      const tr = document.createElement('tr')
+      columns.forEach(column => {
+        const td = document.createElement('td')
+        const content = escapeHtml(String(snp[column]))
+        td.innerHTML = column === 'rsid' ? linkToSnpedia(content) : content
+        tr.appendChild(td)
+      })
+      table.appendChild(tr)
+    })
+
+    elements.resultsDiv.appendChild(table)
+  }
 }
+
+// Group by function
+function groupBy (arr, key) {
+  return arr.reduce(function (rv, x) {
+    (rv[x[key]] = rv[x[key]] || []).push(x)
+    return rv
+  }, {})
+};
 
 function escapeHtml (unsafe) {
   return unsafe
