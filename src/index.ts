@@ -301,12 +301,9 @@ function IsNucleotide (genotype: string): boolean {
 }
 
 function flipOrientation (genotype: string): string {
-  if (genotype.length !== 2) {
-    throw new Error('Invalid genotype')
-  }
-  if (!IsNucleotide(genotype)) {
-    console.log(`found odd genotype=${genotype}`)
-    return genotype // we don't need to flip II genotypes
+  if (genotype.length !== 2 || !IsNucleotide(genotype)) {
+    console.log(`Found weird genotype=${genotype}`)
+    return genotype // skip weird genotypes
   }
 
   const complementMap: Record<string, string> = {
