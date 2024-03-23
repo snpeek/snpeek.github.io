@@ -192,7 +192,7 @@ function parseFileStream (
     complete: () => {
       progressBarUpdate(elements, '100%')
       const matchingVariants = checkVariantGenotypes(mpsData, matchingRsids)
-      renderTable(elements, matchingVariants)
+      renderTable(elements, matchingVariants, mpsData)
       renderReportDownload(elements, matchingVariants)
       progressBarHide(elements)
     },
@@ -284,9 +284,7 @@ function nullOrEmptyString (str: string | null): string {
 // TODO this isn't the best solution, it does come with the risk of https://www.snpedia.com/index.php/Ambiguous_flip
 function checkVariantGenotypes (mpsData: MpsData, variants: Variant[]): Variant[] {
   const sameGenotypeMatches = variants.filter(variant => mpsData[variant.rsid].pathogenic.includes(variant.genotype))
-  const flippedGenotypeMatches = variants
-    .map(variant => ({ ...variant, genotype: flipOrientation(variant.genotype) }))
-    .filter(variant => mpsData[variant.rsid].pathogenic.includes(variant.genotype))
+  const flippedGenotypeMatches = variants.filter(variant => variant.genotype !== 'II').map(variant => ({ ...variant, genotype: flipOrientation(variant.genotype) }))
 
   return [...sameGenotypeMatches, ...flippedGenotypeMatches]
 }
@@ -303,7 +301,7 @@ function IsNucleotide (genotype: string): boolean {
 
 function flipOrientation (genotype: string): string {
   if (genotype.length !== 2 || !IsNucleotide(genotype)) {
-    console.warn(`Found weird genotype=${genotype}`)
+    if (genotype !== 'II') console.warn(`Found weird genotype=${genotype}`)
     return genotype // skip weird genotypes
   }
 
@@ -350,7 +348,7 @@ function prioritySort (variants: Variant[]): Record<string, Variant[]> {
   return sortedGroups
 }
 
-function renderTable (elements: Elements, foundSnps: Variant[]): void {
+function renderTable (elements: Elements, foundSnps: Variant[], mpsData: MpsData): void {
   if (foundSnps.length === 0) {
     elements.resultsDiv.textContent = 'No matching SNPs found'
     return // Stop the function if no SNPs were found
@@ -395,10 +393,16 @@ function renderTable (elements: Elements, foundSnps: Variant[]): void {
 
     sortedGroups[phenotype].forEach(snp => {
       const tr = document.createElement('tr')
+
       columns.forEach(column => {
         const td = document.createElement('td')
         const content = escapeHtml(String(snp[column]))
         td.innerHTML = column === 'rsid' ? linkToSnpedia(content) : content
+        if(mpsData[snp.rsid].pathogenic.includes(snp.genotype)) {
+          td.setAttribute('style', 'color:#f00;border-color:black;font-weight:bold')
+        } else {
+          td.setAttribute('style', 'color:#777;border-color:black;font-style:italic')
+        }
         tr.appendChild(td)
       })
       table.appendChild(tr)
