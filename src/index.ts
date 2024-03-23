@@ -191,9 +191,8 @@ function parseFileStream (
     },
     complete: () => {
       progressBarUpdate(elements, '100%')
-      const matchingVariants = checkVariantGenotypes(mpsData, matchingRsids)
-      renderTable(elements, matchingVariants, mpsData)
-      renderReportDownload(elements, matchingVariants)
+      renderTable(elements, matchingRsids, mpsData)
+      renderReportDownload(elements, matchingRsids)
       progressBarHide(elements)
     },
     error: (error) => {
@@ -280,15 +279,6 @@ function nullOrEmptyString (str: string | null): string {
   return str !== null ? str : ''
 }
 
-// This function tries both orientations to see if they match, it returns the genotype flipped or not if it exists
-// TODO this isn't the best solution, it does come with the risk of https://www.snpedia.com/index.php/Ambiguous_flip
-function checkVariantGenotypes (mpsData: MpsData, variants: Variant[]): Variant[] {
-  const sameGenotypeMatches = variants.filter(variant => mpsData[variant.rsid].pathogenic.includes(variant.genotype))
-  const flippedGenotypeMatches = variants.filter(variant => variant.genotype !== 'II').map(variant => ({ ...variant, genotype: flipOrientation(variant.genotype) }))
-
-  return [...sameGenotypeMatches, ...flippedGenotypeMatches]
-}
-
 function IsNucleotide (genotype: string): boolean {
   const alleles = genotype.split('')
   for (const allele of alleles) {
@@ -299,9 +289,19 @@ function IsNucleotide (genotype: string): boolean {
   return true
 }
 
+function IsIndel (genotype: string): boolean {
+  const alleles = genotype.split('')
+  for (const allele of alleles) {
+    if (!['I', 'D'].includes(allele)) {
+      return false
+    }
+  }
+  return true
+}
+
 function flipOrientation (genotype: string): string {
   if (genotype.length !== 2 || !IsNucleotide(genotype)) {
-    if (genotype !== 'II') console.warn(`Found weird genotype=${genotype}`)
+    if (!IsIndel(genotype)) console.warn(`Found weird genotype=${genotype}`)
     return genotype // skip weird genotypes
   }
 
@@ -398,7 +398,7 @@ function renderTable (elements: Elements, foundSnps: Variant[], mpsData: MpsData
         const td = document.createElement('td')
         const content = escapeHtml(String(snp[column]))
         td.innerHTML = column === 'rsid' ? linkToSnpedia(content) : content
-        if(mpsData[snp.rsid].pathogenic.includes(snp.genotype)) {
+        if(mpsData[snp.rsid].pathogenic.includes(snp.genotype) || mpsData[snp.rsid].pathogenic.includes(flipOrientation(snp.genotype))) {
           td.setAttribute('style', 'color:#f00;border-color:black;font-weight:bold')
         } else {
           td.setAttribute('style', 'color:#777;border-color:black;font-style:italic')
