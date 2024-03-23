@@ -229,6 +229,7 @@ function parseVCFData (data: string[][], mpsData: MpsData): Variant[] {
 function parseAncestryData (data: string[][], mpsData: MpsData): Variant[] {
   const foundSnps: Variant[] = []
   data.forEach(row => {
+    row = row[0]?.split('\t') ?? [] //HACK: This is a workaround for Papa misreading AncestryDNA files.
     if (row.length < 4) {
       return // skip these rows
     }
