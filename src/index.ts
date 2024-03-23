@@ -107,10 +107,10 @@ function processFile (elements: Elements, mpsData: MpsData): void {
     alert('Please select a file!')
     return
   }
-  console.log(`file size=${file.size}`)
+  console.debug(`file size=${file.size}`)
   const maxSize = 1024 * 1024 * 100 // 100 Mb
   if (file.size > maxSize) {
-    console.log('Streaming large file=' + file.name)
+    console.debug('Streaming large file=' + file.name)
     if (getFileExtension(file.name) !== 'vcf') {
       alert('Large file is not a vcf file')
       return
@@ -133,11 +133,11 @@ function parseFile (file: File, elements: Elements, mpsData: MpsData): void {
       let delimiter: string
 
       if (firstLine.includes(twentyThreeAndMeHeader)) {
-        console.log('detected 23andme data')
+        console.debug('detected 23andme data')
         parseRowFunction = parse23AndMeData
         delimiter = '\t'
       } else if (firstLine.includes(ancestryHeader)) {
-        console.log('detected ancestry data')
+        console.debug('detected ancestry data')
         parseRowFunction = parseAncestryData
         delimiter = ','
       } else {
@@ -303,7 +303,7 @@ function IsNucleotide (genotype: string): boolean {
 
 function flipOrientation (genotype: string): string {
   if (genotype.length !== 2 || !IsNucleotide(genotype)) {
-    console.log(`Found weird genotype=${genotype}`)
+    console.warn(`Found weird genotype=${genotype}`)
     return genotype // skip weird genotypes
   }
 
