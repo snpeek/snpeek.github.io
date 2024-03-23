@@ -393,6 +393,7 @@ function renderTable (elements: Elements, foundSnps: Variant[], mpsData: MpsData
 
     sortedGroups[phenotype].forEach(snp => {
       const tr = document.createElement('tr')
+      tr.setAttribute('style', 'font-family:monospace')
 
       columns.forEach(column => {
         const td = document.createElement('td')
