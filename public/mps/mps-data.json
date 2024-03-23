@@ -1,7 +1,7 @@
 {
     "rs2476601": {
         "phenotype": "Addison's Disease",
-        "pathogenic": [],
+        "pathogenic": ["AA"],
         "gene": "AP4B1-AS1, PTPN22"
     },
     "rs11571303": {
@@ -21,7 +21,7 @@
     },
     "rs10806425": {
         "phenotype": "Addison's Disease",
-        "pathogenic": [],
+        "pathogenic": ["AA"],
         "gene": "BACH2"
     },
     "rs7137828": {
@@ -36,7 +36,7 @@
     },
     "rs11203203": {
         "phenotype": "Addison's Disease",
-        "pathogenic": [],
+        "pathogenic": ["AA"],
         "gene": "UBASH3A"
     },
     "rs74203920": {
@@ -46,7 +46,7 @@
     },
     "rs2075876": {
         "phenotype": "Addison's Disease",
-        "pathogenic": [],
+        "pathogenic": ["AA"],
         "gene": "AIRE"
     },
     "rs1801133": {
@@ -56,17 +56,17 @@
     },
     "rs1801131": {
         "phenotype": "DNA Methylation",
-        "pathogenic": [],
+        "pathogenic": ["CC"],
         "gene": "A1298C"
     },
     "rs2236225": {
         "phenotype": "DNA Methylation",
-        "pathogenic": [],
+        "pathogenic": ["TT"],
         "gene": "MTHFD1"
     },
     "rs1950902": {
         "phenotype": "DNA Methylation",
-        "pathogenic": [],
+        "pathogenic": ["CC"],
         "gene": "MTHFD1"
     },
     "rs6922269": {
@@ -87,12 +87,13 @@
     "rs2470144": {
         "phenotype": "Aromatase Enzyme",
         "pathogenic": ["GG"],
-        "gene": "Aromatase #3 (minor)"
+        "gene": "CYP19A1",
+        "notes": "Aromatase #3 (Minor)"
     },
     "rs10046": {
         "phenotype": "Aromatase Enzyme",
         "pathogenic": [],
-        "gene": null
+        "gene": "CYP19A1"
     },
     "rs2414096": {
         "phenotype": "Aromatase Enzyme",
@@ -131,7 +132,7 @@
     },
     "rs7412": {
         "phenotype": "LDL Cholesterol",
-        "pathogenic": [],
+        "pathogenic": ["TT"],
         "gene": "ApoE"
     },
     "rs75932628": {
@@ -206,12 +207,12 @@
     },
     "rs743572": {
         "phenotype": "Estrogen Deactivation",
-        "pathogenic": [],
+        "pathogenic": ["GG"],
         "gene": "CYP17A1"
     },
     "rs398124239": {
         "phenotype": "Hypermobility RS2",
-        "pathogenic": [],
+        "pathogenic": ["DD"],
         "gene": "RP2"
     },
     "i5005436": {
@@ -221,7 +222,7 @@
     },
     "rs151344503": {
         "phenotype": "Congenital Adrenal Hyperplasia",
-        "pathogenic": [],
+        "pathogenic": ["AA"],
         "gene": "CYP21A2, TNXB"
     },
     "rs201552310": {
@@ -236,12 +237,12 @@
     },
     "rs267606757": {
         "phenotype": "Congenital Adrenal Hyperplasia",
-        "pathogenic": [],
+        "pathogenic": ["CC"],
         "gene": null
     },
     "rs387906510": {
         "phenotype": "Congenital Adrenal Hyperplasia",
-        "pathogenic": [],
+        "pathogenic": ["DD"],
         "gene": null
     },
     "rs397509367": {
@@ -251,12 +252,12 @@
     },
     "rs6445": {
         "phenotype": "Congenital Adrenal Hyperplasia",
-        "pathogenic": [],
+        "pathogenic": ["TT"],
         "gene": null
     },
     "rs6467": {
         "phenotype": "Congenital Adrenal Hyperplasia",
-        "pathogenic": [],
+        "pathogenic": ["CC"],
         "gene": null
     },
     "rs6471": {
