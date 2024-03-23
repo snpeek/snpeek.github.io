@@ -61,7 +61,7 @@ npm install
 This will start a development server and open the application in your default browser:
 
 ```
-npm run dev
+npm start
 ```
 
 ### 🏗 Building the Project
@@ -93,7 +93,7 @@ A quick overview of available scripts in the `package.json` file:
 
 - `test`: Execute tests with Mocha.
 - `build`: Build the production version of the application.
-- `dev`: Launch the development server.
+- `dev`: Build the development version of the application.
 - `watch`: Auto recompile files upon changes.
 - `start`: Serve the `public` folder on a local HTTP server.
 - `gh-deploy-init` and `gh-deploy`: Commands for deploying to GitHub Pages.
