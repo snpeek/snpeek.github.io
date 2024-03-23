@@ -239,7 +239,7 @@ function parseAncestryData (data: string[][], mpsData: MpsData): Variant[] {
         rsid: snp,
         chromosome: row[1],
         position: row[2],
-        genotype: row[3],
+        genotype: row[3] + row[4],
         phenotype: mpsData[snp].phenotype,
         pathogenic: mpsData[snp].pathogenic,
         gene: nullOrEmptyString(mpsData[snp].gene)
