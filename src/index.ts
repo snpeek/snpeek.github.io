@@ -430,7 +430,7 @@ function renderTable (elements: Elements, foundSnps: Variant[], mpsData: MpsData
 function renderReportDownload (elements: Elements, foundSnps: Variant[]): void {
   const button = document.createElement('button')
   button.textContent = 'Save Report'
-  button.onclick = () => { downloadCSV(foundSnps) }
+  button.onclick = () => { downloadTSV(foundSnps) }
 
   // Insert the button after the table
   elements.saveReportBtn.innerHTML = ''
@@ -448,24 +448,24 @@ function groupBy (arr: Variant[], key: keyof Variant): Record<string, Variant[]>
   }, {})
 }
 
-function convertToCSV (arrayOfObjects: any[]): string {
+function convertToTSV (arrayOfObjects: any[]): string {
   const keys = Object.keys(arrayOfObjects[0])
-  const values = arrayOfObjects.map(obj => keys.map(key => obj[key]).join(','))
-  return [keys.join(','), ...values].join('\n')
+  const values = arrayOfObjects.map(obj => keys.map(key => obj[key]).join('\t'))
+  return [keys.join('\t'), ...values].join('\n')
 }
 
-function downloadCSV (obj: any[]): void {
-  // Convert the object to CSV
-  const csv = convertToCSV(obj)
+function downloadTSV (obj: any[]): void {
+  // Convert the object to TSV
+  const tsv = convertToTSV(obj)
 
-  // Create a blob from the CSV string
-  const blob = new Blob([csv], { type: 'text/csv' })
+  // Create a blob from the TSV string
+  const blob = new Blob([tsv], { type: 'text/tab-separated-values' })
 
   // Create a hidden link and attach the blob
   const a = document.createElement('a')
   a.style.display = 'none'
   a.href = URL.createObjectURL(blob)
-  a.download = 'meyer-powers-report.csv'
+  a.download = 'meyer-powers-report.tsv'
 
   // Append the link to the body
   document.body.appendChild(a)
