@@ -324,6 +324,20 @@ function flipOrientation (genotype: string): string {
     .join('')
 }
 
+function flipOrder (genotype: string): string {
+  return genotype[1] + genotype[0]
+}
+
+function isMatch (genotype: string, pathogenic: string[]) {
+  const flipped = flipOrientation(genotype)
+  return (
+    pathogenic.includes(genotype) ||
+    pathogenic.includes(flipOrder(genotype)) ||
+    pathogenic.includes(flipped) ||
+    pathogenic.includes(flipOrder(flipped))
+  )
+}
+
 function prioritySort (variants: Variant[]): Record<string, Variant[]> {
   const priorityOrder = ['DNA Methylation', 'Estrogen Deactivation']
 
@@ -399,7 +413,7 @@ function renderTable (elements: Elements, foundSnps: Variant[], mpsData: MpsData
         const td = document.createElement('td')
         const content = escapeHtml(String(snp[column]))
         td.innerHTML = column === 'rsid' ? linkToSnpedia(content) : content
-        if(mpsData[snp.rsid].pathogenic.includes(snp.genotype) || mpsData[snp.rsid].pathogenic.includes(flipOrientation(snp.genotype))) {
+        if(isMatch(snp.genotype, mpsData[snp.rsid].pathogenic)) {
           td.setAttribute('style', 'color:#f00;border-color:black;font-weight:bold')
         } else {
           td.setAttribute('style', 'color:#777;border-color:black;font-style:italic')
