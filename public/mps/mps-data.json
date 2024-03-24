@@ -74,6 +74,11 @@
         "pathogenic": [],
         "gene": "MTHFD1"
     },
+    "rs1802059": {
+        "phenotype": "DNA Methylation",
+        "pathogenic": ["AA"],
+        "gene": null
+    },
     "rs2470152": {
         "phenotype": "Aromatase Enzyme",
         "pathogenic": ["CC"],
@@ -338,6 +343,16 @@
     "rs9378252": {
         "phenotype": "Congenital Adrenal Hyperplasia",
         "pathogenic": [],
+        "gene": null
+    },
+    "rs4680": {
+        "phenotype": "Other",
+        "pathogenic": [],
+        "gene": "COMT"
+    },
+    "rs4633": {
+        "phenotype": "Other",
+        "pathogenic": ["TT", "CT"],
         "gene": null
     }
 }
