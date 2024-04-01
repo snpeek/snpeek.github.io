@@ -104,7 +104,7 @@
         "phenotype": "Aromatase Enzyme",
         "pathogenic": ["GG"],
         "gene": "CYP19A1",
-        "note": "PCOS"
+        "notes": "PCOS"
     },
     "rs17036314": {
         "phenotype": "Insulin Resistance",
