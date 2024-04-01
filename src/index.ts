@@ -191,9 +191,8 @@ function parseFileStream (
     },
     complete: () => {
       progressBarUpdate(elements, '100%')
-      const matchingVariants = checkVariantGenotypes(mpsData, matchingRsids)
-      renderTable(elements, matchingVariants)
-      renderReportDownload(elements, matchingVariants)
+      renderTable(elements, matchingRsids, mpsData)
+      renderReportDownload(elements, matchingRsids)
       progressBarHide(elements)
     },
     error: (error) => {
@@ -280,17 +279,6 @@ function nullOrEmptyString (str: string | null): string {
   return str !== null ? str : ''
 }
 
-// This function tries both orientations to see if they match, it returns the genotype flipped or not if it exists
-// TODO this isn't the best solution, it does come with the risk of https://www.snpedia.com/index.php/Ambiguous_flip
-function checkVariantGenotypes (mpsData: MpsData, variants: Variant[]): Variant[] {
-  const sameGenotypeMatches = variants.filter(variant => mpsData[variant.rsid].pathogenic.includes(variant.genotype))
-  const flippedGenotypeMatches = variants
-    .map(variant => ({ ...variant, genotype: flipOrientation(variant.genotype) }))
-    .filter(variant => mpsData[variant.rsid].pathogenic.includes(variant.genotype))
-
-  return [...sameGenotypeMatches, ...flippedGenotypeMatches]
-}
-
 function IsNucleotide (genotype: string): boolean {
   const alleles = genotype.split('')
   for (const allele of alleles) {
@@ -301,9 +289,19 @@ function IsNucleotide (genotype: string): boolean {
   return true
 }
 
+function IsIndel (genotype: string): boolean {
+  const alleles = genotype.split('')
+  for (const allele of alleles) {
+    if (!['I', 'D'].includes(allele)) {
+      return false
+    }
+  }
+  return true
+}
+
 function flipOrientation (genotype: string): string {
   if (genotype.length !== 2 || !IsNucleotide(genotype)) {
-    console.warn(`Found weird genotype=${genotype}`)
+    if (!IsIndel(genotype)) console.warn(`Found weird genotype=${genotype}`)
     return genotype // skip weird genotypes
   }
 
@@ -324,6 +322,20 @@ function flipOrientation (genotype: string): string {
       return complementMap[allele]
     })
     .join('')
+}
+
+function flipOrder (genotype: string): string {
+  return genotype[1] + genotype[0]
+}
+
+function isMatch (genotype: string, pathogenic: string[]) {
+  const flipped = flipOrientation(genotype)
+  return (
+    pathogenic.includes(genotype) ||
+    pathogenic.includes(flipOrder(genotype)) ||
+    pathogenic.includes(flipped) ||
+    pathogenic.includes(flipOrder(flipped))
+  )
 }
 
 function prioritySort (variants: Variant[]): Record<string, Variant[]> {
@@ -350,7 +362,7 @@ function prioritySort (variants: Variant[]): Record<string, Variant[]> {
   return sortedGroups
 }
 
-function renderTable (elements: Elements, foundSnps: Variant[]): void {
+function renderTable (elements: Elements, foundSnps: Variant[], mpsData: MpsData): void {
   if (foundSnps.length === 0) {
     elements.resultsDiv.textContent = 'No matching SNPs found'
     return // Stop the function if no SNPs were found
@@ -395,10 +407,17 @@ function renderTable (elements: Elements, foundSnps: Variant[]): void {
 
     sortedGroups[phenotype].forEach(snp => {
       const tr = document.createElement('tr')
+      tr.setAttribute('style', 'font-family:monospace')
+
       columns.forEach(column => {
         const td = document.createElement('td')
         const content = escapeHtml(String(snp[column]))
         td.innerHTML = column === 'rsid' ? linkToSnpedia(content) : content
+        if(isMatch(snp.genotype, mpsData[snp.rsid].pathogenic)) {
+          td.setAttribute('style', 'color:#f00;border-color:black;font-weight:bold')
+        } else {
+          td.setAttribute('style', 'color:#777;border-color:black;font-style:italic')
+        }
         tr.appendChild(td)
       })
       table.appendChild(tr)
@@ -411,7 +430,7 @@ function renderTable (elements: Elements, foundSnps: Variant[]): void {
 function renderReportDownload (elements: Elements, foundSnps: Variant[]): void {
   const button = document.createElement('button')
   button.textContent = 'Save Report'
-  button.onclick = () => { downloadCSV(foundSnps) }
+  button.onclick = () => { downloadTSV(foundSnps) }
 
   // Insert the button after the table
   elements.saveReportBtn.innerHTML = ''
@@ -429,24 +448,24 @@ function groupBy (arr: Variant[], key: keyof Variant): Record<string, Variant[]>
   }, {})
 }
 
-function convertToCSV (arrayOfObjects: any[]): string {
+function convertToTSV (arrayOfObjects: any[]): string {
   const keys = Object.keys(arrayOfObjects[0])
-  const values = arrayOfObjects.map(obj => keys.map(key => obj[key]).join(','))
-  return [keys.join(','), ...values].join('\n')
+  const values = arrayOfObjects.map(obj => keys.map(key => obj[key]).join('\t'))
+  return [keys.join('\t'), ...values].join('\n')
 }
 
-function downloadCSV (obj: any[]): void {
-  // Convert the object to CSV
-  const csv = convertToCSV(obj)
+function downloadTSV (obj: any[]): void {
+  // Convert the object to TSV
+  const tsv = convertToTSV(obj)
 
-  // Create a blob from the CSV string
-  const blob = new Blob([csv], { type: 'text/csv' })
+  // Create a blob from the TSV string
+  const blob = new Blob([tsv], { type: 'text/tab-separated-values' })
 
   // Create a hidden link and attach the blob
   const a = document.createElement('a')
   a.style.display = 'none'
   a.href = URL.createObjectURL(blob)
-  a.download = 'meyer-powers-report.csv'
+  a.download = 'meyer-powers-report.tsv'
 
   // Append the link to the body
   document.body.appendChild(a)
