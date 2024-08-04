@@ -328,7 +328,7 @@ function flipOrder (genotype: string): string {
   return genotype[1] + genotype[0]
 }
 
-function isMatch (genotype: string, pathogenic: string[]) {
+function isMatch (genotype: string, pathogenic: string[]): boolean {
   const flipped = flipOrientation(genotype)
   return (
     pathogenic.includes(genotype) ||
