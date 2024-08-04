@@ -241,6 +241,21 @@
         "pathogenic": ["GT"],
         "gene": "ESR1"
     },
+    "rs9340799": {
+        "phenotype": "Estrogen Deactivation",
+        "pathogenic": ["GG"],
+        "gene": "ESR1"
+    },
+    "rs2881766": {
+        "phenotype": "Estrogen Deactivation",
+        "pathogenic": ["GT", "TT"],
+        "gene": "ESR1"
+    },
+    "rs2295190": {
+        "phenotype": "Estrogen Deactivation",
+        "pathogenic": ["GT", "TT"],
+        "gene": "ESR1"
+    },
     "rs398124239": {
         "phenotype": "Hypermobility RS2",
         "pathogenic": ["DD"],
