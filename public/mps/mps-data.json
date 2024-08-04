@@ -226,6 +226,21 @@
         "pathogenic": ["TT", "CT"],
         "gene": "COMT,MIR4761"
     },
+    "rs104893956": {
+        "phenotype": "Estrogen Deactivation",
+        "pathogenic": ["CT"],
+        "gene": "ESR1"
+    },
+    "rs121913044": {
+        "phenotype": "Estrogen Deactivation",
+        "pathogenic": ["AT"],
+        "gene": "ESR1"
+    },
+    "rs397509428": {
+        "phenotype": "Estrogen Deactivation",
+        "pathogenic": ["GT"],
+        "gene": "ESR1"
+    },
     "rs398124239": {
         "phenotype": "Hypermobility RS2",
         "pathogenic": ["DD"],
