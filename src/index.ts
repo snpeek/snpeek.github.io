@@ -228,7 +228,7 @@ function parseVCFData (data: string[][], mpsData: MpsData): Variant[] {
 function parseAncestryData (data: string[][], mpsData: MpsData): Variant[] {
   const foundSnps: Variant[] = []
   data.forEach(row => {
-    row = row[0]?.split('\t') ?? [] //HACK: This is a workaround for Papa misreading AncestryDNA files.
+    row = row[0]?.split('\t') ?? [] // HACK: This is a workaround for Papa misreading AncestryDNA files.
     if (row.length < 4) {
       return // skip these rows
     }
@@ -328,7 +328,7 @@ function flipOrder (genotype: string): string {
   return genotype[1] + genotype[0]
 }
 
-function isMatch (genotype: string, pathogenic: string[]) {
+function isMatch (genotype: string, pathogenic: string[]): boolean {
   const flipped = flipOrientation(genotype)
   return (
     pathogenic.includes(genotype) ||
@@ -413,7 +413,7 @@ function renderTable (elements: Elements, foundSnps: Variant[], mpsData: MpsData
         const td = document.createElement('td')
         const content = escapeHtml(String(snp[column]))
         td.innerHTML = column === 'rsid' ? linkToSnpedia(content) : content
-        if(isMatch(snp.genotype, mpsData[snp.rsid].pathogenic)) {
+        if (isMatch(snp.genotype, mpsData[snp.rsid].pathogenic)) {
           td.setAttribute('style', 'color:#f00;border-color:black;font-weight:bold')
         } else {
           td.setAttribute('style', 'color:#777;border-color:black;font-style:italic')
