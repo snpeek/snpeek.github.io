@@ -161,41 +161,6 @@
         "pathogenic": ["GG"],
         "gene": "IL6,LOC541472"
     },
-    "rs1064039": {
-        "phenotype": "NAD(P)H Metabolism",
-        "pathogenic": ["AA", "AG"],
-        "gene": "CST3"
-    },
-    "rs11868035": {
-        "phenotype": "NAD(P)H Metabolism",
-        "pathogenic": ["AA", "AG"],
-        "gene": "RAI1,SREBF1"
-    },
-    "rs9652490": {
-        "phenotype": "NAD(P)H Metabolism",
-        "pathogenic": ["AA", "AG"],
-        "gene": "LINGO1"
-    },
-    "rs6812193": {
-        "phenotype": "NAD(P)H Metabolism",
-        "pathogenic": ["CC"],
-        "gene": "FAM47E-STBD1,LOC105377286"
-    },
-    "rs393152": {
-        "phenotype": "NAD(P)H Metabolism",
-        "pathogenic": ["AA", "AG"],
-        "gene": "CRHR1-IT1"
-    },
-    "rs2736990": {
-        "phenotype": "NAD(P)H Metabolism",
-        "pathogenic": ["CC", "CT"],
-        "gene": "SNCA"
-    },
-    "rs356219": {
-        "phenotype": "NAD(P)H Metabolism",
-        "pathogenic": ["GG", "AG"],
-        "gene": "LOC105377329"
-    },
     "rs165599": {
         "phenotype": "Estrogen Deactivation",
         "pathogenic": ["GG"],
