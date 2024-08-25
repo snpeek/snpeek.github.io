@@ -1,0 +1,27 @@
+<script lang="ts">
+
+</script>
+
+<h1>Meyer-Powers Syndrome</h1>
+<div id="notice-box">
+  <strong>Notice:</strong>
+  <ul>
+    <li>All genetic data processing is performed entirely on your device, no data is sent or stored elsewhere.</li>
+    <li>This software was written with best intentions, but I am not Dr. Powers nor am I a medical professional. There
+      are no guarantees of correctness. Use at your discretion.</li>
+    <li>Currently, 23andMe, Ancestry.com, and unzipped Nebula Genomics data is supported. To download your data:</li>
+    <ul>
+      <li>For 23andMe data, visit <a href="https://you.23andme.com/tools/data/download/" target="_blank">23andMe</a>.
+      </li>
+      <li>For Ancestry.com data, visit <a href="https://www.ancestry.com/account/data/user/download"
+          target="_blank">Ancestry</a>.</li>
+      <!-- <li>For Nebula Genomics data:</li>
+      <ul>
+        <li>Download the gz file from Nebula Genomics' website.</li>
+        <li>Unzip the file using a tool like 7-Zip or WinRAR. If you're using a terminal, you can use the command
+          "gzip -d yourfilename.vcf.gz".</li>
+      </ul> -->
+    </ul>
+    <li>For more information, visit the <a href="https://www.reddit.com/r/DrWillPowers/">Dr Powers Subreddit</a>.</li>
+  </ul>
+</div>
