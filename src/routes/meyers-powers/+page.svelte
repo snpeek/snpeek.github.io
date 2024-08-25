@@ -1,5 +1,16 @@
 <script lang="ts">
+  import {Input} from "$lib/components/ui/input/index"
+  let files: File[] = [];
 
+  function onFileInput(event: Event) {
+    const target = event.target as HTMLInputElement
+    files = [...target?.files ?? []]
+  }
+
+  $:{
+    console.log(files);
+  }
+  
 </script>
 
 <h1>Meyer-Powers Syndrome</h1>
@@ -25,3 +36,6 @@
     <li>For more information, visit the <a href="https://www.reddit.com/r/DrWillPowers/">Dr Powers Subreddit</a>.</li>
   </ul>
 </div>
+
+<Input type="file" on:change={onFileInput} />
+
