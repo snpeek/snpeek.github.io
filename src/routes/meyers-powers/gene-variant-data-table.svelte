@@ -1,7 +1,9 @@
 <script lang="ts">
   import Badge from "$lib/components/ui/badge/badge.svelte";
+  import Button from "$lib/components/ui/button/button.svelte";
   import * as Table from "$lib/components/ui/table";
   import type { GeneVariant } from "$lib/models/GeneVariant";
+  import { ExternalLink } from "lucide-svelte";
   import {
     BodyRow,
     createRender,
@@ -39,6 +41,13 @@
     table.column({
       accessor: "rsid",
       header: "RSID",
+      cell: ({ value }) => {
+        return createRender(Button, {
+          href: `https://www.snpedia.com/index.php/${value}`,
+          target: "_blank",
+          variant: "secondary",
+        }).slot(value, createRender(ExternalLink, { class: "h-4 w-4 ms-1" }));
+      },
     }),
     table.column({
       accessor: "gene",
@@ -74,10 +83,6 @@
       accessor: "position",
       header: "Position",
     }),
-    // table.column({
-    //   accessor: "phenotype",
-    //   header: "Phenotype",
-    // }),
   ]);
   const { headerRows, rows, tableAttrs, tableBodyAttrs } =
     table.createViewModel(columns);
