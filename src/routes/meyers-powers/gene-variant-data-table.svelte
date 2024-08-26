@@ -1,7 +1,15 @@
 <script lang="ts">
+  import Badge from "$lib/components/ui/badge/badge.svelte";
   import * as Table from "$lib/components/ui/table";
   import type { GeneVariant } from "$lib/models/GeneVariant";
-  import { createTable, Render, Subscribe } from "svelte-headless-table";
+  import {
+    BodyRow,
+    createRender,
+    createTable,
+    DataBodyRow,
+    Render,
+    Subscribe,
+  } from "svelte-headless-table";
   import { readable } from "svelte/store";
 
   export let geneVariants: GeneVariant[];
@@ -9,6 +17,25 @@
   const table = createTable(readable(geneVariants));
 
   const columns = table.createColumns([
+    table.column({
+      header: "Pathogenicity",
+      accessor: (geneVariant) => {
+        return geneVariant.pathogenic.find((genotype) =>
+          geneVariant.genotype?.matches(genotype),
+        );
+      },
+      cell: ({ value }) => {
+        if (value != null) {
+          return createRender(Badge, { variant: "destructive" }).slot(
+            `PATHOGENIC: ${value}`,
+          );
+        } else {
+          return createRender(Badge, { variant: "secondary" }).slot(
+            "NOT PATHOGENIC",
+          );
+        }
+      },
+    }),
     table.column({
       accessor: "rsid",
       header: "RSID",
@@ -18,11 +45,25 @@
       header: "Gene",
     }),
     table.column({
-      accessor: "genotype",
+      accessor: (geneVariant) => {
+        const genotype = geneVariant.genotype;
+        if (genotype == null) {
+          return "--";
+        }
+        return genotype.toString();
+      },
       header: "Genotype",
     }),
     table.column({
-      accessor: "pathogenic",
+      accessor: (geneVariant) => {
+        const pathogenicGenotypes = geneVariant.pathogenic;
+        if (pathogenicGenotypes.length < 1) {
+          return "--";
+        }
+        return pathogenicGenotypes
+          .map((genotype) => genotype.toString())
+          .join(", ");
+      },
       header: "Pathogenic",
     }),
     table.column({
@@ -38,7 +79,7 @@
     //   header: "Phenotype",
     // }),
   ]);
-  const { headerRows, pageRows, tableAttrs, tableBodyAttrs } =
+  const { headerRows, rows, tableAttrs, tableBodyAttrs } =
     table.createViewModel(columns);
 </script>
 
@@ -49,7 +90,7 @@
         <Subscribe rowAttrs={headerRow.attrs()}>
           <Table.Row>
             {#each headerRow.cells as cell (cell.id)}
-              <Subscribe attrs={cell.attrs()} let:attrs props={cell.props()}>
+              <Subscribe attrs={cell.attrs()} let:attrs>
                 <Table.Head {...attrs}>
                   <Render of={cell.render()} />
                 </Table.Head>
@@ -60,7 +101,7 @@
       {/each}
     </Table.Header>
     <Table.Body {...$tableBodyAttrs}>
-      {#each $pageRows as row (row.id)}
+      {#each $rows as row (row.id)}
         <Subscribe rowAttrs={row.attrs()} let:rowAttrs>
           <Table.Row {...rowAttrs}>
             {#each row.cells as cell (cell.id)}

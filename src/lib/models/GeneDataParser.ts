@@ -1,6 +1,7 @@
 import Papa from "papaparse";
 import type { GeneVariant } from "./GeneVariant";
 import type { MpsData } from "./MpsData";
+import { Genotype } from "./Genotype";
 
 export type GeneDataRowParser = (data: string[][], mpsData: MpsData) => GeneVariant[];
 
@@ -137,9 +138,9 @@ export class GeneDataParser {
           rsid: snp,
           chromosome: row[1],
           position: row[2],
-          genotype: row[3],
+          genotype: Genotype.fromString(row[3]),
           phenotype: mpsData[snp].phenotype,
-          pathogenic: mpsData[snp].pathogenic,
+          pathogenic: mpsData[snp].pathogenic.map(Genotype.fromString).filter(item => item !== null),
           gene: mpsData[snp].gene
         })
       }
@@ -160,9 +161,9 @@ export class GeneDataParser {
           rsid: snp,
           chromosome: row[1],
           position: row[2],
-          genotype: row[3] + row[4],
+          genotype: Genotype.fromString(row[3] + row[4]),
           phenotype: mpsData[snp].phenotype,
-          pathogenic: mpsData[snp].pathogenic,
+          pathogenic: mpsData[snp].pathogenic.map(Genotype.fromString).filter(item => item !== null),
           gene: mpsData[snp].gene
         })
       }
@@ -182,9 +183,9 @@ export class GeneDataParser {
           rsid: snp,
           chromosome: row[0],
           position: row[1],
-          genotype: row[4], // assuming genotype is in the 5th column
+          genotype: Genotype.fromString(row[4]), // assuming genotype is in the 5th column
           phenotype: mpsData[snp].phenotype,
-          pathogenic: mpsData[snp].pathogenic,
+          pathogenic: mpsData[snp].pathogenic.map(Genotype.fromString).filter(item => item !== null),
           gene: mpsData[snp].gene
         })
       }
