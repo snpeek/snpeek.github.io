@@ -24,6 +24,7 @@
   "license": "MIT",
   "description": "",
   "dependencies": {
+    "bits-ui": "^0.21.13",
     "clsx": "^2.1.1",
     "lucide-svelte": "^0.435.0",
     "papaparse": "^5.4.1",

@@ -2,6 +2,7 @@
   import * as Alert from "$lib/components/ui/alert";
   import { Input } from "$lib/components/ui/input/index";
   import Progress from "$lib/components/ui/progress/progress.svelte";
+  import Button from "$lib/components/ui/button/button.svelte";
   import { GeneDataParser } from "$lib/models/GeneDataParser";
   import type { GeneVariant } from "$lib/models/GeneVariant";
   import type { MpsData } from "$lib/models/MpsData";
@@ -54,7 +55,7 @@
       <Info class="h-4 w-4" />
       <Alert.Title>Notice</Alert.Title>
       <Alert.Description>
-        <ul>
+        <ul class="list-disc">
           <li>
             All genetic data processing is performed entirely on your device, no
             data is sent or stored elsewhere.
@@ -68,15 +69,17 @@
             Currently, 23andMe, Ancestry.com, and unzipped Nebula Genomics data
             is supported. To download your data:
           </li>
-          <ul>
+          <ul class="list-disc ml-4">
             <li>
               For 23andMe data, visit <a
+                class="text-primary font-bold"
                 href="https://you.23andme.com/tools/data/download/"
                 target="_blank">23andMe</a
               >.
             </li>
             <li>
               For Ancestry.com data, visit <a
+                class="text-primary font-bold"
                 href="https://www.ancestry.com/account/data/user/download"
                 target="_blank">Ancestry</a
               >.
@@ -90,6 +93,7 @@
           </ul>
           <li>
             For more information, visit the <a
+              class="text-primary font-bold"
               href="https://www.reddit.com/r/DrWillPowers/"
               >Dr Powers Subreddit</a
             >
