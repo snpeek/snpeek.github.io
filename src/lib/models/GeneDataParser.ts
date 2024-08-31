@@ -1,5 +1,5 @@
 import Papa from "papaparse";
-import type { GeneVariant } from "./GeneVariant";
+import { GeneVariant } from "./GeneVariant";
 import type { MpsData } from "./MpsData";
 import { Genotype } from "./Genotype";
 
@@ -134,7 +134,7 @@ export class GeneDataParser {
       }
       const snp = row[0]
       if (snp in mpsData) {
-        foundSnps.push({
+        foundSnps.push(new GeneVariant({
           rsid: snp,
           chromosome: row[1],
           position: row[2],
@@ -142,7 +142,7 @@ export class GeneDataParser {
           phenotype: mpsData[snp].phenotype,
           pathogenic: mpsData[snp].pathogenic.map(Genotype.fromString).filter(item => item !== null),
           gene: mpsData[snp].gene
-        })
+        }))
       }
     })
     return foundSnps
@@ -157,7 +157,7 @@ export class GeneDataParser {
       }
       const snp = row[0]
       if (snp in mpsData) {
-        foundSnps.push({
+        foundSnps.push(new GeneVariant({
           rsid: snp,
           chromosome: row[1],
           position: row[2],
@@ -165,7 +165,7 @@ export class GeneDataParser {
           phenotype: mpsData[snp].phenotype,
           pathogenic: mpsData[snp].pathogenic.map(Genotype.fromString).filter(item => item !== null),
           gene: mpsData[snp].gene
-        })
+        }))
       }
     })
     return foundSnps
@@ -179,7 +179,7 @@ export class GeneDataParser {
       }
       const snp = row[2]
       if (snp in mpsData) {
-        foundSnps.push({
+        foundSnps.push(new GeneVariant({
           rsid: snp,
           chromosome: row[0],
           position: row[1],
@@ -187,7 +187,7 @@ export class GeneDataParser {
           phenotype: mpsData[snp].phenotype,
           pathogenic: mpsData[snp].pathogenic.map(Genotype.fromString).filter(item => item !== null),
           gene: mpsData[snp].gene
-        })
+        }))
       }
     })
     return foundSnps

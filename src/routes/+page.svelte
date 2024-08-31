@@ -1,8 +1,7 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+  import { Button } from "$lib/components/ui/button";
+</script>
 
-<style>
-[data-button-root] {
-  
-}
-</style>
+<h1>SNPeek</h1>
+
+<Button href="meyer-powers">Meyer-Powers Syndrome</Button>

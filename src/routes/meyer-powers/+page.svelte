@@ -8,6 +8,7 @@
   import type { MpsData } from "$lib/models/MpsData";
   import { Info } from "lucide-svelte";
   import GeneVariantDataTable from "./gene-variant-data-table.svelte";
+  import Badge from "$lib/components/ui/badge/badge.svelte";
   let files: File[] = [];
   let parseProgress: number = 0;
   let geneVariantsByPhenotype: Map<string, GeneVariant[]>;
@@ -119,10 +120,10 @@
   <section class="container mx-auto">
     {#if geneVariantsByPhenotype != undefined}
       {#each geneVariantsByPhenotype as geneVariantEntry}
-        <h2 class="text-3xl font-semibold my-4">
-          {geneVariantEntry[0]}
-        </h2>
-        <GeneVariantDataTable geneVariants={geneVariantEntry[1]} />
+        <GeneVariantDataTable
+          phenotype={geneVariantEntry[0]}
+          geneVariants={geneVariantEntry[1]}
+        />
       {/each}
     {/if}
   </section>

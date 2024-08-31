@@ -14,7 +14,12 @@
   } from "svelte-headless-table";
   import { readable } from "svelte/store";
 
+  export let phenotype: string;
   export let geneVariants: GeneVariant[];
+
+  let pathogenicAlleles = geneVariants.filter((geneVariant) => {
+    return geneVariant.pathogenicAllele != null;
+  });
 
   const table = createTable(readable(geneVariants));
 
@@ -22,9 +27,7 @@
     table.column({
       header: "Pathogenicity",
       accessor: (geneVariant) => {
-        return geneVariant.pathogenic.find((genotype) =>
-          geneVariant.genotype?.matches(genotype),
-        );
+        return geneVariant.pathogenicAllele;
       },
       cell: ({ value }) => {
         if (value != null) {
@@ -88,6 +91,12 @@
     table.createViewModel(columns);
 </script>
 
+<h2 class="text-3xl font-semibold my-4">
+  {phenotype}
+  <Badge variant={pathogenicAlleles.length > 0 ? "destructive" : "outline"}>
+    {pathogenicAlleles.length} / {geneVariants.length}
+  </Badge>
+</h2>
 <div class="rounded-md border">
   <Table.Root {...$tableAttrs}>
     <Table.Header>
