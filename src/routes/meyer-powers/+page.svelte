@@ -24,6 +24,7 @@
     if (Object.keys(mpsData).length > 0) {
       return mpsData;
     } else {
+      // TODO: Error message
       throw Error("Error: MPS data is empty");
     }
   }
@@ -31,7 +32,7 @@
   async function analyze() {
     const mpsData = await fetchMpsData("./mps/mps-data.json");
     if (files.length < 1) {
-      // maybe an error message.
+      // TODO: Error message
       console.log("No files selected");
       return;
     }
@@ -40,6 +41,7 @@
     const geneVariants = await geneParser.parse((progress: number) => {
       parseProgress = progress;
     });
+
     geneVariantsByPhenotype = Map.groupBy(
       geneVariants,
       (geneVariant, index) => geneVariant.phenotype,

@@ -5,6 +5,12 @@ export enum Nucleotide {
   G = "G"
 }
 
+/**
+ * A representation of the combination of Nucleotides. 
+ * Interchangeagble with Alleles (I think).
+ * An abstraction that allows us to not worry about 
+ * the order of "CT" and "TC", etc...
+ */
 export class Genotype {
   alleles: Nucleotide[];
 
@@ -18,8 +24,6 @@ export class Genotype {
    */
   public static fromString(alleleString: string): Genotype | null {
     const alleleStrings = alleleString.split('');
-    const firstLetter = alleleString[0];
-    const secondLetter = alleleString[1];
 
     const nucleotideArray = Object.keys(Nucleotide);
     if (alleleStrings.every(s => nucleotideArray.includes(s))) {

@@ -5,6 +5,9 @@ import { Genotype } from "./Genotype";
 
 export type GeneDataRowParser = (data: string[][], mpsData: MpsData) => GeneVariant[];
 
+/**
+ * An abstraction over the parsing and handling of genetic data.
+ */
 export class GeneDataParser {
   file: File;
   parseRow: GeneDataRowParser;
@@ -18,6 +21,14 @@ export class GeneDataParser {
     this.mpsData = mpsData
   }
 
+  /**
+   * Decides which parser to use based on the different formats {@link file} can have.
+   * Therefore, this is probably what you want to use to construct a {@link GeneDataParser}, 
+   * rather than the constructor.
+   * @param file The gene data file. Usually a CSV
+   * @param mpsData The MPS Data file. Usually a JSON. Should be statically served under ./mps
+   * @returns A new {@link GeneDataParser}
+   */
   static async fromFile(file: File, mpsData: MpsData): Promise<GeneDataParser> {
     const maxSize = 1024 * 1024 * 100 // 100 Mb
     const fileExtension = file.name.split('.').at(-1);
@@ -26,6 +37,7 @@ export class GeneDataParser {
       if (file.size > maxSize) {
         console.debug('Streaming large file=' + file.name)
         if (fileExtension !== 'vcf') {
+          // TODO: Error message
           throw Error("Large file is not a vcf file")
         }
         resolve(new GeneDataParser(file, GeneDataParser.parseVCFData, '\t', mpsData));
@@ -43,15 +55,22 @@ export class GeneDataParser {
               console.debug('detected ancestry data')
               resolve(new GeneDataParser(file, GeneDataParser.parseAncestryData, ',', mpsData));
             } else {
+              // TODO: Error message
               reject(Error('Unable to determine the filetype from the header.'));
             }
           }
         })
       }
-
     })
   }
 
+  /**
+   * Given the {@link parseRow} that was set during construction, parses the {@link file}
+   * to return an array of {@link GeneVariant}s.
+   * @param onUpdateProgress A function that allows the call-site (i.e. likely a svelte component) 
+   * to render a progress bar as the {@link file} is parsed.
+   * @returns A Promise that returns an array of {@link GeneVariant}.
+   */
   async parse(onUpdateProgress: (progress: number) => void): Promise<GeneVariant[]> {
     const chunkSize = 1024 * 50 // 50KB
     let matchingRsids: GeneVariant[] = [] // aggregate all SNPs
@@ -77,6 +96,7 @@ export class GeneDataParser {
             const foundSnps = this.parseRow(data, this.mpsData)
             matchingRsids = matchingRsids.concat(foundSnps)
           } catch (error) {
+            // TODO: Error message
             console.error('Error while parsing chunk:', error)
             alert('An error occurred while parsing the file.')
             parser.abort()
@@ -90,42 +110,9 @@ export class GeneDataParser {
         },
       })
     });
-
-    // Papa.parse(file, {
-    //   chunkSize,
-    //   dynamicTyping: true,
-    //   delimiter,
-    //   chunk: (results, parser) => {
-    //     const data = results.data as string[][]
-    //     processedSize += chunkSize
-
-    //     const progress = processedSize / fileSize * 100
-    //     // progressBarUpdate(elements, `${progress}%`)
-
-    //     try {
-    //       const foundSnps = parseRowFunction(data, mpsData)
-    //       matchingRsids = matchingRsids.concat(foundSnps)
-    //     } catch (error) {
-    //       console.error('Error while parsing chunk:', error)
-    //       alert('An error occurred while parsing the file.')
-    //       parser.abort()
-    //     }
-    //   },
-    //   complete: () => {
-    //     progressBarUpdate(elements, '100%')
-    //     renderTable(elements, matchingRsids, mpsData)
-    //     renderReportDownload(elements, matchingRsids)
-    //     progressBarHide(elements)
-    //   },
-    //   error: (error) => {
-    //     console.error('Error while reading file:', error)
-    //     alert('An error occurred while reading the file.')
-    //     // progressBarHide(elements)
-    //   }
-    // })
   }
 
-  static parse23AndMeData(data: string[][], mpsData: MpsData): GeneVariant[] {
+  private static parse23AndMeData(data: string[][], mpsData: MpsData): GeneVariant[] {
     const foundSnps: GeneVariant[] = []
     data.forEach(row => {
       // console.log(`row=${row[0]}`)
@@ -148,7 +135,7 @@ export class GeneDataParser {
     return foundSnps
   }
 
-  static parseAncestryData(data: string[][], mpsData: MpsData): GeneVariant[] {
+  private static parseAncestryData(data: string[][], mpsData: MpsData): GeneVariant[] {
     const foundSnps: GeneVariant[] = []
     data.forEach(row => {
       row = row[0]?.split('\t') ?? [] // HACK: This is a workaround for Papa misreading AncestryDNA files.
@@ -171,7 +158,7 @@ export class GeneDataParser {
     return foundSnps
   }
 
-  static parseVCFData(data: string[][], mpsData: MpsData): GeneVariant[] {
+  private static parseVCFData(data: string[][], mpsData: MpsData): GeneVariant[] {
     const foundSnps: GeneVariant[] = []
     data.forEach(row => {
       if (row.length < 5 || (typeof row[0] === 'string' && row[0].startsWith('#'))) {
