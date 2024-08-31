@@ -47,7 +47,7 @@
   }
 </script>
 
-<main class="flex flex-col gap-8">
+<main class="flex flex-col gap-8 mb-6">
   <section class="container mx-auto">
     <h1 class="text-4xl font-bold my-6">Meyer-Powers Syndrome</h1>
     <Alert.Root>
