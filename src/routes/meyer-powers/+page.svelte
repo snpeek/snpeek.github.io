@@ -2,13 +2,11 @@
   import * as Alert from "$lib/components/ui/alert";
   import { Input } from "$lib/components/ui/input/index";
   import Progress from "$lib/components/ui/progress/progress.svelte";
-  import Button from "$lib/components/ui/button/button.svelte";
   import { GeneDataParser } from "$lib/models/GeneDataParser";
   import type { GeneVariant } from "$lib/models/GeneVariant";
   import type { MpsData } from "$lib/models/MpsData";
   import { Info } from "lucide-svelte";
   import GeneVariantDataTable from "./gene-variant-data-table.svelte";
-  import Badge from "$lib/components/ui/badge/badge.svelte";
   let files: File[] = [];
   let parseProgress: number = 0;
   let geneVariantsByPhenotype: Map<string, GeneVariant[]>;
@@ -110,7 +108,6 @@
       type="file"
       on:change={onFileInput}
     />
-    <!-- <Button disabled={files.length == 0} on:click={analyze}>Analyze</Button> -->
   </section>
   {#if files.length > 0 && parseProgress < 100}
     <section class="container mx-auto">

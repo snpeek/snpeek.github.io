@@ -5,10 +5,8 @@
   import type { GeneVariant } from "$lib/models/GeneVariant";
   import { ExternalLink } from "lucide-svelte";
   import {
-    BodyRow,
     createRender,
     createTable,
-    DataBodyRow,
     Render,
     Subscribe,
   } from "svelte-headless-table";
