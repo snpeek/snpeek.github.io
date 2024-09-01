@@ -19,7 +19,8 @@ export class Genotype {
   }
 
   /**
-   * Constructs a Genotype from an {@link alleleString}
+   * Constructs a Genotype from an {@link alleleString}. 
+   * Returns null if invalid nucleotides in alleleString.
    * @param alleleString A string representing the combination of alleles in encoded genetic data
    */
   public static fromString(alleleString: string): Genotype | null {

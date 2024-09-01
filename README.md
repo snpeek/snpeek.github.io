@@ -26,10 +26,11 @@ npm install
 Launch the application on your local development server:
 
 ```
-npm run start
+npm run dev
 ```
 
-Open your browser and navigate to [http://localhost:8000](http://localhost:8000).
+Open your browser and navigate to [http://localhost:5173](http://localhost:5173).
+Or you can simply click on the link in the same terminal from where you invoke `npm run dev`.
 
 ## 💻 For Developers and Contributors
 
@@ -44,7 +45,7 @@ Start by forking this repository to your own GitHub account.
 Clone it to your local machine:
 
 ```
-git clone https://github.com/snpeek/snpeek.github.io.git
+git clone ${your_forked_repository_url}
 cd snpeek
 ```
 
@@ -58,11 +59,14 @@ npm install
 
 #### 4. Start the Dev Server
 
-This will start a development server and open the application in your default browser:
+Launch the application on your local development server:
 
 ```
-npm start
+npm run dev
 ```
+
+Open your browser and navigate to [http://localhost:5173](http://localhost:5173).
+Or you can simply click on the link in the same terminal from where you invoke `npm run dev`.
 
 ### 🏗 Building the Project
 
@@ -70,6 +74,12 @@ Compile the production-ready code:
 
 ```
 npm run build
+```
+
+Preview it:
+
+```
+npm run preview
 ```
 
 ### 🧪 Running Tests
@@ -91,11 +101,9 @@ npm run test
 
 A quick overview of available scripts in the `package.json` file:
 
-- `test`: Execute tests with Mocha.
+- `test`: Execute tests with vitest.
 - `build`: Build the production version of the application.
 - `dev`: Build the development version of the application.
-- `watch`: Auto recompile files upon changes.
-- `start`: Serve the `public` folder on a local HTTP server.
 - `gh-deploy-init` and `gh-deploy`: Commands for deploying to GitHub Pages.
 - `generate-data`: Utilize mock data scripts for development/testing.
 
