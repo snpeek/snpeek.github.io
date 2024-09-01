@@ -7,6 +7,7 @@
   import type { MpsData } from "$lib/models/MpsData";
   import { Info } from "lucide-svelte";
   import GeneVariantDataTable from "./gene-variant-data-table.svelte";
+
   let files: File[] = [];
   let parseProgress: number = 0;
   let geneVariantsByPhenotype: Map<string, GeneVariant[]>;
@@ -30,7 +31,7 @@
   }
 
   async function analyze() {
-    const mpsData = await fetchMpsData("./mps/mps-data.json");
+    const mpsData = await fetchMpsData("/mps/mps-data.json");
     if (files.length < 1) {
       // TODO: Error message
       console.log("No files selected");
