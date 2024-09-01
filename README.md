@@ -1,6 +1,7 @@
 # snpeek
 
 Welcome to **snpeek**!
+This project uses [Svelte](https://svelte.dev/) and [SvelteKit](https://kit.svelte.dev/) along with [TypeScript](https://www.typescriptlang.org/).
 
 ## 🚀 Quickstart for Users
 
