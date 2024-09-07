@@ -339,7 +339,7 @@ function isMatch(genotype: string, pathogenic: string[]): boolean {
 }
 
 function prioritySort(variants: Variant[]): Record<string, Variant[]> {
-  const priorityOrder = ['Estrogen Signaling', 'DNA Methylation']
+  const priorityOrder = ['Estrogen Signaling', 'Folate Cycle']
 
   // Group the found SNPs by phenotype
   const groups: Record<string, Variant[]> = groupBy(variants, 'phenotype')

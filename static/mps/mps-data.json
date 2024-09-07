@@ -50,32 +50,32 @@
         "gene": "AIRE"
     },
     "rs1801133": {
-        "phenotype": "DNA Methylation",
+        "phenotype": "Folate Cycle",
         "pathogenic": ["TT", "CT"],
         "gene": "MTHFR"
     },
     "rs1801131": {
-        "phenotype": "DNA Methylation",
+        "phenotype": "Folate Cycle",
         "pathogenic": ["CC", "AC"],
         "gene": "MTHFR"
     },
     "rs2236225": {
-        "phenotype": "DNA Methylation",
+        "phenotype": "Folate Cycle",
         "pathogenic": ["TT", "CT"],
         "gene": "MTHFD1"
     },
     "rs1950902": {
-        "phenotype": "DNA Methylation",
+        "phenotype": "Folate Cycle",
         "pathogenic": ["CC"],
         "gene": "MTHFD1"
     },
     "rs6922269": {
-        "phenotype": "DNA Methylation",
+        "phenotype": "Folate Cycle",
         "pathogenic": ["AA", "AG"],
         "gene": "MTHFD1L"
     },
     "rs1802059": {
-        "phenotype": "DNA Methylation",
+        "phenotype": "Folate Cycle",
         "pathogenic": ["AA"],
         "gene": "MTRR"
     },
