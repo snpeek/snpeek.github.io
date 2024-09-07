@@ -412,7 +412,9 @@ function renderTable (elements: Elements, foundSnps: Variant[], mpsData: MpsData
       columns.forEach(column => {
         const td = document.createElement('td')
         const content = escapeHtml(String(snp[column]))
-        td.innerHTML = column === 'rsid' ? linkToSnpedia(content) : content
+        td.innerHTML =
+          column === 'rsid' ? linkToSnpedia(content) :
+          column === 'gene' ? linkToNCBI(content) : content
         if (isMatch(snp.genotype, mpsData[snp.rsid].pathogenic)) {
           td.setAttribute('style', 'color:#f00;border-color:black;font-weight:bold')
         } else {
@@ -488,6 +490,10 @@ function escapeHtml (unsafe: string): string {
 
 function linkToSnpedia (snp: string): string {
   return '<a href="https://www.snpedia.com/index.php/' + snp + '">' + snp + '</a>'
+}
+
+function linkToNCBI(snp: string): string {
+  return '<a href="https://www.ncbi.nlm.nih.gov/gene/?term=' + snp + '">' + snp + '</a>'
 }
 
 function progressBarUpdate (elements: Elements, value: string): void {
