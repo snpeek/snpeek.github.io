@@ -339,7 +339,7 @@ function isMatch (genotype: string, pathogenic: string[]): boolean {
 }
 
 function prioritySort (variants: Variant[]): Record<string, Variant[]> {
-  const priorityOrder = ['DNA Methylation', 'Estrogen Deactivation']
+  const priorityOrder = ['Estrogen Signaling', 'Congenital Adrenal Hyperplasia', 'Addison\'s Disease', 'Folate Cycle']
 
   // Group the found SNPs by phenotype
   const groups: Record<string, Variant[]> = groupBy(variants, 'phenotype')
@@ -388,14 +388,14 @@ function renderTable (elements: Elements, foundSnps: Variant[], mpsData: MpsData
     table.setAttribute('border', '1')
 
     const headerRow = document.createElement('tr')
-    const columns: Array<keyof Variant> = ['rsid', 'genotype', 'pathogenic', 'chromosome', 'position', 'gene']
+    const columns: Array<keyof Variant> = ['gene', 'rsid', 'genotype', 'pathogenic', 'chromosome', 'position']
     const columnDisplay: Record<string, string> = {
+      gene: 'Gene',
       rsid: 'RSID',
       genotype: 'Genotype',
       pathogenic: 'Pathogenic',
       chromosome: 'Chromosome',
       position: 'Position',
-      gene: 'Gene'
     }
     columns.forEach(column => {
       const th = document.createElement('th')
@@ -412,7 +412,9 @@ function renderTable (elements: Elements, foundSnps: Variant[], mpsData: MpsData
       columns.forEach(column => {
         const td = document.createElement('td')
         const content = escapeHtml(String(snp[column]))
-        td.innerHTML = column === 'rsid' ? linkToSnpedia(content) : content
+        td.innerHTML =
+          column === 'rsid' ? linkToSnpedia(content) :
+          column === 'gene' ? linkToNCBI(content) : content
         if (isMatch(snp.genotype, mpsData[snp.rsid].pathogenic)) {
           td.setAttribute('style', 'color:#f00;border-color:black;font-weight:bold')
         } else {
@@ -488,6 +490,10 @@ function escapeHtml (unsafe: string): string {
 
 function linkToSnpedia (snp: string): string {
   return '<a href="https://www.snpedia.com/index.php/' + snp + '">' + snp + '</a>'
+}
+
+function linkToNCBI(snp: string): string {
+  return '<a href="https://www.ncbi.nlm.nih.gov/gene/?term=' + snp + '">' + snp + '</a>'
 }
 
 function progressBarUpdate (elements: Elements, value: string): void {
