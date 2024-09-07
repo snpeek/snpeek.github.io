@@ -388,14 +388,14 @@ function renderTable (elements: Elements, foundSnps: Variant[], mpsData: MpsData
     table.setAttribute('border', '1')
 
     const headerRow = document.createElement('tr')
-    const columns: Array<keyof Variant> = ['rsid', 'genotype', 'pathogenic', 'chromosome', 'position', 'gene']
+    const columns: Array<keyof Variant> = ['gene', 'rsid', 'genotype', 'pathogenic', 'chromosome', 'position']
     const columnDisplay: Record<string, string> = {
+      gene: 'Gene',
       rsid: 'RSID',
       genotype: 'Genotype',
       pathogenic: 'Pathogenic',
       chromosome: 'Chromosome',
       position: 'Position',
-      gene: 'Gene'
     }
     columns.forEach(column => {
       const th = document.createElement('th')
