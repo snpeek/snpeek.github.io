@@ -82,34 +82,34 @@
     "rs2470152": {
         "phenotype": "Estrogen Signaling",
         "pathogenic": ["CC"],
-        "gene": "CYP19A1"
+        "gene": "CYP19A1 - Aromatase"
     },
     "rs4646": {
         "phenotype": "Estrogen Signaling",
         "pathogenic": ["CC"],
-        "gene": "CYP19A1"
+        "gene": "CYP19A1 - Aromatase"
     },
     "rs2470144": {
         "phenotype": "Estrogen Signaling",
         "pathogenic": ["GG"],
-        "gene": "CYP19A1",
+        "gene": "CYP19A1 - Aromatase",
         "notes": "Aromatase #3 (Minor)"
     },
     "rs10046": {
         "phenotype": "Estrogen Signaling",
         "pathogenic": ["TT"],
-        "gene": "CYP19A1"
+        "gene": "CYP19A1 - Aromatase"
     },
     "rs2414096": {
         "phenotype": "Estrogen Signaling",
         "pathogenic": ["GG"],
-        "gene": "CYP19A1",
+        "gene": "CYP19A1 - Aromatase",
         "notes": "PCOS"
     },
     "rs78310315": {
         "phenotype": "Estrogen Signaling",
         "pathogenic": ["CT"],
-        "gene": "CYP19A1"
+        "gene": "CYP19A1 - Aromatase"
     },
     "rs17036314": {
         "phenotype": "Insulin Resistance",
