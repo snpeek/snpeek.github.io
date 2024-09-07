@@ -164,7 +164,7 @@
     "rs165599": {
         "phenotype": "Estrogen Signaling",
         "pathogenic": ["GG"],
-        "gene": "ARVCF,COMT"
+        "gene": "COMT"
     },
     "rs165722": {
         "phenotype": "Estrogen Signaling",
