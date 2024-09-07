@@ -80,34 +80,34 @@
         "gene": "MTRR"
     },
     "rs2470152": {
-        "phenotype": "Aromatase Enzyme",
+        "phenotype": "Estrogen Signaling",
         "pathogenic": ["CC"],
         "gene": "CYP19A1"
     },
     "rs4646": {
-        "phenotype": "Aromatase Enzyme",
+        "phenotype": "Estrogen Signaling",
         "pathogenic": ["CC"],
         "gene": "CYP19A1"
     },
     "rs2470144": {
-        "phenotype": "Aromatase Enzyme",
+        "phenotype": "Estrogen Signaling",
         "pathogenic": ["GG"],
         "gene": "CYP19A1",
         "notes": "Aromatase #3 (Minor)"
     },
     "rs10046": {
-        "phenotype": "Aromatase Enzyme",
+        "phenotype": "Estrogen Signaling",
         "pathogenic": ["TT"],
         "gene": "CYP19A1"
     },
     "rs2414096": {
-        "phenotype": "Aromatase Enzyme",
+        "phenotype": "Estrogen Signaling",
         "pathogenic": ["GG"],
         "gene": "CYP19A1",
         "notes": "PCOS"
     },
     "rs78310315": {
-        "phenotype": "Aromatase Enzyme",
+        "phenotype": "Estrogen Signaling",
         "pathogenic": ["CT"],
         "gene": "CYP19A1"
     },
@@ -162,72 +162,72 @@
         "gene": "IL6,LOC541472"
     },
     "rs165599": {
-        "phenotype": "Estrogen Deactivation",
+        "phenotype": "Estrogen Signaling",
         "pathogenic": ["GG"],
         "gene": "ARVCF,COMT"
     },
     "rs165722": {
-        "phenotype": "Estrogen Deactivation",
+        "phenotype": "Estrogen Signaling",
         "pathogenic": ["CC"],
         "gene": "COMT"
     },
     "rs776746": {
-        "phenotype": "Estrogen Deactivation",
+        "phenotype": "Estrogen Signaling",
         "pathogenic": ["GG"],
         "gene": "CYP3A5,ZSCAN25"
     },
     "rs762551": {
-        "phenotype": "Estrogen Deactivation",
+        "phenotype": "Estrogen Signaling",
         "pathogenic": ["AA"],
         "gene": "CYP1A2"
     },
     "rs743572": {
-        "phenotype": "Estrogen Deactivation",
+        "phenotype": "Estrogen Signaling",
         "pathogenic": ["GG"],
         "gene": "CYP17A1"
     },
     "rs4680": {
-        "phenotype": "Estrogen Deactivation",
+        "phenotype": "Estrogen Signaling",
         "pathogenic": [],
         "gene": "COMT"
     },
     "rs4633": {
-        "phenotype": "Estrogen Deactivation",
+        "phenotype": "Estrogen Signaling",
         "pathogenic": ["TT", "CT"],
         "gene": "COMT,MIR4761"
     },
     "rs104893956": {
-        "phenotype": "Estrogen Deactivation",
+        "phenotype": "Estrogen Signaling",
         "pathogenic": ["CT"],
         "gene": "ESR1"
     },
     "rs121913044": {
-        "phenotype": "Estrogen Deactivation",
+        "phenotype": "Estrogen Signaling",
         "pathogenic": ["AT"],
         "gene": "ESR1"
     },
     "rs397509428": {
-        "phenotype": "Estrogen Deactivation",
+        "phenotype": "Estrogen Signaling",
         "pathogenic": ["GT"],
         "gene": "ESR1"
     },
     "rs9340799": {
-        "phenotype": "Estrogen Deactivation",
+        "phenotype": "Estrogen Signaling",
         "pathogenic": ["GG"],
         "gene": "ESR1"
     },
     "rs2881766": {
-        "phenotype": "Estrogen Deactivation",
+        "phenotype": "Estrogen Signaling",
         "pathogenic": ["GT", "TT"],
         "gene": "ESR1"
     },
     "rs2295190": {
-        "phenotype": "Estrogen Deactivation",
+        "phenotype": "Estrogen Signaling",
         "pathogenic": ["GT", "TT"],
         "gene": "ESR1"
     },
     "rs165631": {
-        "phenotype": "Estrogen Deactivation",
+        "phenotype": "Estrogen Signaling",
         "pathogenic": [],
         "gene": "COMT",
         "notes": "Perhaps slightly lower risk for breast cancer in BRCA1/2 mutation carriers"
