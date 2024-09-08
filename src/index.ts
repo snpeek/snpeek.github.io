@@ -206,16 +206,20 @@ function parseFileStream (
 function parseVCFData (data: string[][], mpsData: MpsData): Variant[] {
   const foundSnps: Variant[] = []
   data.forEach(row => {
-    if (row.length < 5 || (typeof row[0] === 'string' && row[0].startsWith('#'))) {
+    if (row.length < 10 || (typeof row[0] === 'string' && row[0].startsWith('#'))) {
       return // skip these rows
     }
     const snp = row[2]
     if (snp in mpsData) {
+      const ref = row[3]; // Reference allele
+      const alt = row[4]; // Alternate allele(s)
+      const genotype = parseVCFGenotype(row[9], ref, alt.split(','));
+      
       foundSnps.push({
         rsid: snp,
         chromosome: row[0],
         position: row[1],
-        genotype: row[4], // assuming genotype is in the 5th column
+        genotype: genotype,
         phenotype: mpsData[snp].phenotype,
         pathogenic: mpsData[snp].pathogenic,
         gene: nullOrEmptyString(mpsData[snp].gene)
@@ -223,6 +227,16 @@ function parseVCFData (data: string[][], mpsData: MpsData): Variant[] {
     }
   })
   return foundSnps
+}
+
+function parseVCFGenotype(genotypeField: string, ref: string, alts: string[]): string {
+  const [genotype] = genotypeField.split(':'); // Extract genotype from the field
+  const alleles = genotype.split(/[|/]/); // Split by '|' or '/'
+  
+  return alleles.map(allele => {
+    const index = parseInt(allele, 10);
+    return index === 0 ? ref : alts[index - 1] || '.';
+  }).join('');
 }
 
 function parseAncestryData (data: string[][], mpsData: MpsData): Variant[] {
