@@ -361,5 +361,20 @@
         "phenotype": "Congenital Adrenal Hyperplasia",
         "pathogenic": ["TT"],
         "gene": "CYP21A2"
+    },
+    "rs12086634": {
+        "phenotype": "Congenital Adrenal Hyperplasia",
+        "pathogenic": ["GG"],
+        "gene": "HSD11B1"
+    },
+    "rs28934586": {
+        "phenotype": "Congenital Adrenal Hyperplasia",
+        "pathogenic": ["GG"],
+        "gene": "CYP11B1"
+    },
+    "rs201103987" : {
+        "phenotype": "Congenital Adrenal Hyperplasia",
+        "pathogenic": ["AA"],
+        "gene": "CYP11B1"
     }
 }
