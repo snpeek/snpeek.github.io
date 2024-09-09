@@ -108,6 +108,41 @@ A quick overview of available scripts in the `package.json` file:
 - `gh-deploy-init` and `gh-deploy`: Commands for deploying to GitHub Pages.
 - `generate-data`: Utilize mock data scripts for development/testing.
 
+### Structure
+
+This is the information you'd need to understand how this project works, and what files to change when you want to make changes.
+
+#### Directory Structure
+- `public` - [DEPRECATED] Part of the asset management of the original app
+- `src`
+  - `lib`
+    - `components` - Where all the UI-specific things reside. These are part of how shadcn-svelte works. These can be modified directly, as shadcn's principle is for UI libraries to be changeable to suit the needs of the app.
+    - `models` - Where all the Models reside. A Model encapsulates both data structure (fields) and behavior (methods). For example, alleles/genotypes have the Genotype model, which allows us not to think about the order of nucleotides. `CT` and `TC` are treated equally by the `Genotype.matches` method, and instantiation is equally convenient with the `Genotype.fromString` method.
+  - `routes` - Sveltekit's way of declaring routes. See Sveltekit documentation
+    - `meyer-powers` - The meyer-powers route
+      - `+page.svelte` - What the visitor sees when they visit `/meyer-powers`. This is the file that calls everything else to let the user do useful things.
+      - `gene-variant-data-table.svelte` - Should probably be moved to `src/lib/components/gene-variant-data-table.svelte` or something like that, especially if we want to use these tables for other things. But for now, not necessary since the only route is `/meyer-powers`.
+    - `+layout.svelte` - A utility thing, for wrapping all svelte files consistently. Right now, wraps everything with the `app.css` file.
+    - `layout.ts` - Configuration that makes static page generation possible. Don't mess with this unless you know what you're doing
+    - `+page.svelte` - What the visitor sees when they visit `/`. This is basically the `index.html` from the user's point of view. These is what renders the `meyer-powers syndrome panel` button.
+  - `app.css` - Base styles
+  - `app.d.ts` - Types relating to Svelte
+  - `app.html` - The html entrypoint for Svelte
+  - `index.test.ts` - In Svelte, it is idiomatic to colocate tests with the corresponding code. This is a temporary file, meant to house tests that we're not sure where they should be placed yet. The contents of this should be moved to the appropriate locations once the project settles.
+  - `global.ts` - [DEPRECATED] Part of bootstrapping the original app
+  - `index.ts` - [DEPRECATED] Contains most if not all the functionality in the original app. Everything in here has been moved and adapted to the new framework.
+- `static` - Files that are meant to be served as-is. This includes data files like `mps-data.json`, but also favicons and robots.txt.
+  - `mps` - A directory to specifically house `mps-data.json`.
+  - `favicon.png` - We should probably replace this with a logo once we have this.
+
+Files and directories marked [DEPRECATED] are for deletion once the migration to the new structure settles.
+
+#### Models
+- GeneDataParser - If you want to change how parsing works, or add support for other data formats, this is what you should be looking at.
+- GeneVariant - These represent the individual rows of gene data. These are the ones with `rsid` and `gene`, etc...
+- Genotype - An abstraction over genotypes and alleles, so we don't have to worry about the ordering of the nucleotides, etc...
+- MpsData - Simply a representation of the JSON structure. If we change the structure of `mps-data.json`, then this should also be updated.
+
 ## 📄 License
 
 snpeek is open-sourced software licensed under the [MIT License](LICENSE).
