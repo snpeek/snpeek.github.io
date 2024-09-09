@@ -40,6 +40,20 @@
       },
     }),
     table.column({
+      accessor: "gene",
+      header: "Gene",
+      cell: ({ value }) => {
+        if (value == null) {
+          return "";
+        }
+        return createRender(Button, {
+          href: `https://www.ncbi.nlm.nih.gov/gene/?term=${value}`,
+          target: "_blank",
+          variant: "secondary",
+        }).slot(value, createRender(ExternalLink, { class: "h-4 w-4 ms-1" }));
+      },
+    }),
+    table.column({
       accessor: "rsid",
       header: "RSID",
       cell: ({ value }) => {
@@ -49,10 +63,6 @@
           variant: "secondary",
         }).slot(value, createRender(ExternalLink, { class: "h-4 w-4 ms-1" }));
       },
-    }),
-    table.column({
-      accessor: "gene",
-      header: "Gene",
     }),
     table.column({
       accessor: (geneVariant) => {

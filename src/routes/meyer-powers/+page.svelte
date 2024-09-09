@@ -8,9 +8,20 @@
   import { Info } from "lucide-svelte";
   import GeneVariantDataTable from "./gene-variant-data-table.svelte";
 
+  interface IPhenotypeSection {
+    phenotypeName: string;
+    geneVariants: GeneVariant[];
+  }
+
   let files: File[] = [];
   let parseProgress: number = 0;
-  let geneVariantsByPhenotype: Map<string, GeneVariant[]>;
+  let phenotypeSections: IPhenotypeSection[];
+  const phenotypePriority: string[] = [
+    "Estrogen Signaling",
+    "Congenital Adrenal Hyperplasia",
+    "Addison's Disease",
+    "Folate Cycle",
+  ];
 
   function onFileInput(event: Event): void {
     const target = event.target as HTMLInputElement;
@@ -31,6 +42,7 @@
   }
 
   async function analyze() {
+    console.log("analyzed");
     const mpsData = await fetchMpsData("/mps/mps-data.json");
     if (files.length < 1) {
       // TODO: Error message
@@ -43,10 +55,22 @@
       parseProgress = progress;
     });
 
-    geneVariantsByPhenotype = Map.groupBy(
+    let geneVariantsByPhenotype: Map<string, GeneVariant[]> = Map.groupBy(
       geneVariants,
       (geneVariant, index) => geneVariant.phenotype,
     );
+    let lowPriorityPhenotypes = Array.from(
+      geneVariantsByPhenotype.keys(),
+    ).filter((phenotype) => !phenotypePriority.includes(phenotype));
+
+    phenotypeSections = [...phenotypePriority, ...lowPriorityPhenotypes]
+      .map((phenotype) => {
+        return {
+          phenotypeName: phenotype,
+          geneVariants: geneVariantsByPhenotype.get(phenotype)!,
+        };
+      })
+      .filter((phenotype) => phenotype.geneVariants != undefined);
   }
 </script>
 
@@ -118,11 +142,11 @@
     </section>
   {/if}
   <section class="container mx-auto">
-    {#if geneVariantsByPhenotype != undefined}
-      {#each geneVariantsByPhenotype as geneVariantEntry}
+    {#if phenotypeSections != undefined}
+      {#each phenotypeSections as phenotypeSection}
         <GeneVariantDataTable
-          phenotype={geneVariantEntry[0]}
-          geneVariants={geneVariantEntry[1]}
+          phenotype={phenotypeSection.phenotypeName}
+          geneVariants={phenotypeSection.geneVariants}
         />
       {/each}
     {/if}

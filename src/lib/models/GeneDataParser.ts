@@ -122,13 +122,13 @@ export class GeneDataParser {
       const snp = row[0]
       if (snp in mpsData) {
         foundSnps.push(new GeneVariant({
+          gene: mpsData[snp].gene,
           rsid: snp,
           chromosome: row[1],
           position: row[2],
           genotype: Genotype.fromString(row[3]),
           phenotype: mpsData[snp].phenotype,
           pathogenic: mpsData[snp].pathogenic.map(Genotype.fromString).filter(item => item !== null),
-          gene: mpsData[snp].gene
         }))
       }
     })
@@ -145,13 +145,13 @@ export class GeneDataParser {
       const snp = row[0]
       if (snp in mpsData) {
         foundSnps.push(new GeneVariant({
+          gene: mpsData[snp].gene,
           rsid: snp,
           chromosome: row[1],
           position: row[2],
           genotype: Genotype.fromString(row[3] + row[4]),
           phenotype: mpsData[snp].phenotype,
           pathogenic: mpsData[snp].pathogenic.map(Genotype.fromString).filter(item => item !== null),
-          gene: mpsData[snp].gene
         }))
       }
     })
@@ -161,23 +161,36 @@ export class GeneDataParser {
   private static parseVCFData(data: string[][], mpsData: MpsData): GeneVariant[] {
     const foundSnps: GeneVariant[] = []
     data.forEach(row => {
-      if (row.length < 5 || (typeof row[0] === 'string' && row[0].startsWith('#'))) {
+      if (row.length < 10 || (typeof row[0] === 'string' && row[0].startsWith('#'))) {
         return // skip these rows
       }
       const snp = row[2]
       if (snp in mpsData) {
+        const ref = row[3]; // Reference allele
+        const alt = row[4]; // Alternate allele(s)
+        const genotype = GeneDataParser.parseVCFGenotype(row[9], ref, alt.split(','));
         foundSnps.push(new GeneVariant({
+          gene: mpsData[snp].gene,
           rsid: snp,
           chromosome: row[0],
           position: row[1],
-          genotype: Genotype.fromString(row[4]), // assuming genotype is in the 5th column
+          genotype: genotype,
           phenotype: mpsData[snp].phenotype,
           pathogenic: mpsData[snp].pathogenic.map(Genotype.fromString).filter(item => item !== null),
-          gene: mpsData[snp].gene
         }))
       }
     })
     return foundSnps
+  }
+
+  private static parseVCFGenotype(genotypeField: string, ref: string, alts: string[]): Genotype | null {
+    const [genotype] = genotypeField.split(':'); // Extract genotype from the field
+    const alleles = genotype.split(/[|/]/); // Split by '|' or '/'
+    const alleleString = alleles.map(allele => {
+      const index = parseInt(allele, 10);
+      return index === 0 ? ref : alts[index - 1] || '.';
+    }).join('');
+    return Genotype.fromString(alleleString);
   }
 }
 
