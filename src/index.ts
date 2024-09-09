@@ -207,25 +207,26 @@ function parseVCFData(data: string[][], mpsData: MpsData): Variant[] {
   const foundSnps: Variant[] = []
   data.forEach(row => {
     if (row.length < 10 || (typeof row[0] === 'string' && row[0].startsWith('#'))) {
-      return // skip these rows
-    }
-    const snp = row[2]
-    if (snp in mpsData) {
-      const ref = row[3]; // Reference allele
-      const alt = row[4]; // Alternate allele(s)
-      const genotype = parseVCFGenotype(row[9], ref, alt.split(','));
+      if (row.length < 10 || (typeof row[0] === 'string' && row[0].startsWith('#'))) {
+        return // skip these rows
+      }
+      const snp = row[2]
+      if (snp in mpsData) {
+        const ref = row[3]; // Reference allele
+        const alt = row[4]; // Alternate allele(s)
+        const genotype = parseVCFGenotype(row[9], ref, alt.split(','));
 
-      foundSnps.push({
-        rsid: snp,
-        chromosome: row[0],
-        position: row[1],
-        genotype: genotype,
-        phenotype: mpsData[snp].phenotype,
-        pathogenic: mpsData[snp].pathogenic,
-        gene: nullOrEmptyString(mpsData[snp].gene)
-      })
-    }
-  })
+        foundSnps.push({
+          rsid: snp,
+          chromosome: row[0],
+          position: row[1],
+          genotype: genotype,
+          phenotype: mpsData[snp].phenotype,
+          pathogenic: mpsData[snp].pathogenic,
+          gene: nullOrEmptyString(mpsData[snp].gene)
+        })
+      }
+    })
   return foundSnps
 }
 
