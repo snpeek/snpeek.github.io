@@ -3,7 +3,8 @@
 ## Context
 
 At the time of writing, SNPeek uses bare javascript to manipulate the DOM to create and update the UI.
-While this is fine while the app is in its simplest stage, the project may benefit from a UI framework/platform to abstract away DOM concerns, and allow contributors to make faster progress with the UI.
+
+While this is fine during SNPeek's early stages, the project may benefit from a UI and state management framework/platform to abstract away DOM concerns, and allow contributors to make faster progress with the UI.
 
 There are several frameworks that fulfill this function: React, Vue, and Svelte.
 
@@ -15,11 +16,11 @@ Vercel also [purchased](https://vercel.com/blog/vercel-welcomes-rich-harris-crea
 
 ## Decision
 
-We will use Svelte moving forward, 
+We will use Svelte moving forward.
 
 ## Status
 
-Draft
+Accepted
 
 ## Consequences
 
