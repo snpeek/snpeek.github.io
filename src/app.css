@@ -58,3 +58,12 @@
     @apply bg-background text-foreground;
   }
 }
+
+#gene-file {
+  @apply p-2 border border-gray-300 rounded;
+}
+
+#gene-file:hover {
+  cursor: pointer;
+  @apply bg-gray-100;
+}
