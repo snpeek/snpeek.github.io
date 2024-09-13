@@ -28,7 +28,7 @@ interface Variant {
 
 (window as any).main = main
 
-export function main (): void {
+export function main(): void {
   const elements = getDOMElements()
 
   elements.analyzeBtn.addEventListener('click', () => {
@@ -47,7 +47,7 @@ export function main (): void {
   })
 }
 
-async function fetchMpsData (): Promise<MpsData | null> {
+async function fetchMpsData(): Promise<MpsData | null> {
   try {
     const response = await fetch('./mps/mps-data.json') // TODO this should be passed in
     const mpsData: MpsData = await response.json()
@@ -64,7 +64,7 @@ async function fetchMpsData (): Promise<MpsData | null> {
   }
 }
 
-function getDOMElements (): Elements {
+function getDOMElements(): Elements {
   const elements: Elements = {
     fileInput: document.getElementById('txt-file') as HTMLInputElement,
     analyzeBtn: document.getElementById('analyze-btn') as HTMLButtonElement,
@@ -82,7 +82,7 @@ function getDOMElements (): Elements {
   return elements
 }
 
-function validateDOMElements (elements: Elements): boolean {
+function validateDOMElements(elements: Elements): boolean {
   for (const key in elements) {
     if (elements[key as keyof Elements] === null) {
       console.error(`DOM element ${key} not found.`)
@@ -99,7 +99,7 @@ function validateDOMElements (elements: Elements): boolean {
   return true
 }
 
-function processFile (elements: Elements, mpsData: MpsData): void {
+function processFile(elements: Elements, mpsData: MpsData): void {
   progressBarShow(elements)
 
   const file = elements.fileInput?.files?.[0]
@@ -121,7 +121,7 @@ function processFile (elements: Elements, mpsData: MpsData): void {
   }
 }
 
-function parseFile (file: File, elements: Elements, mpsData: MpsData): void {
+function parseFile(file: File, elements: Elements, mpsData: MpsData): void {
   Papa.parse(file, {
     preview: 1, // read just the first line
     complete: function (results) {
@@ -155,7 +155,7 @@ function parseFile (file: File, elements: Elements, mpsData: MpsData): void {
   )
 }
 
-function parseFileStream (
+function parseFileStream(
   file: File,
   elements: Elements,
   mpsData: MpsData,
@@ -203,43 +203,44 @@ function parseFileStream (
   })
 }
 
-function parseVCFData (data: string[][], mpsData: MpsData): Variant[] {
+function parseVCFData(data: string[][], mpsData: MpsData): Variant[] {
   const foundSnps: Variant[] = []
   data.forEach(row => {
     if (row.length < 10 || (typeof row[0] === 'string' && row[0].startsWith('#'))) {
-      return // skip these rows
-    }
-    const snp = row[2]
-    if (snp in mpsData) {
-      const ref = row[3]; // Reference allele
-      const alt = row[4]; // Alternate allele(s)
-      const genotype = parseVCFGenotype(row[9], ref, alt.split(','));
-      
-      foundSnps.push({
-        rsid: snp,
-        chromosome: row[0],
-        position: row[1],
-        genotype: genotype,
-        phenotype: mpsData[snp].phenotype,
-        pathogenic: mpsData[snp].pathogenic,
-        gene: nullOrEmptyString(mpsData[snp].gene)
-      })
-    }
-  })
+      if (row.length < 10 || (typeof row[0] === 'string' && row[0].startsWith('#'))) {
+        return // skip these rows
+      }
+      const snp = row[2]
+      if (snp in mpsData) {
+        const ref = row[3]; // Reference allele
+        const alt = row[4]; // Alternate allele(s)
+        const genotype = parseVCFGenotype(row[9], ref, alt.split(','));
+
+        foundSnps.push({
+          rsid: snp,
+          chromosome: row[0],
+          position: row[1],
+          genotype: genotype,
+          phenotype: mpsData[snp].phenotype,
+          pathogenic: mpsData[snp].pathogenic,
+          gene: nullOrEmptyString(mpsData[snp].gene)
+        })
+      }
+    })
   return foundSnps
 }
 
 function parseVCFGenotype(genotypeField: string, ref: string, alts: string[]): string {
   const [genotype] = genotypeField.split(':'); // Extract genotype from the field
   const alleles = genotype.split(/[|/]/); // Split by '|' or '/'
-  
+
   return alleles.map(allele => {
     const index = parseInt(allele, 10);
     return index === 0 ? ref : alts[index - 1] || '.';
   }).join('');
 }
 
-function parseAncestryData (data: string[][], mpsData: MpsData): Variant[] {
+function parseAncestryData(data: string[][], mpsData: MpsData): Variant[] {
   const foundSnps: Variant[] = []
   data.forEach(row => {
     row = row[0]?.split('\t') ?? [] // HACK: This is a workaround for Papa misreading AncestryDNA files.
@@ -262,7 +263,7 @@ function parseAncestryData (data: string[][], mpsData: MpsData): Variant[] {
   return foundSnps
 }
 
-function parse23AndMeData (data: string[][], mpsData: MpsData): Variant[] {
+function parse23AndMeData(data: string[][], mpsData: MpsData): Variant[] {
   const foundSnps: Variant[] = []
   data.forEach(row => {
     // console.log(`row=${row[0]}`)
@@ -285,15 +286,15 @@ function parse23AndMeData (data: string[][], mpsData: MpsData): Variant[] {
   return foundSnps
 }
 
-function getFileExtension (filename: string): string {
+function getFileExtension(filename: string): string {
   return filename.substring(filename.lastIndexOf('.') + 1)
 }
 
-function nullOrEmptyString (str: string | null): string {
+function nullOrEmptyString(str: string | null): string {
   return str !== null ? str : ''
 }
 
-function IsNucleotide (genotype: string): boolean {
+function IsNucleotide(genotype: string): boolean {
   const alleles = genotype.split('')
   for (const allele of alleles) {
     if (!['A', 'C', 'T', 'G'].includes(allele)) {
@@ -303,7 +304,7 @@ function IsNucleotide (genotype: string): boolean {
   return true
 }
 
-function IsIndel (genotype: string): boolean {
+function IsIndel(genotype: string): boolean {
   const alleles = genotype.split('')
   for (const allele of alleles) {
     if (!['I', 'D'].includes(allele)) {
@@ -313,7 +314,7 @@ function IsIndel (genotype: string): boolean {
   return true
 }
 
-function flipOrientation (genotype: string): string {
+function flipOrientation(genotype: string): string {
   if (genotype.length !== 2 || !IsNucleotide(genotype)) {
     if (!IsIndel(genotype)) console.warn(`Found weird genotype=${genotype}`)
     return genotype // skip weird genotypes
@@ -338,11 +339,11 @@ function flipOrientation (genotype: string): string {
     .join('')
 }
 
-function flipOrder (genotype: string): string {
+function flipOrder(genotype: string): string {
   return genotype[1] + genotype[0]
 }
 
-function isMatch (genotype: string, pathogenic: string[]): boolean {
+function isMatch(genotype: string, pathogenic: string[]): boolean {
   const flipped = flipOrientation(genotype)
   return (
     pathogenic.includes(genotype) ||
@@ -352,7 +353,7 @@ function isMatch (genotype: string, pathogenic: string[]): boolean {
   )
 }
 
-function prioritySort (variants: Variant[]): Record<string, Variant[]> {
+function prioritySort(variants: Variant[]): Record<string, Variant[]> {
   const priorityOrder = ['Estrogen Signaling', 'Congenital Adrenal Hyperplasia', 'Addison\'s Disease', 'Folate Cycle']
 
   // Group the found SNPs by phenotype
@@ -376,7 +377,7 @@ function prioritySort (variants: Variant[]): Record<string, Variant[]> {
   return sortedGroups
 }
 
-function renderTable (elements: Elements, foundSnps: Variant[], mpsData: MpsData): void {
+function renderTable(elements: Elements, foundSnps: Variant[], mpsData: MpsData): void {
   if (foundSnps.length === 0) {
     elements.resultsDiv.textContent = 'No matching SNPs found'
     return // Stop the function if no SNPs were found
@@ -428,7 +429,7 @@ function renderTable (elements: Elements, foundSnps: Variant[], mpsData: MpsData
         const content = escapeHtml(String(snp[column]))
         td.innerHTML =
           column === 'rsid' ? linkToSnpedia(content) :
-          column === 'gene' ? linkToNCBI(content) : content
+            column === 'gene' ? linkToNCBI(content) : content
         if (isMatch(snp.genotype, mpsData[snp.rsid].pathogenic)) {
           td.setAttribute('style', 'color:#f00;border-color:black;font-weight:bold')
         } else {
@@ -443,7 +444,7 @@ function renderTable (elements: Elements, foundSnps: Variant[], mpsData: MpsData
   }
 }
 
-function renderReportDownload (elements: Elements, foundSnps: Variant[]): void {
+function renderReportDownload(elements: Elements, foundSnps: Variant[]): void {
   const button = document.createElement('button')
   button.textContent = 'Save Report'
   button.onclick = () => { downloadTSV(foundSnps) }
@@ -453,7 +454,7 @@ function renderReportDownload (elements: Elements, foundSnps: Variant[]): void {
   elements.saveReportBtn.appendChild(button)
 }
 
-function groupBy (arr: Variant[], key: keyof Variant): Record<string, Variant[]> {
+function groupBy(arr: Variant[], key: keyof Variant): Record<string, Variant[]> {
   return arr.reduce((rv: Record<string, Variant[]>, x: Variant) => {
     const keyValue = String(x[key])
     if (!(keyValue in rv)) {
@@ -464,13 +465,13 @@ function groupBy (arr: Variant[], key: keyof Variant): Record<string, Variant[]>
   }, {})
 }
 
-function convertToTSV (arrayOfObjects: any[]): string {
+function convertToTSV(arrayOfObjects: any[]): string {
   const keys = Object.keys(arrayOfObjects[0])
   const values = arrayOfObjects.map(obj => keys.map(key => obj[key]).join('\t'))
   return [keys.join('\t'), ...values].join('\n')
 }
 
-function downloadTSV (obj: any[]): void {
+function downloadTSV(obj: any[]): void {
   // Convert the object to TSV
   const tsv = convertToTSV(obj)
 
@@ -493,7 +494,7 @@ function downloadTSV (obj: any[]): void {
   document.body.removeChild(a)
 }
 
-function escapeHtml (unsafe: string): string {
+function escapeHtml(unsafe: string): string {
   return unsafe
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
@@ -502,7 +503,7 @@ function escapeHtml (unsafe: string): string {
     .replace(/'/g, '&#039;')
 }
 
-function linkToSnpedia (snp: string): string {
+function linkToSnpedia(snp: string): string {
   return '<a href="https://www.snpedia.com/index.php/' + snp + '">' + snp + '</a>'
 }
 
@@ -510,16 +511,16 @@ function linkToNCBI(snp: string): string {
   return '<a href="https://www.ncbi.nlm.nih.gov/gene/?term=' + snp + '">' + snp + '</a>'
 }
 
-function progressBarUpdate (elements: Elements, value: string): void {
+function progressBarUpdate(elements: Elements, value: string): void {
   elements.progressBar.style.width = value
   // elements.progressBar.innerHTML = value;
 }
 
-function progressBarHide (elements: Elements): void {
+function progressBarHide(elements: Elements): void {
   elements.progressContainer.style.display = 'none'
 }
 
-function progressBarShow (elements: Elements): void {
+function progressBarShow(elements: Elements): void {
   elements.progressContainer.style.display = 'block'
   elements.progressBar.style.width = '0%'
 }

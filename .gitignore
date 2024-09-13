@@ -144,3 +144,9 @@ dist
 # End of https://www.toptal.com/developers/gitignore/api/node
 
 **/testdata_*
+
+# Ignore Vite Timestamps
+vite.config.ts.timestamp*
+
+# Ignore svelte build output
+build

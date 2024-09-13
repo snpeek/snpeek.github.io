@@ -1,13 +1,15 @@
 {
   "name": "snpeek",
   "version": "1.0.0",
-  "main": "public/app.js",
+  "private": true,
   "scripts": {
-    "test": "mocha",
-    "build": "webpack --mode production --progress",
-    "dev": "webpack --mode development --progress",
-    "watch": "webpack --watch --mode development --progress",
-    "start": "http-server public -a localhost -p 8000",
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "test": "vitest",
+    "lint": "eslint .",
     "gh-deploy-init": "git push origin && git subtree push --prefix public origin gh-pages",
     "gh-deploy": "git push origin :gh-pages && git subtree push --prefix public origin gh-pages",
     "generate-data": "node mock_scripts/make_23andme.js"
@@ -16,26 +18,34 @@
   "author": "",
   "license": "MIT",
   "description": "",
-  "devDependencies": {
-    "@types/papaparse": "^5.3.7",
-    "@typescript-eslint/eslint-plugin": "^5.59.7",
-    "@typescript-eslint/parser": "^5.59.7",
-    "chai": "^4.3.7",
-    "eslint": "^8.41.0",
-    "eslint-config-standard-with-typescript": "^34.0.1",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-n": "^15.7.0",
-    "eslint-plugin-promise": "^6.1.1",
-    "expose-loader": "^4.1.0",
-    "gh-pages": "^5.0.0",
-    "http-server": "^14.1.1",
-    "mocha": "^10.2.0",
-    "ts-loader": "^9.4.2",
-    "typescript": "^5.0.4",
-    "webpack": "^5.83.1",
-    "webpack-cli": "^5.1.1"
-  },
   "dependencies": {
-    "papaparse": "^5.4.1"
-  }
+    "bits-ui": "^0.21.13",
+    "clsx": "^2.1.1",
+    "lucide-svelte": "^0.435.0",
+    "papaparse": "^5.4.1",
+    "tailwind-merge": "^2.5.2",
+    "tailwind-variants": "^0.2.1"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-auto": "^3.0.0",
+    "@sveltejs/adapter-static": "^3.0.4",
+    "@sveltejs/kit": "^2.0.0",
+    "@sveltejs/vite-plugin-svelte": "^3.0.0",
+    "@tailwindcss/typography": "^0.5.14",
+    "@types/eslint": "^9.6.0",
+    "@types/papaparse": "^5.3.7",
+    "autoprefixer": "^10.4.20",
+    "eslint-plugin-svelte": "^2.36.0",
+    "gh-pages": "^5.0.0",
+    "globals": "^15.0.0",
+    "svelte": "^4.2.7",
+    "svelte-check": "^3.6.0",
+    "svelte-headless-table": "^0.18.2",
+    "tailwindcss": "^3.4.9",
+    "typescript": "^5.0.4",
+    "typescript-eslint": "^8.0.0",
+    "vite": "^5.0.3",
+    "vitest": "^2.0.0"
+  },
+  "type": "module"
 }
