@@ -121,18 +121,20 @@ export class GeneDataParser {
       }
       const snp = row[0]
       if (snp in mpsData) {
-        let foundSnp = new GeneVariant({
+        const onForward = mpsData[snp].onForwardStrand ?? true;
+        let genotype = Genotype.fromString(row[3]);
+        if (!onForward) {
+          genotype = genotype?.fromOppositeStrand() ?? null;
+        }
+        const foundSnp = new GeneVariant({
           gene: mpsData[snp].gene,
           rsid: snp,
           chromosome: row[1],
           position: row[2],
-          genotype: Genotype.fromString(row[3]),
+          genotype: genotype,
           phenotype: mpsData[snp].phenotype,
           pathogenic: mpsData[snp].pathogenic.map(Genotype.fromString).filter(item => item !== null),
         });
-        if (mpsData[snp].onForwardStrand == false) {
-          foundSnp.genotype = Genotype.fromOppositeStrandTo(foundSnp.genotype);
-        }
         foundSnps.push(foundSnp);
       }
     })
@@ -148,18 +150,20 @@ export class GeneDataParser {
       }
       const snp = row[0]
       if (snp in mpsData) {
-        let foundSnp = new GeneVariant({
+        const onForward = mpsData[snp].onForwardStrand ?? true;
+        let genotype = Genotype.fromString(row[3] + row[4]);
+        if (!onForward) {
+          genotype = genotype?.fromOppositeStrand() ?? null;
+        }
+        const foundSnp = new GeneVariant({
           gene: mpsData[snp].gene,
           rsid: snp,
           chromosome: row[1],
           position: row[2],
-          genotype: Genotype.fromString(row[3] + row[4]),
+          genotype: genotype,
           phenotype: mpsData[snp].phenotype,
           pathogenic: mpsData[snp].pathogenic.map(Genotype.fromString).filter(item => item !== null),
         });
-        if (mpsData[snp].onForwardStrand == false) {
-          foundSnp.genotype = Genotype.fromOppositeStrandTo(foundSnp.genotype);
-        }
         foundSnps.push(foundSnp);
       }
     })
