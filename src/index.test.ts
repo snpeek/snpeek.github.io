@@ -6,7 +6,7 @@ describe('JSON structure test', () => {
 		const data = fs.readFileSync('./static/mps/mps-data.json', 'utf8');
 		const json = JSON.parse(data);
 
-		const geneVariantFields = ['phenotype', 'pathogenic', 'gene', 'notes'];
+		const geneVariantFields = ['phenotype', 'pathogenic', 'onForwardStrand', 'gene', 'notes'];
 
 		Object.values(json).forEach((geneVariant: any) => {
 			Object.keys(geneVariant).forEach(function (geneVariantField) {
