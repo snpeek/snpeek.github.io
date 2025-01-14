@@ -35,17 +35,18 @@ export class Genotype {
   }
 
   /**
-   * Constructs a paired Genotype from an existing one, as if it were read from the opposite strand.
+   * Returns a new genotype as if this genotype were read from the opposite strand.
    * This is needed when parsing AncestryDNA and 23andMe files, which report all SNPs in plus/forward
    * orientation, whereas SNPedia reports individual SNPs as either plus/forward or minus/reverse, 
    * depending on the reference standard. For details, see: https://www.snpedia.com/index.php/Orientation
    */
-  public static fromOppositeStrandTo(original: Genotype | null) : Genotype | null {
+  fromOppositeStrand(): Genotype | null {
+    const original = this;
     if (original === null) {
       return null;
     }
     else {
-      let pairedAlleles : Nucleotide[] = [];
+      let pairedAlleles: Nucleotide[] = [];
       original.alleles.forEach(n => {
         switch (n) {
           case Nucleotide.A: {
