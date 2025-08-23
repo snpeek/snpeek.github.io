@@ -395,6 +395,16 @@
         "onForwardStrand": false,
         "pathogenic": ["GG"],
         "gene": "CYP3A5,ZSCAN25"
+    },
+    "rs4570625": {
+        "phenotype": "Estrogen Metabolism",
+        "pathogenic": ["GG", "GT"],
+        "gene": "TPH2"
+    },
+    "rs120074176": {
+        "phenotype": "Estrogen Metabolism",
+        "pathogenic": ["CT"],
+        "gene": "TPH2"
     }
 }
 
