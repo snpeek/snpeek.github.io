@@ -1,60 +1,4 @@
 {
-    "rs2476601": {
-        "phenotype": "Addison's Disease",
-        "pathogenic": ["AA", "AG"],
-        "onForwardStrand": true,
-        "gene": "AP4B1-AS1,PTPN22"
-    },
-    "rs11571303": {
-        "phenotype": "Addison's Disease",
-        "pathogenic": [],
-        "gene": null
-    },
-    "rs1464510": {
-        "phenotype": "Addison's Disease",
-        "pathogenic": ["AA"],
-        "onForwardStrand": false,
-        "gene": "LPP"
-    },
-    "rs3998178": {
-        "phenotype": "Addison's Disease",
-        "pathogenic": [],
-        "gene": "HLA-DQA1,HLA-DQB1"
-    },
-    "rs10806425": {
-        "phenotype": "Addison's Disease",
-        "pathogenic": ["AA"],
-        "onForwardStrand": true,
-        "gene": "BACH2"
-    },
-    "rs7137828": {
-        "phenotype": "Addison's Disease",
-        "pathogenic": [],
-        "onForwardStrand": true,
-        "gene": "ATXN2"
-    },
-    "rs8112143": {
-        "phenotype": "Addison's Disease",
-        "pathogenic": [],
-        "gene": null
-    },
-    "rs11203203": {
-        "phenotype": "Addison's Disease",
-        "pathogenic": ["AA"],
-        "onForwardStrand": true,
-        "gene": "UBASH3A"
-    },
-    "rs74203920": {
-        "phenotype": "Addison's Disease",
-        "pathogenic": [],
-        "gene": null
-    },
-    "rs2075876": {
-        "phenotype": "Addison's Disease",
-        "pathogenic": ["AA"],
-        "onForwardStrand": true,
-        "gene": "AIRE"
-    },
     "rs1801133": {
         "phenotype": "Folate Cycle",
         "pathogenic": ["TT", "CT"],
@@ -447,5 +391,46 @@
         "pathogenic": ["AA"],
         "onForwardStrand": true,
         "gene": "CYP11B1"
+    },
+    "rs1056836": {
+        "phenotype": "Estrogen Metabolism",
+        "pathogenic": ["CG"],
+        "gene": "CYP1B1"
+    },
+    "rs28936700": {
+        "phenotype": "Estrogen Metabolism",
+        "pathogenic": ["AG", "AA"],
+        "gene": "CYP1B1"
+    },
+    "rs28936701": {
+        "phenotype": "Estrogen Metabolism",
+        "pathogenic": ["CT", "GG"],
+        "gene": "CYP1B1"
+    },
+    "rs9282671": {
+        "phenotype": "Estrogen Metabolism",
+        "pathogenic": ["AA", "AT"],
+        "gene": "CYP1B1"
+    },
+    "rs12720461": {
+        "phenotype": "Estrogen Metabolism",
+        "pathogenic": ["CT", "TT"],
+        "gene": "CYP1A2"
+    },
+    "rs28399424": {
+        "phenotype": "Estrogen Metabolism",
+        "pathogenic": ["CT", "TT"],
+        "gene": "CYP1A2"
+    },
+    "rs72547513": {
+        "phenotype": "Estrogen Metabolism",
+        "pathogenic": ["AC"],
+        "gene": "CYP1A2"
+    },
+    "rs762551": {
+        "phenotype": "Estrogen Metabolism",
+        "pathogenic": ["AA", "AC"],
+        "gene": "CYP1A2"
     }
 }
+
