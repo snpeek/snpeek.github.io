@@ -17,10 +17,11 @@
   let parseProgress: number = 0;
   let phenotypeSections: IPhenotypeSection[];
   const phenotypePriority: string[] = [
-    "Estrogen Signaling",
     "Congenital Adrenal Hyperplasia",
-    "Addison's Disease",
-    "Folate Cycle",
+    "Estrogen Production - Aromatase",
+    "Estrogen Metabolism",
+    "COMT Activity",
+    "Estrogen Receptor Alpha"
   ];
 
   function onFileInput(event: Event): void {
