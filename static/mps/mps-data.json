@@ -73,66 +73,6 @@
         "onForwardStrand": true,
         "gene": "CYP19A1 - Aromatase"
     },
-    "rs17036314": {
-        "phenotype": "Insulin Resistance",
-        "pathogenic": ["CC", "CG"],
-        "onForwardStrand": true,
-        "gene": "PPARG"
-    },
-    "rs5219": {
-        "phenotype": "Insulin Resistance",
-        "pathogenic": ["TT", "CT"],
-        "onForwardStrand": true,
-        "gene": "KCNJ11"
-    },
-    "rs2943634": {
-        "phenotype": "Insulin Resistance",
-        "pathogenic": ["CC"],
-        "onForwardStrand": true,
-        "gene": "(pseudogene)"
-    },
-    "rs1800796": {
-        "phenotype": "Inflammation Marker",
-        "pathogenic": ["CC", "CG"],
-        "onForwardStrand": true,
-        "gene": "IL6,LOC541472"
-    },
-    "rs3761847": {
-        "phenotype": "Inflammation Marker",
-        "pathogenic": ["GG", "AG"],
-        "onForwardStrand": true,
-        "gene": "TRAF1"
-    },
-    "rs429358": {
-        "phenotype": "LDL Cholesterol",
-        "pathogenic": ["CC", "CT"],
-        "onForwardStrand": true,
-        "gene": "APOE"
-    },
-    "rs7412": {
-        "phenotype": "LDL Cholesterol",
-        "pathogenic": ["TT"],
-        "onForwardStrand": true,
-        "gene": "APOE"
-    },
-    "rs75932628": {
-        "onForwardStrand": true,
-        "phenotype": "LDL Cholesterol",
-        "pathogenic": ["TT", "CT"],
-        "gene": "TREM2"
-    },
-    "rs4420638": {
-        "onForwardStrand": true,
-        "phenotype": "LDL Cholesterol",
-        "pathogenic": ["GG", "AG"],
-        "gene": "APOC1"
-    },
-    "rs1800795": {
-        "onForwardStrand": true,
-        "phenotype": "LDL Cholesterol",
-        "pathogenic": ["GG"],
-        "gene": "IL6,LOC541472"
-    },
     "rs165599": {
         "onForwardStrand": true,
         "phenotype": "Estrogen Signaling",
