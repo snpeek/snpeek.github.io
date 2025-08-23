@@ -91,12 +91,6 @@
         "pathogenic": ["GG"],
         "gene": "CYP3A5,ZSCAN25"
     },
-    "rs762551": {
-        "phenotype": "Estrogen Signaling",
-        "pathogenic": ["AA"],
-        "onForwardStrand": true,
-        "gene": "CYP1A2"
-    },
     "rs743572": {
         "phenotype": "Estrogen Signaling",
         "pathogenic": ["GG"],
