@@ -396,6 +396,11 @@
         "pathogenic": ["GG"],
         "gene": "CYP3A5,ZSCAN25"
     },
+    "rs3064744": {
+        "phenotype": "Estrogen Metabolism",
+        "pathogenic": ["TA;TA"],
+        "gene": "UGT1A*28"
+    },
     "rs4570625": {
         "phenotype": "Estrogen Metabolism",
         "pathogenic": ["GG", "GT"],
