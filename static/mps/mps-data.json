@@ -1,162 +1,166 @@
 {
-    "rs1801133": {
-        "phenotype": "Folate Cycle",
-        "pathogenic": ["TT", "CT"],
-        "onForwardStrand": false,
-        "gene": "MTHFR"
-    },
-    "rs1801131": {
-        "phenotype": "Folate Cycle",
-        "pathogenic": ["CC", "AC"],
-        "onForwardStrand": false,
-        "gene": "MTHFR"
-    },
-    "rs2236225": {
-        "phenotype": "Folate Cycle",
-        "pathogenic": ["TT", "CT"],
-        "onForwardStrand": false,
-        "gene": "MTHFD1"
-    },
-    "rs1950902": {
-        "phenotype": "Folate Cycle",
-        "pathogenic": ["CC"],
-        "onForwardStrand": false,
-        "gene": "MTHFD1"
-    },
-    "rs6922269": {
-        "phenotype": "Folate Cycle",
-        "pathogenic": ["AA", "AG"],
-        "onForwardStrand": true,
-        "gene": "MTHFD1L"
-    },
-    "rs1802059": {
-        "phenotype": "Folate Cycle",
-        "pathogenic": ["AA"],
-        "onForwardStrand": true,
-        "gene": "MTRR"
-    },
-    "rs2470152": {
-        "phenotype": "Estrogen Signaling",
-        "pathogenic": ["CC"],
-        "onForwardStrand": false,
-        "gene": "CYP19A1 - Aromatase"
-    },
-    "rs4646": {
-        "phenotype": "Estrogen Signaling",
-        "pathogenic": ["CC"],
-        "onForwardStrand": true,
-        "gene": "CYP19A1 - Aromatase"
-    },
-    "rs2470144": {
-        "phenotype": "Estrogen Signaling",
-        "pathogenic": ["GG"],
-        "onForwardStrand": false,
-        "gene": "CYP19A1 - Aromatase",
-        "notes": "Aromatase #3 (Minor)"
-    },
-    "rs10046": {
-        "phenotype": "Estrogen Signaling",
-        "pathogenic": ["TT"],
-        "onForwardStrand": false,
-        "gene": "CYP19A1 - Aromatase"
-    },
-    "rs2414096": {
-        "phenotype": "Estrogen Signaling",
-        "pathogenic": ["GG"],
-        "onForwardStrand": true,
-        "gene": "CYP19A1 - Aromatase",
-        "notes": "PCOS"
-    },
-    "rs78310315": {
-        "phenotype": "Estrogen Signaling",
-        "pathogenic": ["CT"],
-        "onForwardStrand": true,
-        "gene": "CYP19A1 - Aromatase"
-    },
     "rs165599": {
         "onForwardStrand": true,
-        "phenotype": "Estrogen Signaling",
+        "phenotype": "COMT Activity",
         "pathogenic": ["GG"],
         "gene": "COMT"
     },
     "rs165722": {
         "onForwardStrand": true,
-        "phenotype": "Estrogen Signaling",
+        "phenotype": "COMT Activity",
         "pathogenic": ["CC"],
         "gene": "COMT"
     },
-    "rs776746": {
-        "onForwardStrand": false,
-        "phenotype": "Estrogen Signaling",
-        "pathogenic": ["GG"],
-        "gene": "CYP3A5,ZSCAN25"
-    },
-    "rs743572": {
-        "phenotype": "Estrogen Signaling",
-        "pathogenic": ["GG"],
-        "onForwardStrand": true,
-        "gene": "CYP17A1"
-    },
     "rs4680": {
-        "phenotype": "Estrogen Signaling",
+        "phenotype": "COMT Activity",
         "pathogenic": [],
         "onForwardStrand": true,
         "gene": "COMT"
     },
     "rs4633": {
-        "phenotype": "Estrogen Signaling",
+        "phenotype": "COMT Activity",
         "pathogenic": ["TT", "CT"],
         "onForwardStrand": true,
         "gene": "COMT,MIR4761"
     },
-    "rs104893956": {
-        "phenotype": "Estrogen Signaling",
-        "pathogenic": ["CT"],
-        "onForwardStrand": true,
-        "gene": "ESR1"
-    },
-    "rs121913044": {
-        "phenotype": "Estrogen Signaling",
-        "pathogenic": ["AT"],
-        "onForwardStrand": true,
-        "gene": "ESR1"
-    },
-    "rs397509428": {
-        "phenotype": "Estrogen Signaling",
-        "pathogenic": ["GT"],
-        "onForwardStrand": true,
-        "gene": "ESR1"
-    },
-    "rs9340799": {
-        "phenotype": "Estrogen Signaling",
-        "pathogenic": ["GG"],
-        "onForwardStrand": true,
-        "gene": "ESR1"
-    },
-    "rs2881766": {
-        "phenotype": "Estrogen Signaling",
-        "pathogenic": ["GT", "TT"],
-        "onForwardStrand": true,
-        "gene": "ESR1"
-    },
-    "rs2295190": {
-        "phenotype": "Estrogen Signaling",
-        "pathogenic": ["GT", "TT"],
-        "onForwardStrand": true,
-        "gene": "ESR1"
-    },
     "rs165631": {
-        "phenotype": "Estrogen Signaling",
+        "phenotype": "COMT Activity",
         "pathogenic": [],
         "onForwardStrand": true,
         "gene": "COMT",
         "notes": "Perhaps slightly lower risk for breast cancer in BRCA1/2 mutation carriers"
     },
-    "rs398124239": {
-        "phenotype": "Hypermobility RS2",
-        "pathogenic": ["DD"],
+    "rs1801133": {
+        "phenotype": "COMT Activity",
+        "pathogenic": ["TT", "CT"],
+        "onForwardStrand": false,
+        "gene": "MTHFR"
+    },
+    "rs1801131": {
+        "phenotype": "COMT Activity",
+        "pathogenic": ["CC", "AC"],
+        "onForwardStrand": false,
+        "gene": "MTHFR"
+    },
+    "rs2236225": {
+        "phenotype": "COMT Activity",
+        "pathogenic": ["TT", "CT"],
+        "onForwardStrand": false,
+        "gene": "MTHFD1"
+    },
+    "rs1950902": {
+        "phenotype": "COMT Activity",
+        "pathogenic": ["CC"],
+        "onForwardStrand": false,
+        "gene": "MTHFD1"
+    },
+    "rs6922269": {
+        "phenotype": "COMT Activity",
+        "pathogenic": ["AA", "AG"],
         "onForwardStrand": true,
-        "gene": "RP2"
+        "gene": "MTHFD1L"
+    },
+    "rs1802059": {
+        "phenotype": "COMT Activity",
+        "pathogenic": ["AA"],
+        "onForwardStrand": true,
+        "gene": "MTRR"
+    },
+    "rs651852": {
+        "phenotype": "COMT Activity",
+        "pathogenic": ["AG"],
+        "gene": "BHMT"
+    },
+    "rs1858830": {
+        "phenotype": "COMT Activity",
+        "pathogenic": ["CC", "CG"],
+        "gene": "MET"
+    },
+    "rs2237717": {
+        "phenotype": "COMT Activity",
+        "pathogenic": ["TT", "CT"],
+        "gene": "MET"
+    },
+    "rs2470152": {
+        "phenotype": "Estrogen Production - Aromatase",
+        "pathogenic": ["CC"],
+        "onForwardStrand": false,
+        "gene": "CYP19A1"
+    },
+    "rs4646": {
+        "phenotype": "Estrogen Production - Aromatase",
+        "pathogenic": ["CC"],
+        "onForwardStrand": true,
+        "gene": "CYP19A1"
+    },
+    "rs2470144": {
+        "phenotype": "Estrogen Production - Aromatase",
+        "pathogenic": ["GG"],
+        "onForwardStrand": false,
+        "gene": "CYP19A1",
+        "notes": "Aromatase #3 (Minor)"
+    },
+    "rs10046": {
+        "phenotype": "Estrogen Production - Aromatase",
+        "pathogenic": ["TT"],
+        "onForwardStrand": false,
+        "gene": "CYP19A1"
+    },
+    "rs2414096": {
+        "phenotype": "Estrogen Production - Aromatase",
+        "pathogenic": ["GG"],
+        "onForwardStrand": true,
+        "gene": "CYP19A1",
+        "notes": "PCOS"
+    },
+    "rs78310315": {
+        "phenotype": "Estrogen Production - Aromatase",
+        "pathogenic": ["CT"],
+        "onForwardStrand": true,
+        "gene": "CYP19A1"
+    },
+    "rs104893956": {
+        "phenotype": "Estrogen Receptor Alpha",
+        "pathogenic": ["CT"],
+        "onForwardStrand": true,
+        "gene": "ESR1"
+    },
+    "rs121913044": {
+        "phenotype": "Estrogen Receptor Alpha",
+        "pathogenic": ["AT"],
+        "onForwardStrand": true,
+        "gene": "ESR1"
+    },
+    "rs397509428": {
+        "phenotype": "Estrogen Receptor Alpha",
+        "pathogenic": ["GT"],
+        "onForwardStrand": true,
+        "gene": "ESR1"
+    },
+    "rs9340799": {
+        "phenotype": "Estrogen Receptor Alpha",
+        "pathogenic": ["GG"],
+        "onForwardStrand": true,
+        "gene": "ESR1"
+    },
+    "rs2881766": {
+        "phenotype": "Estrogen Receptor Alpha",
+        "pathogenic": ["GT", "TT"],
+        "onForwardStrand": true,
+        "gene": "ESR1"
+    },
+    "rs2295190": {
+        "phenotype": "Estrogen Receptor Alpha",
+        "pathogenic": ["GT", "TT"],
+        "onForwardStrand": true,
+        "gene": "ESR1"
+    },
+    "rs743572": {
+        "phenotype": "Congenital Adrenal Hyperplasia",
+        "pathogenic": ["GG"],
+        "onForwardStrand": true,
+        "gene": "CYP17A1",
+        "notes": "Fast version"
     },
     "i5005436": {
         "phenotype": "Congenital Adrenal Hyperplasia",
@@ -326,6 +330,26 @@
         "onForwardStrand": true,
         "gene": "CYP11B1"
     },
+    "rs2282679": {
+        "phenotype": "Vitamin D Deficiency",
+        "pathogenic": ["AC", "CC"],
+        "gene": "GC"
+    },
+    "rs12785878": {
+        "phenotype": "Vitamin D Deficiency",
+        "pathogenic": ["GT", "TT"],
+        "gene": "NADSYN1"
+    },
+    "rs10741657": {
+        "phenotype": "Vitamin D Deficiency",
+        "pathogenic": ["GG"],
+        "gene": "CYP2R1 LOC107984314"
+    },
+    "rs1544410": {
+        "phenotype": "Vitamin D Deficiency",
+        "pathogenic": ["AA"],
+        "gene": "VDR"
+    },
     "rs1056836": {
         "phenotype": "Estrogen Metabolism",
         "pathogenic": ["CG"],
@@ -365,6 +389,12 @@
         "phenotype": "Estrogen Metabolism",
         "pathogenic": ["AA", "AC"],
         "gene": "CYP1A2"
+    },
+    "rs776746": {
+        "phenotype": "Estrogen Metabolism",
+        "onForwardStrand": false,
+        "pathogenic": ["GG"],
+        "gene": "CYP3A5,ZSCAN25"
     }
 }
 
