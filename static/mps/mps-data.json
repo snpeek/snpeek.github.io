@@ -410,6 +410,12 @@
         "phenotype": "Estrogen Metabolism",
         "pathogenic": ["CT"],
         "gene": "TPH2"
+    },
+    "rs1048943": {
+        "phenotype": "Estrogen Metabolism",
+        "pathogenic": ["GG", "AG"],
+        "gene": "CYP1A1",
+        "notes": "increases catalytic activity https://www.sciencedirect.com/science/article/abs/pii/S2452014421003642"
     }
 }
 
