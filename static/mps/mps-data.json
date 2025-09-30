@@ -119,6 +119,11 @@
         "onForwardStrand": true,
         "gene": "CYP19A1"
     },
+    "rs2747648": {
+        "phenotype": "Estrogen Receptor Alpha",
+        "pathogenic": ["CT", "CC"],
+        "gene": "ESR1"
+    },
     "rs104893956": {
         "phenotype": "Estrogen Receptor Alpha",
         "pathogenic": ["CT"],
