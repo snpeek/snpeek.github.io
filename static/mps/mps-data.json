@@ -119,6 +119,11 @@
         "onForwardStrand": true,
         "gene": "CYP19A1"
     },
+    "rs2747648": {
+        "phenotype": "Estrogen Receptor Alpha",
+        "pathogenic": ["CT", "CC"],
+        "gene": "ESR1"
+    },
     "rs104893956": {
         "phenotype": "Estrogen Receptor Alpha",
         "pathogenic": ["CT"],
@@ -350,23 +355,58 @@
         "pathogenic": ["AA"],
         "gene": "VDR"
     },
+    "rs104893629": {
+        "phenotype": "Estrogen Metabolism - 1A Dominant",
+        "pathogenic": ["AA", "AT"],
+        "gene": "CYP1B1"
+    },
+    "rs1056827": {
+        "phenotype": "Estrogen Metabolism - 1A Dominant",
+        "pathogenic": ["GT", "TT"],
+        "gene": "CYP1B1"
+    },
     "rs1056836": {
-        "phenotype": "Estrogen Metabolism",
+        "phenotype": "Estrogen Metabolism - 1A Dominant",
         "pathogenic": ["CG"],
         "gene": "CYP1B1"
     },
+    "rs1800440": {
+        "phenotype": "Estrogen Metabolism - 1A Dominant",
+        "pathogenic": ["AG", "GG"],
+        "gene": "CYP1B1"
+    },
+    "rs201824781": {
+        "phenotype": "Estrogen Metabolism - 1A Dominant",
+        "pathogenic": ["AG", "GG"],
+        "gene": "CYP1B1"
+    },
+    "rs2617266": {
+        "phenotype": "Estrogen Metabolism - 1A Dominant",
+        "pathogenic": ["CT", "TT"],
+        "gene": "CYP1B1"
+    },
     "rs28936700": {
-        "phenotype": "Estrogen Metabolism",
+        "phenotype": "Estrogen Metabolism - 1A Dominant",
         "pathogenic": ["AG", "AA"],
         "gene": "CYP1B1"
     },
     "rs28936701": {
-        "phenotype": "Estrogen Metabolism",
+        "phenotype": "Estrogen Metabolism - 1A Dominant",
         "pathogenic": ["CT", "GG"],
         "gene": "CYP1B1"
     },
+    "rs55771538": {
+        "phenotype": "Estrogen Metabolism - 1A Dominant",
+        "pathogenic": ["GT", "TT"],
+        "gene": "CYP1B1"
+    },
+    "rs79204362": {
+        "phenotype": "Estrogen Metabolism - 1A Dominant",
+        "pathogenic": ["CT", "TT"],
+        "gene": "CYP1B1"
+    },
     "rs9282671": {
-        "phenotype": "Estrogen Metabolism",
+        "phenotype": "Estrogen Metabolism - 1A Dominant",
         "pathogenic": ["AA", "AT"],
         "gene": "CYP1B1"
     },
@@ -397,12 +437,12 @@
         "gene": "CYP3A5,ZSCAN25"
     },
     "rs3064744": {
-        "phenotype": "Estrogen Metabolism",
+        "phenotype": "Estrogen Metabolism - 1B Dominant",
         "pathogenic": ["TA;TA"],
         "gene": "UGT1A*28"
     },
     "rs4570625": {
-        "phenotype": "Estrogen Metabolism",
+        "phenotype": "Estrogen Metabolism - 1A Dominant",
         "pathogenic": ["GG", "GT"],
         "gene": "TPH2"
     },

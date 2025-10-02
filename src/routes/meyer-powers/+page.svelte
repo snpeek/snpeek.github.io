@@ -19,7 +19,9 @@
   const phenotypePriority: string[] = [
     "Congenital Adrenal Hyperplasia",
     "Estrogen Production - Aromatase",
+    "Estrogen Metabolism - 1A Dominant",
     "Estrogen Metabolism",
+    "Estrogen Metabolism - 1B Dominant",
     "COMT Activity",
     "Estrogen Receptor Alpha"
   ];
