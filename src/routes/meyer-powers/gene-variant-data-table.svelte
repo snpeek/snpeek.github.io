@@ -23,18 +23,18 @@
 
   const columns = table.createColumns([
     table.column({
-      header: "Pathogenicity",
+      header: "",
       accessor: (geneVariant) => {
         return geneVariant.pathogenicAllele;
       },
       cell: ({ value }) => {
         if (value != null) {
           return createRender(Badge, { variant: "destructive" }).slot(
-            `PATHOGENIC: ${value}`,
+            `INTERESTING: ${value}`,
           );
         } else {
           return createRender(Badge, { variant: "secondary" }).slot(
-            "NOT PATHOGENIC",
+            "NOT INTERESTING",
           );
         }
       },
@@ -84,7 +84,7 @@
           .map((genotype) => genotype.toString())
           .join(", ");
       },
-      header: "Pathogenic",
+      header: "Interesting",
     }),
     table.column({
       accessor: "chromosome",
