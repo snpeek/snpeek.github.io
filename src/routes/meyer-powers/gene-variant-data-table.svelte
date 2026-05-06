@@ -23,19 +23,17 @@
 
   const columns = table.createColumns([
     table.column({
-      header: "",
+      header: "Attention",
       accessor: (geneVariant) => {
         return geneVariant.pathogenicAllele;
       },
       cell: ({ value }) => {
         if (value != null) {
           return createRender(Badge, { variant: "destructive" }).slot(
-            `INTERESTING: ${value}`,
+            `ATTN:${value}`,
           );
         } else {
-          return createRender(Badge, { variant: "secondary" }).slot(
-            "NOT INTERESTING",
-          );
+          return createRender(Badge, { variant: "secondary" }).slot("NO ATTN");
         }
       },
     }),
@@ -50,6 +48,7 @@
           href: `https://www.ncbi.nlm.nih.gov/gene/?term=${value}`,
           target: "_blank",
           variant: "secondary",
+          class: "px-2 md:px-4",
         }).slot(value, createRender(ExternalLink, { class: "h-4 w-4 ms-1" }));
       },
     }),
@@ -61,6 +60,7 @@
           href: `https://www.snpedia.com/index.php/${value}`,
           target: "_blank",
           variant: "secondary",
+          class: "px-2 md:px-4",
         }).slot(value, createRender(ExternalLink, { class: "h-4 w-4 ms-1" }));
       },
     }),

@@ -77,7 +77,7 @@
 </script>
 
 <main class="flex flex-col gap-8 mb-6">
-  <section class="container mx-auto">
+  <section class="container px-4 md:px-8">
     <h1 class="text-4xl font-bold my-6">Meyer-Powers Syndrome</h1>
     <Alert.Root>
       <Info class="h-4 w-4" />
@@ -130,7 +130,7 @@
       </Alert.Description>
     </Alert.Root>
   </section>
-  <section class="container mx-auto">
+  <section class="container px-4 md:px-8">
     <Input
       class="border-primary"
       id="gene-file"
@@ -139,11 +139,11 @@
     />
   </section>
   {#if files.length > 0 && parseProgress < 100}
-    <section class="container mx-auto">
+    <section class="container px-4 md:px-8">
       <Progress value={parseProgress} />
     </section>
   {/if}
-  <section class="container mx-auto">
+  <section class="container px-4 md:px-8">
     {#if phenotypeSections != undefined}
       {#each phenotypeSections as phenotypeSection}
         <GeneVariantDataTable
