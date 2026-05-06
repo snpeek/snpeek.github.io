@@ -226,7 +226,8 @@ function parseVCFData(data: string[][], mpsData: MpsData): Variant[] {
           gene: nullOrEmptyString(mpsData[snp].gene)
         })
       }
-    })
+    }
+  })
   return foundSnps
 }
 
