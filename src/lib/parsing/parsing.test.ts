@@ -2,88 +2,68 @@ import { describe, it, expect } from 'vitest';
 import { IndexMap } from './parsing';
 
 describe('Parsing Test', () => {
+  const valueBattery: Record<string, ('snp' | 'genotype' | 'position' | 'chromosome' | 'nucleotide' | null)> = {
+    'rs4680': 'snp',
+    'ilmnseq_rs46801234125': 'snp',
+    'dupseq-rs4680': 'snp',
+    'GG': 'genotype',
+    'AA': 'genotype',
+    'AT': 'genotype',
+    'G': 'nucleotide',
+    '1': 'chromosome',
+    '01': 'chromosome',
+    '20': 'chromosome',
+    'XX': 'chromosome',
+    'XY': 'chromosome',
+    '4680': 'position',
+    '21556106': 'position',
+    '16954110': 'position',
+    '111': 'position',
+    'FXXBAR': null
+  }
   it('should infer if the data is an SNP', function (done) {
-    expect(IndexMap.isColumnSnp('rs4680')).toBe(true);
-    expect(IndexMap.isColumnSnp('ilmnseq_rs373025151')).toBe(true);
+    for (const cellValue in valueBattery) {
+      if (!Object.hasOwn(valueBattery, cellValue)) continue;
 
-    expect(IndexMap.isColumnSnp('GG')).toBe(false);
-    expect(IndexMap.isColumnSnp('4680')).toBe(false);
-    expect(IndexMap.isColumnSnp('1')).toBe(false);
-    expect(IndexMap.isColumnSnp('01')).toBe(false);
-    expect(IndexMap.isColumnSnp('20')).toBe(false);
-    expect(IndexMap.isColumnSnp('XX')).toBe(false);
-    expect(IndexMap.isColumnSnp('XY')).toBe(false);
-    expect(IndexMap.isColumnSnp('21556106')).toBe(false);
-    expect(IndexMap.isColumnSnp('16954110')).toBe(false);
+      const column = valueBattery[cellValue];
+      expect(IndexMap.isColumnSnp(cellValue), cellValue).toBe(column == 'snp');
+    }
   });
 
   it('should infer if the data is a chromosome', function (done) {
-    expect(IndexMap.isColumnChromosome('1')).toBe(true);
-    expect(IndexMap.isColumnChromosome('01')).toBe(true);
-    expect(IndexMap.isColumnChromosome('20')).toBe(true);
-    expect(IndexMap.isColumnChromosome('XX')).toBe(true);
-    expect(IndexMap.isColumnChromosome('XY')).toBe(true);
+    for (const cellValue in valueBattery) {
+      if (!Object.hasOwn(valueBattery, cellValue)) continue;
 
-    expect(IndexMap.isColumnChromosome('111')).toBe(false);
-    expect(IndexMap.isColumnChromosome('FXXBAR')).toBe(false);
-    expect(IndexMap.isColumnChromosome('GG')).toBe(false);
-    expect(IndexMap.isColumnChromosome('rs4680')).toBe(false);
-    expect(IndexMap.isColumnChromosome('21556106')).toBe(false);
-    expect(IndexMap.isColumnChromosome('16954110')).toBe(false);
+      const column = valueBattery[cellValue];
+      expect(IndexMap.isColumnChromosome(cellValue), cellValue).toBe(column == 'chromosome');
+    }
   });
 
   it('should infer if the data is a genotype', function (done) {
-    expect(IndexMap.isColumnGenotype('GG')).toBe(true);
-    expect(IndexMap.isColumnGenotype('CG')).toBe(true);
-    expect(IndexMap.isColumnGenotype('AT')).toBe(true);
-    expect(IndexMap.isColumnGenotype('TA')).toBe(true);
-    expect(IndexMap.isColumnGenotype('TT')).toBe(true);
+    for (const cellValue in valueBattery) {
+      if (!Object.hasOwn(valueBattery, cellValue)) continue;
 
-    expect(IndexMap.isColumnGenotype('G')).toBe(false);
-    expect(IndexMap.isColumnGenotype('1')).toBe(false);
-    expect(IndexMap.isColumnGenotype('01')).toBe(false);
-    expect(IndexMap.isColumnGenotype('20')).toBe(false);
-    expect(IndexMap.isColumnGenotype('XX')).toBe(false);
-    expect(IndexMap.isColumnGenotype('XY')).toBe(false);
-    expect(IndexMap.isColumnGenotype('111')).toBe(false);
-    expect(IndexMap.isColumnGenotype('rs4680')).toBe(false);
-    expect(IndexMap.isColumnGenotype('21556106')).toBe(false);
-    expect(IndexMap.isColumnGenotype('16954110')).toBe(false);
+      const column = valueBattery[cellValue];
+      expect(IndexMap.isColumnGenotype(cellValue), cellValue).toBe(column == 'genotype');
+    }
   });
 
   it('should infer if the data is a nucleotide', function (done) {
-    expect(IndexMap.isColumnNucleotide('G')).toBe(true);
-    expect(IndexMap.isColumnNucleotide('C')).toBe(true);
-    expect(IndexMap.isColumnNucleotide('A')).toBe(true);
-    expect(IndexMap.isColumnNucleotide('T')).toBe(true);
+    for (const cellValue in valueBattery) {
+      if (!Object.hasOwn(valueBattery, cellValue)) continue;
 
-    expect(IndexMap.isColumnNucleotide('GG')).toBe(false);
-    expect(IndexMap.isColumnNucleotide('1')).toBe(false);
-    expect(IndexMap.isColumnNucleotide('01')).toBe(false);
-    expect(IndexMap.isColumnNucleotide('20')).toBe(false);
-    expect(IndexMap.isColumnNucleotide('XX')).toBe(false);
-    expect(IndexMap.isColumnNucleotide('XY')).toBe(false);
-    expect(IndexMap.isColumnNucleotide('111')).toBe(false);
-    expect(IndexMap.isColumnNucleotide('rs4680')).toBe(false);
-    expect(IndexMap.isColumnNucleotide('21556106')).toBe(false);
-    expect(IndexMap.isColumnNucleotide('16954110')).toBe(false);
+      const column = valueBattery[cellValue];
+      expect(IndexMap.isColumnNucleotide(cellValue), cellValue).toBe(column == 'nucleotide');
+    }
   });
 
   it('should infer if the data is a position', function (done) {
-    expect(IndexMap.isColumnPosition('21556106')).toBe(true);
-    expect(IndexMap.isColumnPosition('16954110')).toBe(true);
-    expect(IndexMap.isColumnPosition('111')).toBe(true);
+    for (const cellValue in valueBattery) {
+      if (!Object.hasOwn(valueBattery, cellValue)) continue;
 
-    expect(IndexMap.isColumnPosition('CG')).toBe(false);
-    expect(IndexMap.isColumnPosition('AT')).toBe(false);
-    expect(IndexMap.isColumnPosition('TA')).toBe(false);
-    expect(IndexMap.isColumnPosition('TT')).toBe(false);
-    expect(IndexMap.isColumnPosition('1')).toBe(false);
-    expect(IndexMap.isColumnPosition('01')).toBe(false);
-    expect(IndexMap.isColumnPosition('20')).toBe(false);
-    expect(IndexMap.isColumnPosition('XX')).toBe(false);
-    expect(IndexMap.isColumnPosition('XY')).toBe(false);
-    expect(IndexMap.isColumnPosition('rs4680')).toBe(false);
+      const column = valueBattery[cellValue];
+      expect(IndexMap.isColumnPosition(cellValue), cellValue).toBe(column == 'position');
+    }
   });
 
   it("should properly parse 23andme", function (done) {

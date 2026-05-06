@@ -136,7 +136,7 @@ export class IndexMap implements IIndexMap {
  * @returns whether the column is likely to be an SNP
  */
   static isColumnSnp(data: string): boolean {
-    return data.startsWith('rs') || data.startsWith('ilmnseq');
+    return data.startsWith('rs') || data.startsWith('ilmnseq') || data.startsWith('dupseq');
   }
 
   static isColumnChromosome(data: string): boolean {
