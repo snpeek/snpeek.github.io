@@ -25,6 +25,7 @@ describe('Parsing Test', () => {
     expect(IndexMap.isColumnChromosome('XY')).toBe(true);
 
     expect(IndexMap.isColumnChromosome('111')).toBe(false);
+    expect(IndexMap.isColumnChromosome('FXXBAR')).toBe(false);
     expect(IndexMap.isColumnChromosome('GG')).toBe(false);
     expect(IndexMap.isColumnChromosome('rs4680')).toBe(false);
     expect(IndexMap.isColumnChromosome('21556106')).toBe(false);
