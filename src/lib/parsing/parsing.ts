@@ -141,7 +141,7 @@ export class IndexMap implements IIndexMap {
 
   static isColumnChromosome(data: string): boolean {
     // 1-2 digit number or XX or XY
-    const chromosomeRegex = new RegExp('(^[0-2]?[0-9]$)|XX|XY');
+    const chromosomeRegex = new RegExp('^([0-2]?[0-9]|XX|XY)$');
     return chromosomeRegex.test(data);
   }
 
