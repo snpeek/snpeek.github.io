@@ -4,7 +4,7 @@
   import Progress from "$lib/components/ui/progress/progress.svelte";
   import { GeneDataParser } from "$lib/models/GeneDataParser";
   import type { GeneVariant } from "$lib/models/GeneVariant";
-  import type { MpsData } from "$lib/models/MpsData";
+  import type { MpsDataByRsid } from "$lib/models/MpsData";
   import { Info } from "lucide-svelte";
   import GeneVariantDataTable from "./gene-variant-data-table.svelte";
 
@@ -32,9 +32,9 @@
     analyze();
   }
 
-  async function fetchMpsData(path: string): Promise<MpsData> {
+  async function fetchMpsData(path: string): Promise<MpsDataByRsid> {
     const response = await fetch(path); // TODO this should be passed in
-    const mpsData: MpsData = await response.json();
+    const mpsData: MpsDataByRsid = await response.json();
 
     if (Object.keys(mpsData).length > 0) {
       return mpsData;
@@ -45,7 +45,6 @@
   }
 
   async function analyze() {
-    console.log("analyzed");
     const mpsData = await fetchMpsData("/mps/mps-data.json");
     if (files.length < 1) {
       // TODO: Error message
