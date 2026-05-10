@@ -25,6 +25,7 @@
   ];
 
   async function onFileInput(event: Event): Promise<void> {
+    parseProgress = null;
     const target = event.target as HTMLInputElement;
     const files = [...(target?.files ?? [])];
     if (files.length < 1) {
