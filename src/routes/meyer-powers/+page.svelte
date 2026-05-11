@@ -12,9 +12,7 @@
     phenotypeName: string;
     geneVariants: GeneVariant[];
   }
-
-  let files: File[] = [];
-  let parseProgress: number = 0;
+  let parseProgress: number | null = null;
   let phenotypeSections: IPhenotypeSection[];
   const phenotypePriority: string[] = [
     "Congenital Adrenal Hyperplasia",
@@ -26,10 +24,24 @@
     "Estrogen Receptor Alpha",
   ];
 
-  function onFileInput(event: Event): void {
+  async function onFileInput(event: Event): Promise<void> {
+    parseProgress = null;
     const target = event.target as HTMLInputElement;
-    files = [...(target?.files ?? [])];
-    analyze();
+    const files = [...(target?.files ?? [])];
+    if (files.length < 1) {
+      // TODO: Error message
+      console.log("No files selected");
+      return;
+    }
+    const file = files[0] as File;
+    const panelDatabase = await fetchMpsData("/mps/mps-data.json");
+    phenotypeSections = await analyze(
+      file,
+      panelDatabase,
+      (progress: number) => {
+        parseProgress = progress;
+      },
+    );
   }
 
   async function fetchMpsData(path: string): Promise<MpsDataByRsid> {
@@ -44,28 +56,33 @@
     }
   }
 
-  async function analyze() {
-    const mpsData = await fetchMpsData("/mps/mps-data.json");
-    if (files.length < 1) {
-      // TODO: Error message
-      console.log("No files selected");
-      return;
-    }
-    const file = files[0] as File;
-    const geneParser = await GeneDataParser.fromFile(file, mpsData);
-    const geneVariants = await geneParser.parse((progress: number) => {
-      parseProgress = progress;
-    });
+  /**
+   * Takes a {@link genomeFile} and compares it against a {@link panelDatabase} to produce
+   * a list of {@link IPhenotypeSection}. {@link panelDatabase} is so called because
+   * this same structure can be used for panels other than MPS.
+   * Takes a {@link onParseProgress} callback to update UI as each chunk is processed.
+   * @param genomeFile
+   * @param panelDatabase
+   * @param onParseProgress
+   * @returns A promise for {@link IPhenotypeSection}
+   */
+  async function analyze(
+    genomeFile: File,
+    panelDatabase: MpsDataByRsid,
+    onParseProgress: (progress: number) => void,
+  ): Promise<IPhenotypeSection[]> {
+    const geneParser = await GeneDataParser.fromFile(genomeFile, panelDatabase);
+    const geneVariants = await geneParser.parse(onParseProgress);
 
     let geneVariantsByPhenotype: Map<string, GeneVariant[]> = Map.groupBy(
       geneVariants,
-      (geneVariant, index) => geneVariant.phenotype,
+      (geneVariant, _) => geneVariant.phenotype,
     );
     let lowPriorityPhenotypes = Array.from(
       geneVariantsByPhenotype.keys(),
     ).filter((phenotype) => !phenotypePriority.includes(phenotype));
 
-    phenotypeSections = [...phenotypePriority, ...lowPriorityPhenotypes]
+    return [...phenotypePriority, ...lowPriorityPhenotypes]
       .map((phenotype) => {
         return {
           phenotypeName: phenotype,
@@ -138,7 +155,7 @@
       on:change={onFileInput}
     />
   </section>
-  {#if files.length > 0 && parseProgress < 100}
+  {#if parseProgress !== null && parseProgress < 100}
     <section class="container px-4 md:px-8">
       <Progress value={parseProgress} />
     </section>
