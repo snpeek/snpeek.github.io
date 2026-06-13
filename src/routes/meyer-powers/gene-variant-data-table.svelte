@@ -12,8 +12,12 @@
   } from "svelte-headless-table";
   import { readable } from "svelte/store";
 
-  export let phenotype: string;
-  export let geneVariants: GeneVariant[];
+  interface Props {
+    phenotype: string;
+    geneVariants: GeneVariant[];
+  }
+
+  let { phenotype, geneVariants }: Props = $props();
 
   let pathogenicAlleles = geneVariants.filter((geneVariant) => {
     return geneVariant.pathogenicAllele != null;
@@ -112,11 +116,13 @@
         <Subscribe rowAttrs={headerRow.attrs()}>
           <Table.Row>
             {#each headerRow.cells as cell (cell.id)}
-              <Subscribe attrs={cell.attrs()} let:attrs>
-                <Table.Head {...attrs}>
-                  <Render of={cell.render()} />
-                </Table.Head>
-              </Subscribe>
+              <Subscribe attrs={cell.attrs()} >
+                {#snippet children({ attrs })}
+                                <Table.Head {...attrs}>
+                    <Render of={cell.render()} />
+                  </Table.Head>
+                                              {/snippet}
+                            </Subscribe>
             {/each}
           </Table.Row>
         </Subscribe>
@@ -124,17 +130,21 @@
     </Table.Header>
     <Table.Body {...$tableBodyAttrs}>
       {#each $rows as row (row.id)}
-        <Subscribe rowAttrs={row.attrs()} let:rowAttrs>
-          <Table.Row {...rowAttrs}>
-            {#each row.cells as cell (cell.id)}
-              <Subscribe attrs={cell.attrs()} let:attrs>
-                <Table.Cell {...attrs}>
-                  <Render of={cell.render()} />
-                </Table.Cell>
-              </Subscribe>
-            {/each}
-          </Table.Row>
-        </Subscribe>
+        <Subscribe rowAttrs={row.attrs()} >
+          {#snippet children({ rowAttrs })}
+                    <Table.Row {...rowAttrs}>
+              {#each row.cells as cell (cell.id)}
+                <Subscribe attrs={cell.attrs()} >
+                  {#snippet children({ attrs })}
+                                <Table.Cell {...attrs}>
+                      <Render of={cell.render()} />
+                    </Table.Cell>
+                                                {/snippet}
+                            </Subscribe>
+              {/each}
+            </Table.Row>
+                            {/snippet}
+                </Subscribe>
       {/each}
     </Table.Body>
   </Table.Root>

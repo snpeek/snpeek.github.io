@@ -12,8 +12,8 @@
     phenotypeName: string;
     geneVariants: GeneVariant[];
   }
-  let parseProgress: number | null = null;
-  let phenotypeSections: IPhenotypeSection[];
+  let parseProgress: number | null = $state(null);
+  let phenotypeSections: IPhenotypeSection[] = $state([]);
   const phenotypePriority: string[] = [
     "Congenital Adrenal Hyperplasia",
     "Estrogen Production - Aromatase",
