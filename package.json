@@ -19,12 +19,16 @@
   "license": "MIT",
   "description": "",
   "dependencies": {
-    "@lucide/svelte": "^0.482.0",
-    "bits-ui": "^1.0.0",
+    "@lucide/svelte": "^1.23.0",
+    "bits-ui": "^2.18.1",
     "clsx": "^2.1.1",
+    "formsnap": "^2.0.1",
+    "paneforge": "1.0.0-next.6",
     "papaparse": "^5.5.3",
-    "tailwind-merge": "^2.5.2",
-    "tailwind-variants": "^0.2.1"
+    "svelte-sonner": "^1.1.1",
+    "tailwind-merge": "^3.6.0",
+    "tailwind-variants": "^3.2.2",
+    "vaul-svelte": "1.0.0-next.7"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^3.0.0",
