@@ -5,7 +5,7 @@
   import { GeneDataParser } from "$lib/models/GeneDataParser";
   import type { GeneVariant } from "$lib/models/GeneVariant";
   import type { MpsDataByRsid } from "$lib/models/MpsData";
-  import { Info } from "lucide-svelte";
+  import { Info } from "@lucide/svelte";
   import GeneVariantDataTable from "./gene-variant-data-table.svelte";
 
   interface IPhenotypeSection {
