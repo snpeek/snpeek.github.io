@@ -4,13 +4,14 @@
   import * as Table from "$lib/components/ui/table";
   import type { GeneVariant } from "$lib/models/GeneVariant";
   import { ExternalLink } from "@lucide/svelte";
+  import { type ColumnDef, getCoreRowModel } from "@tanstack/table-core";
   import {
-    createRender,
-    createTable,
-    Render,
-    Subscribe,
-  } from "svelte-headless-table";
-  import { readable } from "svelte/store";
+    createSvelteTable,
+    FlexRender,
+    renderComponent,
+    renderSnippet,
+  } from "$lib/components/ui/data-table";
+  import { createRawSnippet, type Snippet } from "svelte";
 
   interface Props {
     phenotype: string;
@@ -19,67 +20,72 @@
 
   let { phenotype, geneVariants }: Props = $props();
 
-  let pathogenicAlleles = geneVariants.filter((geneVariant) => {
-    return geneVariant.pathogenicAllele != null;
-  });
+  let pathogenicAlleles = $derived(
+    geneVariants.filter((geneVariant) => {
+      return geneVariant.pathogenicAllele != null;
+    }),
+  );
 
-  const table = createTable(readable(geneVariants));
-
-  const columns = table.createColumns([
-    table.column({
+  const columns: ColumnDef<GeneVariant>[] = [
+    {
       header: "Attention",
-      accessor: (geneVariant) => {
-        return geneVariant.pathogenicAllele;
-      },
-      cell: ({ value }) => {
+      accessorFn: (geneVariant, _) => geneVariant.pathogenicAllele,
+      cell: (cellContext) => {
+        const value = cellContext.getValue();
         if (value != null) {
-          return createRender(Badge, { variant: "destructive" }).slot(
-            `ATTN:${value}`,
-          );
+          return renderComponent(Badge, {
+            variant: "destructive",
+            children: createRawSnippet(() => ({
+              render: () => `ATTN:${value}`,
+            })),
+          });
         } else {
-          return createRender(Badge, { variant: "secondary" }).slot("NO ATTN");
+          return renderComponent(Badge, {
+            variant: "secondary",
+            children: createRawSnippet(() => ({
+              render: () => "NO ATTN",
+            })),
+          });
         }
       },
-    }),
-    table.column({
-      accessor: "gene",
+    },
+    {
       header: "Gene",
-      cell: ({ value }) => {
-        if (value == null) {
-          return "";
-        }
-        return createRender(Button, {
-          href: `https://www.ncbi.nlm.nih.gov/gene/?term=${value}`,
-          target: "_blank",
-          variant: "secondary",
-          class: "px-2 md:px-4",
-        }).slot(value, createRender(ExternalLink, { class: "h-4 w-4 ms-1" }));
+      accessorFn: (geneVariant, _) => geneVariant.gene,
+      cell: (cellContext) => {
+        const value = cellContext.getValue();
+        if (value == null) return "";
+        return renderSnippet(linkButton, {
+          text: value as string,
+          url: `https://www.ncbi.nlm.nih.gov/gene/?term=${value}`,
+        });
       },
-    }),
-    table.column({
-      accessor: "rsid",
+    },
+    {
       header: "RSID",
-      cell: ({ value }) => {
-        return createRender(Button, {
-          href: `https://www.snpedia.com/index.php/${value}`,
-          target: "_blank",
-          variant: "secondary",
-          class: "px-2 md:px-4",
-        }).slot(value, createRender(ExternalLink, { class: "h-4 w-4 ms-1" }));
+      accessorFn: (geneVariant, _) => geneVariant.rsid,
+      cell: (cellContext) => {
+        const value = cellContext.getValue();
+        if (value == null) return "";
+        return renderSnippet(linkButton, {
+          text: value as string,
+          url: `https://www.snpedia.com/index.php/${value}`,
+        });
       },
-    }),
-    table.column({
-      accessor: (geneVariant) => {
+    },
+    {
+      header: "Genotype",
+      accessorFn: (geneVariant, _) => {
         const genotype = geneVariant.genotype;
         if (genotype == null) {
           return "--";
         }
         return genotype.toString();
       },
-      header: "Genotype",
-    }),
-    table.column({
-      accessor: (geneVariant) => {
+    },
+    {
+      header: "Interesting",
+      accessorFn: (geneVariant, _) => {
         const pathogenicGenotypes = geneVariant.pathogenic;
         if (pathogenicGenotypes.length < 1) {
           return "--";
@@ -88,65 +94,68 @@
           .map((genotype) => genotype.toString())
           .join(", ");
       },
-      header: "Interesting",
-    }),
-    table.column({
-      accessor: "chromosome",
-      header: "Chromosome",
-    }),
-    table.column({
-      accessor: "position",
-      header: "Position",
-    }),
-  ]);
-  const { headerRows, rows, tableAttrs, tableBodyAttrs } =
-    table.createViewModel(columns);
+    },
+  ];
+  // const { headerRows, rows, tableAttrs, tableBodyAttrs } =
+  //   table.createViewModel(columns);
+
+  const table = createSvelteTable({
+    get data() {
+      return geneVariants;
+    },
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+  });
+
+  const rows = table.getRowModel().rows;
 </script>
+
+{#snippet linkButton(params: { text: string; url: string })}
+  <Button
+    target="_blank"
+    variant="secondary"
+    class="px-2 md:px-4"
+    href={params.url}
+  >
+    {params.text}
+    <ExternalLink class="h-4 w-4 ms-1" />
+  </Button>
+{/snippet}
 
 <h2 class="text-3xl font-semibold my-4">
   {phenotype}
-  <Badge
-    variant={pathogenicAlleles.length > 0 ? "destructive" : "outline-solid"}
-  >
+  <Badge variant={pathogenicAlleles.length > 0 ? "destructive" : "outline"}>
     {pathogenicAlleles.length} / {geneVariants.length}
   </Badge>
 </h2>
 <div class="rounded-md border">
-  <Table.Root {...$tableAttrs}>
+  <Table.Root>
     <Table.Header>
-      {#each $headerRows as headerRow}
-        <Subscribe rowAttrs={headerRow.attrs()}>
-          <Table.Row>
-            {#each headerRow.cells as cell (cell.id)}
-              <Subscribe attrs={cell.attrs()}>
-                {#snippet children({ attrs })}
-                  <Table.Head {...attrs}>
-                    <Render of={cell.render()} />
-                  </Table.Head>
-                {/snippet}
-              </Subscribe>
-            {/each}
-          </Table.Row>
-        </Subscribe>
+      {#each table.getHeaderGroups() as headerGroup (headerGroup.id)}
+        <Table.Row>
+          {#each headerGroup.headers as header (header.id)}
+            <Table.Head>
+              <FlexRender
+                content={header.column.columnDef.header}
+                context={header.getContext()}
+              />
+            </Table.Head>
+          {/each}
+        </Table.Row>
       {/each}
     </Table.Header>
-    <Table.Body {...$tableBodyAttrs}>
-      {#each $rows as row (row.id)}
-        <Subscribe rowAttrs={row.attrs()}>
-          {#snippet children({ rowAttrs })}
-            <Table.Row {...rowAttrs}>
-              {#each row.cells as cell (cell.id)}
-                <Subscribe attrs={cell.attrs()}>
-                  {#snippet children({ attrs })}
-                    <Table.Cell {...attrs}>
-                      <Render of={cell.render()} />
-                    </Table.Cell>
-                  {/snippet}
-                </Subscribe>
-              {/each}
-            </Table.Row>
-          {/snippet}
-        </Subscribe>
+    <Table.Body>
+      {#each rows as row (row.id)}
+        <Table.Row>
+          {#each row.getVisibleCells() as cell (cell.id)}
+            <Table.Cell>
+              <FlexRender
+                content={cell.column.columnDef.cell}
+                context={cell.getContext()}
+              />
+            </Table.Cell>
+          {/each}
+        </Table.Row>
       {/each}
     </Table.Body>
   </Table.Root>

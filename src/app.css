@@ -50,6 +50,10 @@
   }
 }
 
+@utility container {
+  margin-inline: auto;
+}
+
 @theme inline {
   /* Radius (for rounded-*) */
   --radius-sm: calc(var(--radius) - 4px);
