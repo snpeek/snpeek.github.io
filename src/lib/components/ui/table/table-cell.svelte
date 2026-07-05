@@ -18,7 +18,7 @@
 </script>
 
 <td
-	class={cn("p-2 md:p-4 align-middle [&:has([role=checkbox])]:pr-0", className)}
+	class={cn("p-2 md:p-4 align-middle has-[[role=checkbox]]:pr-0", className)}
 	{...rest}
 	onclick={bubble('click')}
 	onkeydown={bubble('keydown')}
