@@ -3,7 +3,7 @@
   import Button from "$lib/components/ui/button/button.svelte";
   import * as Table from "$lib/components/ui/table";
   import type { GeneVariant } from "$lib/models/GeneVariant";
-  import { ExternalLink } from "lucide-svelte";
+  import { ExternalLink } from "@lucide/svelte";
   import {
     createRender,
     createTable,
@@ -105,7 +105,9 @@
 
 <h2 class="text-3xl font-semibold my-4">
   {phenotype}
-  <Badge variant={pathogenicAlleles.length > 0 ? "destructive" : "outline"}>
+  <Badge
+    variant={pathogenicAlleles.length > 0 ? "destructive" : "outline-solid"}
+  >
     {pathogenicAlleles.length} / {geneVariants.length}
   </Badge>
 </h2>
@@ -116,13 +118,13 @@
         <Subscribe rowAttrs={headerRow.attrs()}>
           <Table.Row>
             {#each headerRow.cells as cell (cell.id)}
-              <Subscribe attrs={cell.attrs()} >
+              <Subscribe attrs={cell.attrs()}>
                 {#snippet children({ attrs })}
-                                <Table.Head {...attrs}>
+                  <Table.Head {...attrs}>
                     <Render of={cell.render()} />
                   </Table.Head>
-                                              {/snippet}
-                            </Subscribe>
+                {/snippet}
+              </Subscribe>
             {/each}
           </Table.Row>
         </Subscribe>
@@ -130,21 +132,21 @@
     </Table.Header>
     <Table.Body {...$tableBodyAttrs}>
       {#each $rows as row (row.id)}
-        <Subscribe rowAttrs={row.attrs()} >
+        <Subscribe rowAttrs={row.attrs()}>
           {#snippet children({ rowAttrs })}
-                    <Table.Row {...rowAttrs}>
+            <Table.Row {...rowAttrs}>
               {#each row.cells as cell (cell.id)}
-                <Subscribe attrs={cell.attrs()} >
+                <Subscribe attrs={cell.attrs()}>
                   {#snippet children({ attrs })}
-                                <Table.Cell {...attrs}>
+                    <Table.Cell {...attrs}>
                       <Render of={cell.render()} />
                     </Table.Cell>
-                                                {/snippet}
-                            </Subscribe>
+                  {/snippet}
+                </Subscribe>
               {/each}
             </Table.Row>
-                            {/snippet}
-                </Subscribe>
+          {/snippet}
+        </Subscribe>
       {/each}
     </Table.Body>
   </Table.Root>
