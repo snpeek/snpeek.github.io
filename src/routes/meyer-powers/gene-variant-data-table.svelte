@@ -36,14 +36,14 @@
           return renderComponent(Badge, {
             variant: "destructive",
             children: createRawSnippet(() => ({
-              render: () => `ATTN:${value}`,
+              render: () => `<span>ATTN:${value}</span>`,
             })),
           });
         } else {
           return renderComponent(Badge, {
             variant: "secondary",
             children: createRawSnippet(() => ({
-              render: () => "NO ATTN",
+              render: () => "<span>NO ATTN</span>",
             })),
           });
         }
