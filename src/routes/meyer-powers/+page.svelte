@@ -149,10 +149,10 @@
   </section>
   <section class="container px-4 md:px-8">
     <Input
-      class="border-primary"
+      // class="border-primary"
       id="gene-file"
       type="file"
-      on:change={onFileInput}
+      onchange={onFileInput}
     />
   </section>
   {#if parseProgress !== null && parseProgress < 100}
