@@ -20,7 +20,6 @@
   "description": "",
   "dependencies": {
     "@lucide/svelte": "^1.23.0",
-    "bits-ui": "^2.18.1",
     "clsx": "^2.1.1",
     "formsnap": "^2.0.1",
     "paneforge": "1.0.0-next.6",
@@ -40,6 +39,7 @@
     "@tanstack/table-core": "^8.21.3",
     "@types/eslint": "^9.6.0",
     "@types/papaparse": "^5.3.7",
+    "bits-ui": "^2.18.1",
     "eslint-plugin-svelte": "^2.45.1",
     "gh-pages": "^5.0.0",
     "globals": "^15.0.0",
