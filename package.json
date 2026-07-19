@@ -38,6 +38,7 @@
     "@tailwindcss/vite": "^4.3.2",
     "@tanstack/table-core": "^8.21.3",
     "@types/eslint": "^9.6.0",
+    "@types/node": "^25.9.3",
     "@types/papaparse": "^5.3.7",
     "bits-ui": "^2.18.1",
     "eslint-plugin-svelte": "^2.45.1",
