@@ -107,7 +107,7 @@
     getCoreRowModel: getCoreRowModel(),
   });
 
-  const rows = table.getRowModel().rows;
+  const rows = $derived(table.getRowModel().rows);
 </script>
 
 {#snippet linkButton(params: { text: string; url: string })}
