@@ -60,6 +60,9 @@ importers:
       '@types/eslint':
         specifier: ^9.6.0
         version: 9.6.1
+      '@types/node':
+        specifier: ^25.9.3
+        version: 25.9.3
       '@types/papaparse':
         specifier: ^5.3.7
         version: 5.5.2
