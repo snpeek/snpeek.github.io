@@ -7,6 +7,11 @@
   import type { MpsDataByRsid } from "$lib/models/MpsData";
   import { Info } from "@lucide/svelte";
   import GeneVariantDataTable from "./gene-variant-data-table.svelte";
+  import Button, {
+    buttonVariants,
+  } from "$lib/components/ui/button/button.svelte";
+  import * as Dialog from "$lib/components/ui/dialog/index";
+  import * as Tabs from "$lib/components/ui/tabs/index.js";
 
   interface IPhenotypeSection {
     phenotypeName: string;
@@ -14,6 +19,7 @@
   }
   let parseProgress: number | null = $state(null);
   let phenotypeSections: IPhenotypeSection[] = $state([]);
+  let selectedShareTab: "json" | "ascii" = $state("json");
   const phenotypePriority: string[] = [
     "Congenital Adrenal Hyperplasia",
     "Estrogen Production - Aromatase",
@@ -154,6 +160,44 @@
       type="file"
       onchange={onFileInput}
     />
+    <Dialog.Root>
+      <Dialog.Trigger type="button">Share</Dialog.Trigger>
+      <Dialog.Content class="sm:max-w-[425px]">
+        <Dialog.Header>
+          <Dialog.Title>Edit profile</Dialog.Title>
+          <Dialog.Description>
+            Make changes to your profile here. Click save when you&apos;re done.
+          </Dialog.Description>
+        </Dialog.Header>
+        <Tabs.Root value={selectedShareTab} class="w-[400px]">
+          <Tabs.List>
+            <Tabs.Trigger value="json">JSON</Tabs.Trigger>
+            <Tabs.Trigger value="ascii">ASCII</Tabs.Trigger>
+          </Tabs.List>
+          <Tabs.Content value="json">
+            Make changes to your account here.
+          </Tabs.Content>
+          <Tabs.Content value="ascii">Change your password here.</Tabs.Content>
+        </Tabs.Root>
+        <div class="grid gap-4">
+          <div class="grid gap-3">
+            <Input id="name-1" name="name" defaultValue="Pedro Duarte" />
+          </div>
+          <div class="grid gap-3">
+            <Input id="username-1" name="username" defaultValue="@peduarte" />
+          </div>
+        </div>
+        <Dialog.Footer>
+          <Dialog.Close
+            type="button"
+            class={buttonVariants({ variant: "outline" })}
+          >
+            Cancel
+          </Dialog.Close>
+          <Button type="submit">Save changes</Button>
+        </Dialog.Footer>
+      </Dialog.Content>
+    </Dialog.Root>
   </section>
   {#if parseProgress !== null && parseProgress < 100}
     <section class="container px-4 md:px-8">
