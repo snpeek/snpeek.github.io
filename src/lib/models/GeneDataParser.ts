@@ -183,8 +183,6 @@ export class GeneDataParser {
         foundSnps.push(new GeneVariant({
           gene: mpsData[snp].gene,
           rsid: snp,
-          chromosome: row[0],
-          position: row[1],
           genotype: genotype,
           phenotype: mpsData[snp].phenotype,
           pathogenic: mpsData[snp].pathogenic.map(Genotype.fromString).filter(item => item !== null),

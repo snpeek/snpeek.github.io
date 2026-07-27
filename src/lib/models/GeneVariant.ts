@@ -2,8 +2,6 @@ import type { Genotype } from "./Genotype"
 
 interface IGeneVariant {
   rsid: string
-  chromosome: string
-  position: string
   genotype: Genotype | null
   phenotype: string
   pathogenic: Genotype[]
@@ -12,8 +10,6 @@ interface IGeneVariant {
 
 export class GeneVariant implements IGeneVariant {
   rsid: string
-  chromosome: string
-  position: string
   genotype: Genotype | null
   // Data from matching MPS data, NOT the variant itself.
   phenotype: string
@@ -23,8 +19,6 @@ export class GeneVariant implements IGeneVariant {
 
   constructor(object: IGeneVariant) {
     this.rsid = object.rsid;
-    this.chromosome = object.chromosome;
-    this.position = object.position;
     this.genotype = object.genotype;
     this.phenotype = object.phenotype;
     this.pathogenic = object.pathogenic;

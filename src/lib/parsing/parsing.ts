@@ -6,8 +6,6 @@ const nucleotidePattern = '(A|C|T|G)';
 
 export interface Variant {
   rsid: string
-  chromosome: string
-  position: string
   genotype: string
   phenotype: string
   pathogenic: string[]
@@ -19,8 +17,6 @@ export interface Variant {
  */
 interface IIndexMap {
   rsidIndex: number;
-  chromosomeIndex: number;
-  positionIndex: number;
   genotypeIndex: number;
   nucleotide1Index: number;
   nucleotide2Index: number;
@@ -31,8 +27,6 @@ interface IIndexMap {
  */
 export class IndexMap implements IIndexMap {
   rsidIndex: number;
-  chromosomeIndex: number;
-  positionIndex: number;
   // -1 if not found
   genotypeIndex: number;
   // -1 if not found
@@ -42,8 +36,6 @@ export class IndexMap implements IIndexMap {
 
   constructor(object: IIndexMap) {
     this.rsidIndex = object.rsidIndex;
-    this.chromosomeIndex = object.chromosomeIndex;
-    this.positionIndex = object.positionIndex;
     this.genotypeIndex = object.genotypeIndex;
     this.nucleotide1Index = object.nucleotide1Index;
     this.nucleotide2Index = object.nucleotide2Index;
@@ -52,8 +44,6 @@ export class IndexMap implements IIndexMap {
   static fromSampleRow(sampleRow: string[]): IndexMap {
     // Iterate through the firstRow to find the indices 
     const rsidIndex = sampleRow.findIndex(IndexMap.isColumnSnp);
-    const chromosomeIndex = sampleRow.findIndex(IndexMap.isColumnChromosome);
-    const positionIndex = sampleRow.findIndex(IndexMap.isColumnPosition);
     const genotypeIndex = sampleRow.findIndex(IndexMap.isColumnGenotype);
     let nucleotide1Index: number = -1;
     let nucleotide2Index: number = -1;
@@ -61,13 +51,11 @@ export class IndexMap implements IIndexMap {
       nucleotide1Index = sampleRow.findIndex(IndexMap.isColumnNucleotide);
       nucleotide2Index = sampleRow.findLastIndex(IndexMap.isColumnNucleotide);
     }
-    if (rsidIndex < 0 || chromosomeIndex < 0 || positionIndex < 0) {
-      throw `Could not find indices for required fields: ${rsidIndex} ${chromosomeIndex} ${positionIndex}`;
+    if (rsidIndex < 0) {
+      throw `Could not find index for rsid: ${rsidIndex}`;
     }
     return new IndexMap({
       rsidIndex: rsidIndex,
-      chromosomeIndex: chromosomeIndex,
-      positionIndex: positionIndex,
       genotypeIndex: genotypeIndex,
       nucleotide1Index: nucleotide1Index,
       nucleotide2Index: nucleotide2Index,
@@ -76,14 +64,6 @@ export class IndexMap implements IIndexMap {
 
   #accessRsid(row: string[]): string {
     return row[this.rsidIndex];
-  }
-
-  #accessChromosome(row: string[]): string {
-    return row[this.chromosomeIndex];
-  }
-
-  #accessPosition(row: string[]): string {
-    return row[this.positionIndex];
   }
 
   #accessGenotype(row: string[]): string {
@@ -118,8 +98,6 @@ export class IndexMap implements IIndexMap {
         const foundSnp = new GeneVariant({
           gene: mpsData.gene,
           rsid: snp,
-          chromosome: this.#accessChromosome(row),
-          position: this.#accessPosition(row),
           genotype: genotype,
           phenotype: mpsData.phenotype,
           pathogenic: mpsData.pathogenic.map(Genotype.fromString).filter(item => item !== null),
