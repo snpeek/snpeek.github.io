@@ -38,4 +38,11 @@ describe("Tests on Genotype", () => {
     expect(genotype1.matches(genotype2)).toBe(false);
     expect(genotype2.matches(genotype1)).toBe(false);
   })
+  it("should swap as expected if fromOppositeStrand", () => {
+    const genotype1 = Genotype.fromString("CT");
+    const genotype2 = Genotype.fromString("AG");
+    assert(genotype1 != null, "genotype should not be null");
+    assert(genotype2 != null, "genotype should not be null");
+    expect(genotype1?.fromOppositeStrand()?.matches(genotype2)).toBe(true);
+  })
 })

@@ -40,37 +40,24 @@ export class Genotype {
    * orientation, whereas SNPedia reports individual SNPs as either plus/forward or minus/reverse, 
    * depending on the reference standard. For details, see: https://www.snpedia.com/index.php/Orientation
    */
-  fromOppositeStrand(): Genotype | null {
-    const original = this;
-    if (original === null) {
-      return null;
-    }
-    else {
-      let pairedAlleles: Nucleotide[] = [];
-      original.alleles.forEach(n => {
-        switch (n) {
-          case Nucleotide.A: {
-            pairedAlleles.push(Nucleotide.T);
-            break;
-          }
-          case Nucleotide.T: {
-            pairedAlleles.push(Nucleotide.A);
-            break;
-          }
-          case Nucleotide.C: {
-            pairedAlleles.push(Nucleotide.G);
-            break;
-          }
-          case Nucleotide.G: {
-            pairedAlleles.push(Nucleotide.C);
-            break;
-          }
-          default:
-            return null;
+  fromOppositeStrand(): Genotype {
+    const swappedAlleles = this.alleles.map((allele) => {
+      switch (allele) {
+        case Nucleotide.A: {
+          return Nucleotide.T;
         }
-      });
-      return new Genotype(pairedAlleles);
-    }
+        case Nucleotide.T: {
+          return Nucleotide.A;
+        }
+        case Nucleotide.C: {
+          return Nucleotide.G;
+        }
+        case Nucleotide.G: {
+          return Nucleotide.C;
+        }
+      }
+    });
+    return new Genotype(swappedAlleles);
   }
 
   /**
