@@ -10,13 +10,11 @@ export type GeneDataRowParser = (data: string[][], mpsDict: MpsDataByRsid) => Ge
  * An abstraction over the parsing and handling of genetic data.
  */
 export class GeneDataParser {
-  file: File;
   parseRow: GeneDataRowParser;
   delimiter: string;
   mpsData: MpsDataByRsid;
 
-  constructor(file: File, parseRow: GeneDataRowParser, delimiter: string, mpsData: MpsDataByRsid) {
-    this.file = file;
+  constructor(parseRow: GeneDataRowParser, delimiter: string, mpsData: MpsDataByRsid) {
     this.parseRow = parseRow;
     this.delimiter = delimiter;
     this.mpsData = mpsData
@@ -26,7 +24,7 @@ export class GeneDataParser {
    * Decides which parser to use based on the different formats {@link file} can have.
    * Therefore, this is probably what you want to use to construct a {@link GeneDataParser}, 
    * rather than the constructor.
-   * @param file The gene data file. Usually a CSV
+   * @param file The gene data file. Usually a CSV.
    * @param mpsData The MPS Data file. Usually a JSON. Should be statically served under ./mps
    * @returns A new {@link GeneDataParser}
    */
@@ -39,7 +37,7 @@ export class GeneDataParser {
         // TODO: Error message
         throw Error("Large file is not a vcf file")
       }
-      return new GeneDataParser(file, GeneDataParser.parseVCFData, '\t', mpsData);
+      return new GeneDataParser(GeneDataParser.parseVCFData, '\t', mpsData);
     } else {
       const delimiter = await this.guessCsvDelimiter(file);
       const sampleRow = await this.getSampleRow(file, delimiter, 100);
@@ -47,7 +45,6 @@ export class GeneDataParser {
       // We have to rebind rowIndexMap as the "this" of rowIndexMap.parser
       // because of javascript quirks.
       return new GeneDataParser(
-        file,
         rowIndexMap.parser.bind(rowIndexMap),
         delimiter,
         mpsData
@@ -58,20 +55,21 @@ export class GeneDataParser {
   /**
    * Given the {@link parseRow} that was set during construction, parses the {@link file}
    * to return an array of {@link GeneVariant}s.
+   * @param file The gene data file. Usually a CSV.
    * @param onUpdateProgress A function that allows the call-site (i.e. likely a svelte component) 
    * to render a progress bar as the {@link file} is parsed.
    * @returns A Promise that returns an array of {@link GeneVariant}.
    */
-  async parse(onUpdateProgress: (progress: number) => void): Promise<GeneVariant[]> {
+  async parseFile(file: File, onUpdateProgress: (progress: number) => void): Promise<GeneVariant[]> {
     const chunkSize = 1024 * 50 // 50KB
     let matchingRsids: GeneVariant[] = [] // aggregate all SNPs
 
     // for updating the progress bar
-    const fileSize = this.file.size
-    let processedSize = 0
+    const fileSize = file.size;
+    let processedSize = 0;
 
     return new Promise((resolve, reject) => {
-      Papa.parse(this.file, {
+      Papa.parse(file, {
         chunkSize,
         comments: "#",
         skipEmptyLines: "greedy",
@@ -106,67 +104,25 @@ export class GeneDataParser {
   }
 
   /**
-   * @deprecated See IndexMap
+   * Parses {@link queryParams} to produce a list of {@link GeneVariant}s.
+   * Unlike {@link parseFile}, there's no need for onUpdateProgress because this method
+   * should be quick. Consequently, this is no need for this to be async.
+   * @param queryParams query params from browser.
+   * @returns An array of {@link GeneVariant}.
    */
-  private static parse23AndMeData(data: string[][], mpsData: MpsDataByRsid): GeneVariant[] {
-    const foundSnps: GeneVariant[] = []
-    data.forEach(row => {
-      // console.log(`row=${row[0]}`)
-      if (row.length < 4 || (typeof row[0] === 'string' && row[0].startsWith('#'))) {
-        return // skip these rows
-      }
-      const snp = row[0]
-      if (snp in mpsData) {
-        const onForward = mpsData[snp].onForwardStrand ?? true;
-        let genotype = Genotype.fromString(row[3]);
-        if (!onForward) {
-          genotype = genotype?.fromOppositeStrand() ?? null;
-        }
-        const foundSnp = new GeneVariant({
-          gene: mpsData[snp].gene,
-          rsid: snp,
-          chromosome: row[1],
-          position: row[2],
-          genotype: genotype,
-          phenotype: mpsData[snp].phenotype,
-          pathogenic: mpsData[snp].pathogenic.map(Genotype.fromString).filter(item => item !== null),
-        });
-        foundSnps.push(foundSnp);
-      }
-    })
-    return foundSnps
-  }
-
-  /**
-   * @deprecated See IndexMap
-   */
-  private static parseAncestryData(data: string[][], mpsData: MpsDataByRsid): GeneVariant[] {
-    const foundSnps: GeneVariant[] = []
-    data.forEach(row => {
-      row = row[0]?.split('\t') ?? [] // HACK: This is a workaround for Papa misreading AncestryDNA files.
-      if (row.length < 4) {
-        return // skip these rows
-      }
-      const snp = row[0]
-      if (snp in mpsData) {
-        const onForward = mpsData[snp].onForwardStrand ?? true;
-        let genotype = Genotype.fromString(row[3] + row[4]);
-        if (!onForward) {
-          genotype = genotype?.fromOppositeStrand() ?? null;
-        }
-        const foundSnp = new GeneVariant({
-          gene: mpsData[snp].gene,
-          rsid: snp,
-          chromosome: row[1],
-          position: row[2],
-          genotype: genotype,
-          phenotype: mpsData[snp].phenotype,
-          pathogenic: mpsData[snp].pathogenic.map(Genotype.fromString).filter(item => item !== null),
-        });
-        foundSnps.push(foundSnp);
-      }
-    })
-    return foundSnps
+  parseQueryParams(queryParams: URLSearchParams): GeneVariant[] {
+    try {
+      const data = queryParams.entries().map(entry => {
+        return [entry[0], entry[1]];
+      }).toArray();
+      const foundSnps = this.parseRow(data, this.mpsData)
+      return foundSnps;
+    } catch (error) {
+      // TODO: Error message
+      console.error('Error while parsing chunk:', error)
+      alert('An error occurred while parsing the file.')
+      return [];
+    }
   }
 
   private static parseVCFData(data: string[][], mpsData: MpsDataByRsid): GeneVariant[] {
@@ -186,6 +142,7 @@ export class GeneDataParser {
           genotype: genotype,
           phenotype: mpsData[snp].phenotype,
           pathogenic: mpsData[snp].pathogenic.map(Genotype.fromString).filter(item => item !== null),
+          // It is assumed that VCF never flips nucleotides in the genotype
         }))
       }
     })

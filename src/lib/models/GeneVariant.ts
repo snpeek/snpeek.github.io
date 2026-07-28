@@ -6,6 +6,7 @@ interface IGeneVariant {
   phenotype: string
   pathogenic: Genotype[]
   gene: string | null
+  flipStrand?: boolean
 }
 
 export class GeneVariant implements IGeneVariant {
@@ -16,6 +17,7 @@ export class GeneVariant implements IGeneVariant {
   // Data from matching MPS data, NOT the variant itself.
   pathogenic: Genotype[]
   gene: string | null
+  flipStrand: boolean
 
   constructor(object: IGeneVariant) {
     this.rsid = object.rsid;
@@ -23,6 +25,7 @@ export class GeneVariant implements IGeneVariant {
     this.phenotype = object.phenotype;
     this.pathogenic = object.pathogenic;
     this.gene = object.gene;
+    this.flipStrand = object.flipStrand ?? false;
   }
 
   /**
@@ -32,7 +35,19 @@ export class GeneVariant implements IGeneVariant {
    */
   get pathogenicAllele(): Genotype | null {
     return this.pathogenic.find((genotype) =>
-      this.genotype?.matches(genotype),
+      this.normalizedGenotype?.matches(genotype),
     ) ?? null;
+  }
+
+  /**
+   * Use this for matching. The raw {@link genotype} should be used internally
+   * and for setting query parameters and/or exporting.
+   */
+  get normalizedGenotype(): Genotype | null {
+    if (this.flipStrand) {
+      return this.genotype?.fromOppositeStrand() ?? null;
+    } else {
+      return this.genotype;
+    }
   }
 }

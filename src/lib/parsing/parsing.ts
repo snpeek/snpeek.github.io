@@ -17,9 +17,9 @@ export interface Variant {
  */
 interface IIndexMap {
   rsidIndex: number;
-  genotypeIndex: number;
-  nucleotide1Index: number;
-  nucleotide2Index: number;
+  genotypeIndex?: number;
+  nucleotide1Index?: number;
+  nucleotide2Index?: number;
 }
 
 /**
@@ -36,9 +36,9 @@ export class IndexMap implements IIndexMap {
 
   constructor(object: IIndexMap) {
     this.rsidIndex = object.rsidIndex;
-    this.genotypeIndex = object.genotypeIndex;
-    this.nucleotide1Index = object.nucleotide1Index;
-    this.nucleotide2Index = object.nucleotide2Index;
+    this.genotypeIndex = object.genotypeIndex ?? -1;
+    this.nucleotide1Index = object.nucleotide1Index ?? -1;
+    this.nucleotide2Index = object.nucleotide2Index ?? -1;
   }
 
   static fromSampleRow(sampleRow: string[]): IndexMap {
@@ -91,16 +91,14 @@ export class IndexMap implements IIndexMap {
       if (snp in mpsDict) {
         const mpsData = mpsDict[snp];
         const onForward = mpsData.onForwardStrand ?? true;
-        let genotype = Genotype.fromString(this.#accessGenotype(row));
-        if (!onForward) {
-          genotype = genotype?.fromOppositeStrand() ?? null;
-        }
+
         const foundSnp = new GeneVariant({
           gene: mpsData.gene,
           rsid: snp,
-          genotype: genotype,
+          genotype: Genotype.fromString(this.#accessGenotype(row)),
           phenotype: mpsData.phenotype,
           pathogenic: mpsData.pathogenic.map(Genotype.fromString).filter(item => item !== null),
+          flipStrand: !onForward
         });
         foundSnps.push(foundSnp);
       }
