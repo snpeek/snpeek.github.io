@@ -112,9 +112,8 @@ export class GeneDataParser {
    */
   parseQueryParams(queryParams: URLSearchParams): GeneVariant[] {
     try {
-      const data = queryParams.entries().map(entry => {
-        return [entry[0], entry[1]];
-      }).toArray();
+      // Array.from rather than iterator helpers, which need Safari 18.4+.
+      const data = Array.from(queryParams.entries(), entry => [entry[0], entry[1]]);
       const foundSnps = this.parseRow(data, this.mpsData)
       return foundSnps;
     } catch (error) {
