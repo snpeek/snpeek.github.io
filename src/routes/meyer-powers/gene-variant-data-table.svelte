@@ -76,7 +76,9 @@
     {
       header: "Genotype",
       accessorFn: (geneVariant, _) => {
-        const genotype = geneVariant.genotype;
+        // Normalized, so this column stays in the same orientation as the
+        // Attention and Interesting columns.
+        const genotype = geneVariant.normalizedGenotype;
         if (genotype == null) {
           return "--";
         }
