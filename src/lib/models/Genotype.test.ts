@@ -43,6 +43,17 @@ describe("Tests on Genotype", () => {
     const genotype2 = Genotype.fromString("AG");
     assert(genotype1 != null, "genotype should not be null");
     assert(genotype2 != null, "genotype should not be null");
-    expect(genotype1?.fromOppositeStrand()?.matches(genotype2)).toBe(true);
+    expect(genotype1.fromOppositeStrand().matches(genotype2)).toBe(true);
+  })
+  it("should complement every nucleotide if fromOppositeStrand", () => {
+    // Covers all four cases of the switch, in both directions.
+    const pairs = [["AA", "TT"], ["TT", "AA"], ["CC", "GG"], ["GG", "CC"]];
+    pairs.forEach(([input, expected]) => {
+      const genotype = Genotype.fromString(input);
+      const complement = Genotype.fromString(expected);
+      assert(genotype != null, `${input} should not be null`);
+      assert(complement != null, `${expected} should not be null`);
+      expect(genotype.fromOppositeStrand().matches(complement)).toBe(true);
+    });
   })
 })
