@@ -124,7 +124,7 @@ export class GeneDataParser {
     }
   }
 
-  private static parseVCFData(data: string[][], mpsData: MpsDataByRsid): GeneVariant[] {
+  static parseVCFData(data: string[][], mpsData: MpsDataByRsid): GeneVariant[] {
     const foundSnps: GeneVariant[] = []
     data.forEach(row => {
       if (row.length < 10 || (typeof row[0] === 'string' && row[0].startsWith('#'))) {
@@ -141,7 +141,10 @@ export class GeneDataParser {
           genotype: genotype,
           phenotype: mpsData[snp].phenotype,
           pathogenic: mpsData[snp].pathogenic.map(Genotype.fromString).filter(item => item !== null),
-          // It is assumed that VCF never flips nucleotides in the genotype
+          // VCF reports on the forward strand, same as the CSV formats, so the
+          // flag has to be set here too. Otherwise a variant parsed from a VCF
+          // and the same variant restored from query params disagree.
+          flipStrand: !(mpsData[snp].onForwardStrand ?? true),
         }))
       }
     })
