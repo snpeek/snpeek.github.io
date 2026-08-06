@@ -6,8 +6,6 @@ import Harness from "./gene-variant-data-table.harness.svelte";
 function variant(gene: string): GeneVariant {
   return new GeneVariant({
     rsid: "rs1",
-    chromosome: "1",
-    position: "1",
     genotype: null,
     phenotype: "COMT Activity",
     pathogenic: [],
