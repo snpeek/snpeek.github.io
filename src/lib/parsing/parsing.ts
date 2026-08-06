@@ -88,7 +88,7 @@ export class IndexMap implements IIndexMap {
         // If there's no number in this row, it's probably a header row
         return;
       }
-      if (snp in mpsDict) {
+      if (Object.hasOwn(mpsDict, snp)) {
         const mpsData = mpsDict[snp];
         const onForward = mpsData.onForwardStrand ?? true;
 

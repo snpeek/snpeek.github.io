@@ -131,7 +131,7 @@ export class GeneDataParser {
         return // skip these rows
       }
       const snp = row[2]
-      if (snp in mpsData) {
+      if (Object.hasOwn(mpsData, snp)) {
         const ref = row[3]; // Reference allele
         const alt = row[4]; // Alternate allele(s)
         const genotype = GeneDataParser.parseVCFGenotype(row[9], ref, alt.split(','));
