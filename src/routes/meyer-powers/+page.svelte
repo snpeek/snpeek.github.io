@@ -155,7 +155,14 @@
         <ul class="list-disc">
           <li>
             All genetic data processing is performed entirely on your device, no
-            data is sent or stored elsewhere.
+            data is sent or stored elsewhere intentionally. The state of the
+            table is reflected on the address bar to allow for easy sharing of
+            your results when consulting. Whenever the URL with your table data
+            is visited, these may be logged by github's servers, but we have no
+            reason to believe they'll do anything with these. If this is a
+            concern, do not refresh or share the url with the query parameters
+            (the bits after the question mark) while your data is in the address
+            bar.
           </li>
           <li>
             This software was written with best intentions, but I am not Dr.
