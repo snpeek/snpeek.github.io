@@ -70,8 +70,6 @@ describe('Parsing Test', () => {
     expect(IndexMap.fromSampleRow(['rs9999999', '1', '100000089', 'AA']))
       .toStrictEqual(new IndexMap({
         rsidIndex: 0,
-        chromosomeIndex: 1,
-        positionIndex: 2,
         genotypeIndex: 3,
         nucleotide1Index: -1,
         nucleotide2Index: -1
@@ -81,8 +79,6 @@ describe('Parsing Test', () => {
     expect(IndexMap.fromSampleRow(['rs9999999', '1', '100000089', 'A', 'A']))
       .toStrictEqual(new IndexMap({
         rsidIndex: 0,
-        chromosomeIndex: 1,
-        positionIndex: 2,
         genotypeIndex: -1,
         nucleotide1Index: 3,
         nucleotide2Index: 4

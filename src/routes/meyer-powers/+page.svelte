@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import * as Alert from "$lib/components/ui/alert";
   import { Input } from "$lib/components/ui/input/index";
   import Progress from "$lib/components/ui/progress/progress.svelte";
@@ -7,6 +8,7 @@
   import type { MpsDataByRsid } from "$lib/models/MpsData";
   import { Info } from "@lucide/svelte";
   import GeneVariantDataTable from "./gene-variant-data-table.svelte";
+  import { IndexMap } from "$lib/parsing/parsing";
 
   interface IPhenotypeSection {
     phenotypeName: string;
@@ -24,6 +26,26 @@
     "Estrogen Receptor Alpha",
   ];
 
+  onMount(async () => {
+    // The fragment is never sent to the server, so genotypes stay out of
+    // request logs. Analytics on this page would undo that.
+    const initialQueryParams = new URLSearchParams(
+      window.location.hash.slice(1),
+    );
+    const panelDatabase = await fetchMpsData("/mps/mps-data.json");
+    const indexMap = new IndexMap({
+      rsidIndex: 0,
+      genotypeIndex: 1,
+    });
+    const geneParser = new GeneDataParser(
+      indexMap.parser.bind(indexMap),
+      "",
+      panelDatabase,
+    );
+    const geneVariants = geneParser.parseQueryParams(initialQueryParams);
+    phenotypeSections = groupVariantsByPhenotype(geneVariants);
+  });
+
   async function onFileInput(event: Event): Promise<void> {
     parseProgress = null;
     const target = event.target as HTMLInputElement;
@@ -35,13 +57,19 @@
     }
     const file = files[0] as File;
     const panelDatabase = await fetchMpsData("/mps/mps-data.json");
-    phenotypeSections = await analyze(
+    const geneVariants = await analyze(
       file,
       panelDatabase,
       (progress: number) => {
         parseProgress = progress;
       },
     );
+    const queryParams = queryParamsFromVariants(geneVariants);
+    const newUrl = `${window.location.pathname}#${queryParams.toString()}`;
+    // Not using SvelteKit, so we have to use this.
+    window.history.replaceState(null, "", newUrl);
+
+    phenotypeSections = groupVariantsByPhenotype(geneVariants);
   }
 
   async function fetchMpsData(path: string): Promise<MpsDataByRsid> {
@@ -70,10 +98,18 @@
     genomeFile: File,
     panelDatabase: MpsDataByRsid,
     onParseProgress: (progress: number) => void,
-  ): Promise<IPhenotypeSection[]> {
+  ): Promise<GeneVariant[]> {
     const geneParser = await GeneDataParser.fromFile(genomeFile, panelDatabase);
-    const geneVariants = await geneParser.parse(onParseProgress);
+    const geneVariants = await geneParser.parseFile(
+      genomeFile,
+      onParseProgress,
+    );
+    return geneVariants;
+  }
 
+  function groupVariantsByPhenotype(
+    geneVariants: GeneVariant[],
+  ): IPhenotypeSection[] {
     let geneVariantsByPhenotype: Map<string, GeneVariant[]> = Map.groupBy(
       geneVariants,
       (geneVariant, _) => geneVariant.phenotype,
@@ -90,6 +126,26 @@
         };
       })
       .filter((phenotype) => phenotype.geneVariants != undefined);
+  }
+
+  /**
+   * Takes a {@link phenotypeSections} and encodes this data onto the query params
+   * @param phenotypeSections
+   * @returns void
+   */
+  function queryParamsFromVariants(
+    geneVariants: GeneVariant[],
+  ): URLSearchParams {
+    // Each IPhenotypeSection is its own query param.
+    // The value is a list of comma separated values.
+    let queryParams = new URLSearchParams();
+    geneVariants.forEach((variant) => {
+      const genotype = variant.genotype;
+      if (genotype != null) {
+        queryParams.set(variant.rsid, genotype.toString());
+      }
+    });
+    return queryParams;
   }
 </script>
 
